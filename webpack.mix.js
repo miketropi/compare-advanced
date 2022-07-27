@@ -13,6 +13,7 @@ mix
  * Backend
  */
  mix
- .js('./src/backend.js', 'dist/compare-advanced.backend.bundle.js')
- .sass('./src/scss/backend.scss', 'css/compare-advanced.backend.bundle.css')
- .setPublicPath('dist');
+  .js('./src/backend.js', 'dist/compare-advanced.backend.bundle.js')
+  .react()
+  .sass('./src/scss/backend.scss', 'css/compare-advanced.backend.bundle.css')
+  .setPublicPath('dist');

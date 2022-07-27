@@ -23,6 +23,7 @@ Version: 1.0.0
   /**
    * Includes
    */
+  require(CA_DIR . '/inc/options.php');
   require(CA_DIR . '/inc/static.php');
   require(CA_DIR . '/inc/helpers.php');
   require(CA_DIR . '/inc/hooks.php');
@@ -32,5 +33,6 @@ Version: 1.0.0
   /**
    * Admin
    */
-  
+  require(CA_DIR . '/inc/admin/register-cpt.php');
+  require(CA_DIR . '/inc/admin/register-meta-fields.php');
 }
