@@ -61,21 +61,25 @@ function ca_compare_item_render_html_by_type($field) {
 
   switch($field['type']) {
     case 'text':
-      $_html = $field['value'];
+      $_html = wpautop(!empty($field['value']) ? $field['value'] : 'N/A');
       break;
 
     case 'image':
-      $_html = '<img src="'. $field['value']['url'] .'" alt="" />';
+      if(!$field['value']) {
+        $_html = wpautop('N/A');
+      } else {
+        $_html = '<img src="'. $field['value']['url'] .'" alt="" />';
+      }
       break;
 
     case 'wysiwyg':
-      $_html = wpautop($field['value']);
+      $_html = wpautop(!empty($field['value']) ? $field['value'] : 'N/A');
       break;
     
     case 'gallery':
       $_html = 'Gallery ...!';
       break;
-
+ 
     default:
       break;
   }
@@ -88,13 +92,15 @@ function ca_prepare_compare_table_data($ids = []) {
   return array_map(function($item) {
     $compare_item_data = [
       'brand_logo' => [
+        '_name' => 'brand_logo',
         '_key' => ca_rand_key(),
         '_html' => '<img src="'. $item['brand_image']['url'] .'" alt="'. $item['brand_name'] .'"/>',
         'extra_params' => [],
-        'extra_class' => '',
+        'extra_class' => '__product-brand',
       ],
       'infomation' => [
-        '_key' => ca_rand_key(),
+        '_name' => 'infomation',
+        '_key' => ca_rand_key(), 
         '_html' => '<img src="'. $item['featured_image'] .'" alt="'. $item['title'] .'"/> <p>'. $item['product_code'] .'</p>',
         'extra_params' => [],
         'extra_class' => '',
@@ -105,6 +111,7 @@ function ca_prepare_compare_table_data($ids = []) {
       foreach($item['compare_fields'] as $_index => $f) {
         
         $compare_item_data[$f['name']] = [
+          '_name' => $f['name'],
           '_key' => ca_rand_key(),
           '_html' => ca_compare_item_render_html_by_type($f),
           'extra_params' => $f,
@@ -130,6 +137,7 @@ function ca_table_compare_fields_register() {
       'help_text' => '',
       'enable_help_text' => false,
       'field_map' => 'brand_logo',
+      'extra_class' => '__no-background'
     ],
     [
       '_key' => ca_rand_key(),
@@ -145,7 +153,7 @@ function ca_table_compare_fields_register() {
       array_push($fields, [
         '_key' => ca_rand_key(),
         'label' => $f['label'],
-        'help_text' => $f['help_text'],
+        'help_text' => wpautop($f['help_text']),
         'enable_help_text' => $f['enable_help_text'],
         'field_map' => $f['name'],
       ],);

@@ -1,0 +1,109 @@
+.compare-advanced-table {
+  background: none;
+  border-collapse: collapse;
+
+  .__icon-tooltip {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+    svg {
+      fill: white;
+    }
+  }
+
+  .__product-brand {
+
+    img {
+      width: 150px;
+      max-width: 90%;
+      margin: 0 auto;
+      display: inline-block;
+    }
+  }
+
+  tbody {
+
+    tr {
+
+      > * {
+        vertical-align: middle;
+      }
+
+      > *:last-child {
+        padding-right: 0;
+      }
+    }
+
+    td {
+      text-align: center;
+
+      .__entry-cell {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        min-height: 80px;
+        padding: 10px 0;
+      }
+    }
+
+    th, td {
+      border: none;
+      padding: 0 4px;
+    }
+
+    *.__no-background {
+      background: none !important;
+    }
+
+    th {
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    tr:nth-child(odd) {
+
+      th {
+        background: #BDC6D4;
+      }
+
+      td {
+        background: #BDC6D4;
+
+        .__entry-cell {
+          background: #F5F5F5;
+        }
+      }
+    }
+    
+    tr:nth-child(even) {
+
+      th {
+        background: #D0D6DF;
+      }
+
+      td {
+        background: #D0D6DF;
+
+        .__entry-cell {
+          background: white;
+        }
+      }
+    }
+
+    tr:first-child { 
+
+      td {
+        background: none;
+
+        .__entry-cell {
+          background: white;
+          border-radius: 16px 16px 0 0;
+        }
+      }
+    }
+  }
+}

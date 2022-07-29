@@ -1,1 +1,73 @@
-
+.compare-advanced-table {
+  background: none;
+  border-collapse: collapse;
+}
+.compare-advanced-table .__icon-tooltip {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.compare-advanced-table .__icon-tooltip svg {
+  fill: white;
+}
+.compare-advanced-table .__product-brand img {
+  width: 150px;
+  max-width: 90%;
+  margin: 0 auto;
+  display: inline-block;
+}
+.compare-advanced-table tbody tr > * {
+  vertical-align: middle;
+}
+.compare-advanced-table tbody tr > *:last-child {
+  padding-right: 0;
+}
+.compare-advanced-table tbody td {
+  text-align: center;
+}
+.compare-advanced-table tbody td .__entry-cell {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  padding: 10px 0;
+}
+.compare-advanced-table tbody th, .compare-advanced-table tbody td {
+  border: none;
+  padding: 0 4px;
+}
+.compare-advanced-table tbody *.__no-background {
+  background: none !important;
+}
+.compare-advanced-table tbody th {
+  color: white;
+  text-align: center;
+  position: relative;
+}
+.compare-advanced-table tbody tr:nth-child(odd) th {
+  background: #BDC6D4;
+}
+.compare-advanced-table tbody tr:nth-child(odd) td {
+  background: #BDC6D4;
+}
+.compare-advanced-table tbody tr:nth-child(odd) td .__entry-cell {
+  background: #F5F5F5;
+}
+.compare-advanced-table tbody tr:nth-child(even) th {
+  background: #D0D6DF;
+}
+.compare-advanced-table tbody tr:nth-child(even) td {
+  background: #D0D6DF;
+}
+.compare-advanced-table tbody tr:nth-child(even) td .__entry-cell {
+  background: white;
+}
+.compare-advanced-table tbody tr:first-child td {
+  background: none;
+}
+.compare-advanced-table tbody tr:first-child td .__entry-cell {
+  background: white;
+  border-radius: 16px 16px 0 0;
+}

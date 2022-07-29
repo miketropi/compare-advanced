@@ -5,17 +5,24 @@ const CompareAdvancedContext = createContext();
 
 const CompareAdvancedProvider = ({ children, compareItems }) => {
   const [items, setItems] = useState([]);
+  const [compareFields, setCompareFields] = useState([]);
 
   useEffect(() => {
     const _getCompareItems = async () => {
-      const result = await getCompareItems(compareItems);
-      setItems(result);
+      const { success, compare_items, compare_fields } = await getCompareItems(compareItems);
+
+      if(true == success) {
+        setItems(compare_items);
+        setCompareFields(compare_fields);
+      }
+      
     }
     _getCompareItems();
   }, [])
 
   const value = {
-    items
+    items,
+    compareFields
   };
 
   return <CompareAdvancedContext.Provider value={ value }>

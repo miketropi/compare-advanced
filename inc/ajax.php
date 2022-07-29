@@ -4,8 +4,13 @@
  */
 
 function ca_ajax_get_compare_items() {
-  $result = ca_prepare_compare_table_data($_POST['args']['ids']);
-  wp_send_json($result);
+  $compareItems = ca_prepare_compare_table_data($_POST['args']['ids']);
+  $compareFields = ca_table_compare_fields_register();
+  wp_send_json([
+    'success' => true,
+    'compare_items' => $compareItems,
+    'compare_fields' => $compareFields,
+  ]);
 }
 
 add_action('wp_ajax_ca_ajax_get_compare_items', 'ca_ajax_get_compare_items');
