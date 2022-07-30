@@ -857,16 +857,38 @@ var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_3__["defa
                 })
               })]
             }), compareItems.length > 0 && compareItems.map(function (item, _itemIndex) {
+              var _fieldData$extra_para;
+
               var fieldData = item[field.field_map];
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                className: fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "__entry-cell",
+              var type = (_fieldData$extra_para = fieldData.extra_params) === null || _fieldData$extra_para === void 0 ? void 0 : _fieldData$extra_para.type;
+              var contentInner = '';
+
+              if (type == 'gallery') {
+                var Test = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                  children: "Hello this is component...!"
+                });
+
+                contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
+                  content: Test,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                     dangerouslySetInnerHTML: {
                       __html: fieldData._html
                     }
                   })
+                });
+              } else {
+                contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                  dangerouslySetInnerHTML: {
+                    __html: fieldData._html
+                  }
+                });
+              }
+
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                className: fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class,
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                  className: "__entry-cell",
+                  children: contentInner
                 })
               }, fieldData._key);
             })]
@@ -896,6 +918,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _templateObject;
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -971,7 +995,7 @@ var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"]
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var _setPos = function _setPos() {
       var top = jQuery(handle.current).offset().top - 50;
-      var left = jQuery(handle.current).offset().left + 50;
+      var left = jQuery(handle.current).offset().left + jQuery(handle.current).innerWidth() + 20;
       setPos(_objectSpread(_objectSpread({}, pos), {}, {
         top: top,
         left: left
@@ -983,6 +1007,11 @@ var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"]
     window.addEventListener('resize', _setPos);
     handle.current.addEventListener('mouseover', _setPos);
   }, [handle]);
+  var tooltipContent = _typeof(content) === 'object' ? content : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    dangerouslySetInnerHTML: {
+      __html: content
+    }
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       ref: handle,
@@ -998,11 +1027,7 @@ var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"]
       top: pos.top,
       left: pos.left,
       show: show,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        dangerouslySetInnerHTML: {
-          __html: content
-        }
-      })
+      children: tooltipContent
     }), container)]
   });
 });

@@ -77,7 +77,11 @@ function ca_compare_item_render_html_by_type($field) {
       break;
     
     case 'gallery':
-      $_html = 'Gallery ...!';
+      if($field['value']) {
+        $_html = '<img src="'. $field['value'][0]['url'] .'" alt="" />';
+      } else {
+        $_html = wpautop('N/A');
+      }
       break;
  
     default:

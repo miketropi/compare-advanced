@@ -32,9 +32,21 @@ export default ({ compareFields, compareItems }) => {
                 (compareItems.length > 0) && 
                 compareItems.map((item, _itemIndex) => {
                   let fieldData = item[field.field_map];
+                  const type = fieldData.extra_params?.type;
+                  let contentInner = '';
+
+                  if(type == 'gallery') {
+                    const Test = <div>Hello this is component...!</div>
+                    contentInner = <Tooltip content={ Test }>
+                      <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>
+                    </Tooltip>;
+                  } else {
+                    contentInner = <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>;
+                  }
+
                   return <td className={ fieldData?.extra_class } key={ fieldData._key }>
                     <div className="__entry-cell">
-                      <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>
+                      { contentInner }
                     </div>  
                   </td>
                 })

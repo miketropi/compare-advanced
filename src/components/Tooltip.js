@@ -45,7 +45,7 @@ export default ({ content, children, eventActive, className }) => {
   useEffect(() => {
     const _setPos = () => {
       const top = jQuery(handle.current).offset().top - 50;
-      const left = jQuery(handle.current).offset().left + 50;
+      const left = jQuery(handle.current).offset().left + jQuery(handle.current).innerWidth() + 20;
       
       setPos({
         ...pos,
@@ -59,6 +59,8 @@ export default ({ content, children, eventActive, className }) => {
     handle.current.addEventListener('mouseover', _setPos)
   }, [handle])
 
+  const tooltipContent = typeof content === 'object' ? content : <div dangerouslySetInnerHTML={{ __html: content }}></div>
+  
   return <Fragment>
     <div 
       ref={ handle } 
@@ -69,7 +71,9 @@ export default ({ content, children, eventActive, className }) => {
       container && 
       show &&
       ReactDOM.createPortal(<TooltipContainer top={ pos.top } left={ pos.left } show={ show }>
-        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        {/* { typeof content } */}
+        {/* <div dangerouslySetInnerHTML={{ __html: content }}></div> */}
+        { tooltipContent }
       </TooltipContainer>, container) 
     }
   </Fragment>
