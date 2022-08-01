@@ -20,6 +20,11 @@ const CompareAdvancedProvider = ({ children, compareItems }) => {
     _getCompareItems();
   }, [])
 
+  const updatePinFunc = (ID, pin) => {
+    let _items = [...items];
+    let item = _items.find(i => i.ID == ID)
+  }
+
   const value = {
     items,
     compareFields

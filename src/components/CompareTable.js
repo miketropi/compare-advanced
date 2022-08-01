@@ -1,21 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
 import Tooltip from './Tooltip';
+import SlideImages from './SlideImages';
 
 const CompareTableContainer = styled.div`
 display: block;
 width: 100%;
+overflow: auto;
+margin-bottom: 3em;
+
+.compare-advanced-table {
+  max-width: initial;
+  margin-bottom: 0;
+  overflow-x: initial !important;
+
+  tr {
+
+    th.__col-heading {
+      position: sticky;
+      left: 0;
+      z-index: 9;
+    }
+  }
+}
 `
 
 export default ({ compareFields, compareItems }) => {
   return <CompareTableContainer>
-    <table className="compare-advanced-table">
+    <table className="compare-advanced-table" style={{ width: `${ (compareItems.length + 1) * 200 }px` }}>
       <tbody>
         {
           compareFields && 
           compareFields.map(field => {
             return <tr key={ field._key }>
-              <th className={ field?.extra_class }>
+              <th className={ ['__col-heading', field?.extra_class].join(' ') } width="200px">
                 { field?.label }
 
                 {
@@ -31,21 +49,33 @@ export default ({ compareFields, compareItems }) => {
               {
                 (compareItems.length > 0) && 
                 compareItems.map((item, _itemIndex) => {
+                  if(item._pin == true) return false; 
+                  
                   let fieldData = item[field.field_map];
                   const type = fieldData.extra_params?.type;
                   let contentInner = '';
 
                   if(type == 'gallery') {
-                    const Test = <div>Hello this is component...!</div>
-                    contentInner = <Tooltip content={ Test }>
+                    // const Test = <div>Hello this is component...!</div>
+                    const gallery = fieldData.extra_params?.value;
+                    contentInner = <Tooltip 
+                      eventActive={ 'click' } 
+                      content={ <SlideImages gallery={ gallery } /> }>
                       <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>
                     </Tooltip>;
                   } else {
                     contentInner = <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>;
                   }
 
-                  return <td className={ fieldData?.extra_class } key={ fieldData._key }>
+                  return <td className={ fieldData?.extra_class } key={ fieldData._key } width="200px">
                     <div className="__entry-cell">
+                      {
+                        fieldData._name == 'infomation' &&
+                        <div className="actions">
+                          <button className="ca-button">PIN</button>
+                          <button className="ca-button">REMOVE</button>
+                        </div>
+                      }
                       { contentInner }
                     </div>  
                   </td>

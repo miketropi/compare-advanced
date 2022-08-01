@@ -106,7 +106,10 @@ function ca_prepare_compare_table_data($ids = []) {
         '_name' => 'infomation',
         '_key' => ca_rand_key(), 
         '_html' => '<img src="'. $item['featured_image'] .'" alt="'. $item['title'] .'"/> <p>'. $item['product_code'] .'</p>',
-        'extra_params' => [],
+        'extra_params' => [
+          'type' => 'gallery',
+          'value' => $item['product_gallery'],
+        ],
         'extra_class' => '',
       ],
     ];

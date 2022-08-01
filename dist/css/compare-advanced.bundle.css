@@ -28,11 +28,28 @@
 }
 .compare-advanced-table tbody td .__entry-cell {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: center;
   align-items: center;
   min-height: 80px;
   padding: 10px 0;
+}
+.compare-advanced-table tbody td .__entry-cell .actions {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.compare-advanced-table tbody td .__entry-cell .actions button {
+  margin-bottom: 9px;
+  background: #E6E6E6;
+  color: #525252;
+  border-radius: 40px;
+  transition: 0.3s ease;
+}
+.compare-advanced-table tbody td .__entry-cell .actions button:hover {
+  background: #C0C2AD;
+  color: white;
 }
 .compare-advanced-table tbody th, .compare-advanced-table tbody td {
   border: none;
