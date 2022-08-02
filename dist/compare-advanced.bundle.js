@@ -925,6 +925,7 @@ var CompareItems = function CompareItems(_ref) {
         children: compareFields && compareFields.map(function (field) {
           var _field$image_label, _field$image_label2;
 
+          if (field.visible == false) return false;
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("th", {
               className: ['__col-heading', field === null || field === void 0 ? void 0 : field.extra_class].join(' '),
@@ -1079,7 +1080,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  z-index: 99;\n  left: ", ";\n  top: ", ";\n  background: white;\n  padding: 20px;\n  border-radius: 16px;\n  width: 200px;\n  box-shadow: 0 8px 10px 0 rgb(1 1 1 / 15%);\n\n  p {\n    font-size: 15px;\n    line-height: 1.3em;\n    margin: 0;\n  }\n"])), function (props) {
+var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  z-index: 99;\n  left: ", ";\n  top: ", ";\n  background: white;\n  padding: 20px;\n  border-radius: 16px;\n  width: 200px;\n  box-shadow: 0 8px 10px 0 rgb(1 1 1 / 15%);\n  text-align: center;\n\n  p {\n    font-size: 13px;\n    line-height: 1.3em;\n    margin: 0;\n\n    font-family: var(--text-font);\n    color: black;\n  }\n"])), function (props) {
   return props.left ? "".concat(props.left, "px") : "0px";
 }, function (props) {
   return props.top ? "".concat(props.top, "px") : "0px";

@@ -13,11 +13,15 @@ const TooltipContainer = styled.div`
   border-radius: 16px;
   width: 200px;
   box-shadow: 0 8px 10px 0 rgb(1 1 1 / 15%);
+  text-align: center;
 
   p {
-    font-size: 15px;
+    font-size: 13px;
     line-height: 1.3em;
     margin: 0;
+
+    font-family: var(--text-font);
+    color: black;
   }
 `;
 

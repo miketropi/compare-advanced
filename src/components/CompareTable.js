@@ -103,6 +103,8 @@ export default ({ compareFields, compareItems }) => {
         {
           compareFields && 
           compareFields.map(field => {
+            if(field.visible == false) return false;
+            
             return <tr key={ field._key }>
               <th className={ ['__col-heading', field?.extra_class].join(' ') } width="200px">
                 {

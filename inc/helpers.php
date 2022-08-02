@@ -146,6 +146,8 @@ function ca_table_compare_fields_register() {
   $fields = [
     [
       '_key' => ca_rand_key(),
+      'visible' => true,
+      'image_label' => '',
       'label' => false,
       'help_text' => '',
       'enable_help_text' => false,
@@ -154,6 +156,8 @@ function ca_table_compare_fields_register() {
     ],
     [
       '_key' => ca_rand_key(),
+      'visible' => true,
+      'image_label' => '',
       'label' => __('Brand and model', 'compare-advanced'),
       'help_text' => '',
       'enable_help_text' => false,
@@ -165,6 +169,7 @@ function ca_table_compare_fields_register() {
     foreach($compare_fields as $index => $f) {
       array_push($fields, [
         '_key' => ca_rand_key(),
+        'visible' => $f['visible'],
         'image_label' => $f['image_label'], 
         'label' => $f['label'],
         'help_text' => wpautop($f['help_text']),
