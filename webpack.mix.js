@@ -6,6 +6,8 @@ mix.webpackConfig({
   },
 });
 
+mix.setResourceRoot('/wp-content/plugins/compare-advanced/dist/');
+
 /**
  * Frontend 
  */

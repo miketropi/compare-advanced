@@ -4,6 +4,7 @@ import Tooltip from './Tooltip';
 import SlideImages from './SlideImages';
 import orderBy from 'lodash/orderBy';
 import { useCompareAdvanced } from '../context/CompareAdvancedContext';
+import iconPlus from '../../images/plus.svg';
 
 const CompareTableContainer = styled.div`
 display: block;
@@ -61,9 +62,16 @@ export const CompareItems = ({ items, field }) => {
         if(type == 'gallery') {
           const gallery = fieldData.extra_params?.value;
           contentInner = <Tooltip 
+            className="tooltip-contain-gallery" 
             eventActive={ 'click' } 
             content={ <SlideImages gallery={ gallery } /> }>
             <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>
+            {
+              type == 'gallery' && 
+              <span class="__icon-extra-gallery">
+                <img src={ iconPlus } alt="#" />
+              </span>
+            }
           </Tooltip>;
         } else {
           contentInner = <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>;
@@ -104,7 +112,7 @@ export default ({ compareFields, compareItems }) => {
           compareFields && 
           compareFields.map(field => {
             if(field.visible == false) return false;
-            
+
             return <tr key={ field._key }>
               <th className={ ['__col-heading', field?.extra_class].join(' ') } width="200px">
                 {

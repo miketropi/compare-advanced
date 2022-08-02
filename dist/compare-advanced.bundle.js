@@ -810,13 +810,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var _Tooltip__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tooltip */ "./src/components/Tooltip.js");
 /* harmony import */ var _SlideImages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SlideImages */ "./src/components/SlideImages.js");
 /* harmony import */ var lodash_orderBy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/orderBy */ "./node_modules/lodash/orderBy.js");
 /* harmony import */ var lodash_orderBy__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_orderBy__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../context/CompareAdvancedContext */ "./src/context/CompareAdvancedContext.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _images_plus_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../images/plus.svg */ "./images/plus.svg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _templateObject;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -829,7 +830,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 9;\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 9;\n    }\n  }\n}\n"])));
+
+var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 9;\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 9;\n    }\n  }\n}\n"])));
 var CompareItems = function CompareItems(_ref) {
   var items = _ref.items,
       field = _ref.field;
@@ -839,7 +841,7 @@ var CompareItems = function CompareItems(_ref) {
       updatePinFunc = _useCompareAdvanced.updatePinFunc,
       removeCompareItem = _useCompareAdvanced.removeCompareItem;
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: items.map(function (item, _itemIndex) {
       var _fieldData$extra_para;
 
@@ -855,19 +857,26 @@ var CompareItems = function CompareItems(_ref) {
         var _fieldData$extra_para2;
 
         var gallery = (_fieldData$extra_para2 = fieldData.extra_params) === null || _fieldData$extra_para2 === void 0 ? void 0 : _fieldData$extra_para2.value;
-        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          className: "tooltip-contain-gallery",
           eventActive: 'click',
-          content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_SlideImages__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SlideImages__WEBPACK_IMPORTED_MODULE_2__["default"], {
             gallery: gallery
           }),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             dangerouslySetInnerHTML: {
               __html: fieldData._html
             }
-          })
+          }), type == 'gallery' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            "class": "__icon-extra-gallery",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+              src: _images_plus_svg__WEBPACK_IMPORTED_MODULE_5__["default"],
+              alt: "#"
+            })
+          })]
         });
       } else {
-        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           dangerouslySetInnerHTML: {
             __html: fieldData._html
           }
@@ -879,23 +888,23 @@ var CompareItems = function CompareItems(_ref) {
         r ? removeCompareItem(index) : '';
       };
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
         className: [fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class, pin ? '__is-sticky' : ''].join(' '),
         style: {
           '--left-space': "".concat((_itemIndex + 1) * cellWidth, "px")
         },
         width: "".concat(cellWidth, "px"),
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "__entry-cell",
-          children: [fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "actions",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
               className: ['ca-button', pin ? '__pinned' : ''].join(' '),
               onClick: function onClick(e) {
                 return updatePinFunc(pin ? false : true, _key);
               },
               children: pin ? 'PINNED' : 'PIN'
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
               className: "ca-button __remove",
               onClick: function onClick(e) {
                 return __removeItem(_itemIndex);
@@ -915,49 +924,49 @@ var CompareItems = function CompareItems(_ref) {
   var _useCompareAdvanced2 = (0,_context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_4__.useCompareAdvanced)(),
       cellWidth = _useCompareAdvanced2.cellWidth;
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(CompareTableContainer, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("table", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(CompareTableContainer, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("table", {
       className: "compare-advanced-table",
       style: {
         width: "".concat((compareItems.length + 1) * cellWidth, "px")
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", {
         children: compareFields && compareFields.map(function (field) {
           var _field$image_label, _field$image_label2;
 
           if (field.visible == false) return false;
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("th", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("th", {
               className: ['__col-heading', field === null || field === void 0 ? void 0 : field.extra_class].join(' '),
               width: "200px",
-              children: [((_field$image_label = field.image_label) === null || _field$image_label === void 0 ? void 0 : _field$image_label.url) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+              children: [((_field$image_label = field.image_label) === null || _field$image_label === void 0 ? void 0 : _field$image_label.url) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
                 className: "__image-label",
                 src: (_field$image_label2 = field.image_label) === null || _field$image_label2 === void 0 ? void 0 : _field$image_label2.url,
                 alt: "#"
-              }), field === null || field === void 0 ? void 0 : field.label, field.help_text != '' && field.enable_help_text == true && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              }), field === null || field === void 0 ? void 0 : field.label, field.help_text != '' && field.enable_help_text == true && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 className: "__icon-tooltip",
                 content: field.help_text,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                   className: "__icon",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("svg", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("svg", {
                     width: "24px",
                     height: "24px",
                     viewBox: "0 0 24 24",
                     xmlns: "http://www.w3.org/2000/svg",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("rect", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("rect", {
                       x: "0",
                       fill: "none",
                       width: "24",
                       height: "24"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("g", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("path", {
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("g", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("path", {
                         d: "M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 16h-2v-2h2v2zm0-4.14V15h-2v-2c0-.552.448-1 1-1 1.103 0 2-.897 2-2s-.897-2-2-2-2 .897-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.862-1.278 3.413-3 3.86z"
                       })
                     })]
                   })
                 })
               })]
-            }), compareItems.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(CompareItems, {
+            }), compareItems.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(CompareItems, {
               items: lodash_orderBy__WEBPACK_IMPORTED_MODULE_3___default()(compareItems, [function (o) {
                 return o.__config.pin;
               }], 'desc'),
@@ -1267,6 +1276,14 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
       compareFields = _useState6[0],
       setCompareFields = _useState6[1];
 
+  var _setCellWidthHandle = function _setCellWidthHandle() {
+    if (window.innerWidth <= 768) {
+      setCellWidth(150);
+    } else {
+      setCellWidth(200);
+    }
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var _getCompareItems = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -1304,6 +1321,10 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
     }();
 
     _getCompareItems();
+
+    window.addEventListener('resize', _setCellWidthHandle);
+
+    _setCellWidthHandle();
   }, []);
 
   var updatePinFunc = function updatePinFunc(pin, key) {
@@ -1951,6 +1972,21 @@ module.exports = {
 var MediaQueryDispatch = __webpack_require__(/*! ./MediaQueryDispatch */ "./node_modules/enquire.js/src/MediaQueryDispatch.js");
 module.exports = new MediaQueryDispatch();
 
+
+/***/ }),
+
+/***/ "./images/plus.svg":
+/*!*************************!*\
+  !*** ./images/plus.svg ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/wp-content/plugins/compare-advanced/dist/images/plus.svg?47d992c2602d9578c8a2cfb7e9758100");
 
 /***/ }),
 

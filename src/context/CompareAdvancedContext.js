@@ -9,6 +9,14 @@ const CompareAdvancedProvider = ({ children, compareItems }) => {
   const [cellWidth, setCellWidth] = useState(200);
   const [compareFields, setCompareFields] = useState([]);
 
+  const _setCellWidthHandle = () => {
+    if(window.innerWidth <= 768) {
+      setCellWidth(150)
+    } else {
+      setCellWidth(200)
+    }
+  }
+
   useEffect(() => {
     const _getCompareItems = async () => {
       const { success, compare_items, compare_fields } = await getCompareItems(compareItems);
@@ -20,6 +28,9 @@ const CompareAdvancedProvider = ({ children, compareItems }) => {
       
     }
     _getCompareItems();
+    
+    window.addEventListener('resize', _setCellWidthHandle);
+    _setCellWidthHandle();
   }, [])
 
   const updatePinFunc = (pin, key) => {
