@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Tooltip from './Tooltip';
 import SlideImages from './SlideImages';
+import orderBy from 'lodash/orderBy';
+import { useCompareAdvanced } from '../context/CompareAdvancedContext';
 
 const CompareTableContainer = styled.div`
 display: block;
@@ -14,7 +16,28 @@ margin-bottom: 3em;
   margin-bottom: 0;
   overflow-x: initial !important;
 
+  .__image-label {
+    width: 70%;
+    margin: 1em auto 5px auto;
+    display: block;
+  }
+
   tr {
+
+    td.__is-sticky {
+      position: sticky;
+      left: var(--left-space);
+      z-index: 9;
+    }
+
+    td.__product-brand {
+
+      .__entry-cell {
+        min-height: auto;
+        line-height: 0;
+        padding-bottom: 0;
+      }
+    }
 
     th.__col-heading {
       position: sticky;
@@ -25,15 +48,67 @@ margin-bottom: 3em;
 }
 `
 
+export const CompareItems = ({ items, field }) => {
+  const { cellWidth, updatePinFunc, removeCompareItem } = useCompareAdvanced();
+  return <Fragment>
+    {
+      items.map((item, _itemIndex) => {
+        const { _key, ID, pin } = item['__config']; 
+        const fieldData = item[field.field_map];
+        const type = fieldData.extra_params?.type;
+        let contentInner = '';
+
+        if(type == 'gallery') {
+          const gallery = fieldData.extra_params?.value;
+          contentInner = <Tooltip 
+            eventActive={ 'click' } 
+            content={ <SlideImages gallery={ gallery } /> }>
+            <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>
+          </Tooltip>;
+        } else {
+          contentInner = <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>;
+        }
+
+        const __removeItem = (index) => {
+          const r = confirm('Are you sure remove this item?')
+          r ? removeCompareItem(index) : '';
+        }
+
+        return <td 
+          className={ [fieldData?.extra_class, pin ? '__is-sticky' : ''].join(' ') } 
+          style={{ '--left-space': `${ (_itemIndex + 1) * cellWidth }px` }}
+          key={ fieldData._key } width={ `${ cellWidth }px` }>
+          <div className="__entry-cell">
+            {
+              fieldData._name == 'infomation' &&
+              <div className="actions">
+                <button className={ ['ca-button', pin ? '__pinned' : ''].join(' ') } onClick={ e => updatePinFunc((pin ? false : true), _key) }>{ pin ? 'PINNED' : 'PIN' }</button>
+                <button className="ca-button __remove" onClick={ e => __removeItem(_itemIndex) }>REMOVE</button>
+              </div>
+            }
+            { contentInner }
+          </div>  
+        </td>
+      })
+    }
+  </Fragment>
+}
+
 export default ({ compareFields, compareItems }) => {
+  const { cellWidth } = useCompareAdvanced();
+
   return <CompareTableContainer>
-    <table className="compare-advanced-table" style={{ width: `${ (compareItems.length + 1) * 200 }px` }}>
+    <table className="compare-advanced-table" style={{ width: `${ (compareItems.length + 1) * cellWidth }px` }}>
       <tbody>
         {
           compareFields && 
           compareFields.map(field => {
             return <tr key={ field._key }>
               <th className={ ['__col-heading', field?.extra_class].join(' ') } width="200px">
+                {
+                  field.image_label?.url &&
+                  <img className="__image-label" src={ field.image_label?.url } alt="#" />
+                }
                 { field?.label }
 
                 {
@@ -48,38 +123,7 @@ export default ({ compareFields, compareItems }) => {
               </th>
               {
                 (compareItems.length > 0) && 
-                compareItems.map((item, _itemIndex) => {
-                  if(item._pin == true) return false; 
-                  
-                  let fieldData = item[field.field_map];
-                  const type = fieldData.extra_params?.type;
-                  let contentInner = '';
-
-                  if(type == 'gallery') {
-                    // const Test = <div>Hello this is component...!</div>
-                    const gallery = fieldData.extra_params?.value;
-                    contentInner = <Tooltip 
-                      eventActive={ 'click' } 
-                      content={ <SlideImages gallery={ gallery } /> }>
-                      <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>
-                    </Tooltip>;
-                  } else {
-                    contentInner = <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>;
-                  }
-
-                  return <td className={ fieldData?.extra_class } key={ fieldData._key } width="200px">
-                    <div className="__entry-cell">
-                      {
-                        fieldData._name == 'infomation' &&
-                        <div className="actions">
-                          <button className="ca-button">PIN</button>
-                          <button className="ca-button">REMOVE</button>
-                        </div>
-                      }
-                      { contentInner }
-                    </div>  
-                  </td>
-                })
+                <CompareItems items={ orderBy(compareItems, [o => o.__config.pin], 'desc') } field={ field } />
               }
             </tr>
           })

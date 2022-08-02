@@ -44,6 +44,7 @@ function ca_get_compare_items($ids = []) {
   return array_map(function($item) {
     $ID = $item->ID;
     return [
+      '_key' => ca_rand_key(),
       'ID' => $ID,
       'title' => $item->post_title,
       'featured_image' => get_the_post_thumbnail_url($ID, 'full'),
@@ -95,6 +96,11 @@ function ca_prepare_compare_table_data($ids = []) {
   $result = ca_get_compare_items($ids);
   return array_map(function($item) {
     $compare_item_data = [
+      '__config' => [
+        '_key' => $item['_key'],
+        'ID' => $item['ID'],
+        'pin' => false,
+      ],
       'brand_logo' => [
         '_name' => 'brand_logo',
         '_key' => ca_rand_key(),
@@ -159,6 +165,7 @@ function ca_table_compare_fields_register() {
     foreach($compare_fields as $index => $f) {
       array_push($fields, [
         '_key' => ca_rand_key(),
+        'image_label' => $f['image_label'], 
         'label' => $f['label'],
         'help_text' => wpautop($f['help_text']),
         'enable_help_text' => $f['enable_help_text'],

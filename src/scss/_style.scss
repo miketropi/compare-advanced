@@ -60,7 +60,8 @@
             border-radius: 40px;
             transition: .3s ease;
             
-            &:hover {
+            &:hover,
+            &.__pinned {
               background: #C0C2AD;
               color: white;
             }

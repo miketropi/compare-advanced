@@ -47,7 +47,7 @@
   border-radius: 40px;
   transition: 0.3s ease;
 }
-.compare-advanced-table tbody td .__entry-cell .actions button:hover {
+.compare-advanced-table tbody td .__entry-cell .actions button:hover, .compare-advanced-table tbody td .__entry-cell .actions button.__pinned {
   background: #C0C2AD;
   color: white;
 }

@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getCompareItems } from '../lib/api';
+import find from 'lodash/find';
 
 const CompareAdvancedContext = createContext();
 
 const CompareAdvancedProvider = ({ children, compareItems }) => {
   const [items, setItems] = useState([]);
+  const [cellWidth, setCellWidth] = useState(200);
   const [compareFields, setCompareFields] = useState([]);
 
   useEffect(() => {
@@ -20,14 +22,25 @@ const CompareAdvancedProvider = ({ children, compareItems }) => {
     _getCompareItems();
   }, [])
 
-  const updatePinFunc = (ID, pin) => {
-    let _items = [...items];
-    let item = _items.find(i => i.ID == ID)
+  const updatePinFunc = (pin, key) => {
+    let _items = [...items];  
+    let item = find(_items, o => o.__config._key == key);
+    item.__config.pin = pin;
+    setItems(_items);
+  }
+
+  const removeCompareItem = (index) => {
+    let _items = [...items];  
+    _items.splice(index, 1);
+    setItems(_items);
   }
 
   const value = {
     items,
-    compareFields
+    compareFields,
+    cellWidth,
+    updatePinFunc,
+    removeCompareItem
   };
 
   return <CompareAdvancedContext.Provider value={ value }>
