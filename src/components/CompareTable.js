@@ -114,7 +114,7 @@ export default ({ compareFields, compareItems }) => {
             if(field.visible == false) return false;
 
             return <tr key={ field._key }>
-              <th className={ ['__col-heading', field?.extra_class].join(' ') } width="200px">
+              <th className={ ['__col-heading', field?.extra_class].join(' ') } width={ `${ cellWidth }px` }>
                 {
                   field.image_label?.url &&
                   <img className="__image-label" src={ field.image_label?.url } alt="#" />

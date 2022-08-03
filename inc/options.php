@@ -14,6 +14,72 @@ if( function_exists('acf_add_options_page') ) {
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
+		'key' => 'group_62e9eccb65c3b',
+		'title' => 'Compare Advanced Guten Block',
+		'fields' => array(
+			array(
+				'key' => 'field_62e9ece1bebe0',
+				'label' => 'Compare Items',
+				'name' => 'compare_items',
+				'type' => 'post_object',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'post_type' => array(
+					0 => 'compare-items',
+				),
+				'taxonomy' => '',
+				'allow_null' => 0,
+				'multiple' => 1,
+				'return_format' => 'id',
+				'ui' => 1,
+			),
+			array(
+				'key' => 'field_62e9ed10bebe1',
+				'label' => 'Extra Class',
+				'name' => 'extra_class',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'block',
+					'operator' => '==',
+					'value' => 'acf/compare-advanced',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+		'show_in_rest' => 0,
+	));
+	
+	acf_add_local_field_group(array(
 		'key' => 'group_62e0bf9ca4ccc',
 		'title' => 'Compare Settings',
 		'fields' => array(

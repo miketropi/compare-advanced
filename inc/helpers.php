@@ -34,6 +34,7 @@ function ca_get_post_compare_fields($post_id = null) {
 function ca_get_compare_items($ids = []) {
   $args = [
     'include' => $ids,
+    'orderby' => 'post__in',
     'post_type' => 'compare-items',
     'post_status' => 'publish'
   ];

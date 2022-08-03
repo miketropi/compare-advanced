@@ -938,7 +938,7 @@ var CompareItems = function CompareItems(_ref) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("th", {
               className: ['__col-heading', field === null || field === void 0 ? void 0 : field.extra_class].join(' '),
-              width: "200px",
+              width: "".concat(cellWidth, "px"),
               children: [((_field$image_label = field.image_label) === null || _field$image_label === void 0 ? void 0 : _field$image_label.url) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
                 className: "__image-label",
                 src: (_field$image_label2 = field.image_label) === null || _field$image_label2 === void 0 ? void 0 : _field$image_label2.url,

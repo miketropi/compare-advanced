@@ -30,6 +30,7 @@ Version: 1.0.0
   require(CA_DIR . '/inc/ajax.php');
   require(CA_DIR . '/inc/template-tags.php');
   require(CA_DIR . '/inc/shortcode.php');
+  require(CA_DIR . '/inc/guten-block.php');
 
   /**
    * Admin

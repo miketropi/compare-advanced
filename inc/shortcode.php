@@ -10,7 +10,7 @@ function ca_shortcode_compare_advanced_func($atts){
   ], $atts);
 
   // $result = ca_get_compare_items(explode(',', $a['compare_items']));
-
+  if(empty($a)) return;
   ob_start();
   ?>
   <div 
