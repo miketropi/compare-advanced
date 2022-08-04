@@ -810,14 +810,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var _Tooltip__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tooltip */ "./src/components/Tooltip.js");
 /* harmony import */ var _SlideImages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SlideImages */ "./src/components/SlideImages.js");
 /* harmony import */ var lodash_orderBy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/orderBy */ "./node_modules/lodash/orderBy.js");
 /* harmony import */ var lodash_orderBy__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_orderBy__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../context/CompareAdvancedContext */ "./src/context/CompareAdvancedContext.js");
 /* harmony import */ var _images_plus_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../images/plus.svg */ "./images/plus.svg");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_indiana_drag_scroll__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-indiana-drag-scroll */ "./node_modules/react-indiana-drag-scroll/dist/index.es.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _templateObject;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -831,7 +832,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 9;\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 9;\n    }\n  }\n}\n"])));
+
+var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 9;\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 9;\n    }\n  }\n}\n"])));
 var CompareItems = function CompareItems(_ref) {
   var items = _ref.items,
       field = _ref.field;
@@ -841,7 +843,7 @@ var CompareItems = function CompareItems(_ref) {
       updatePinFunc = _useCompareAdvanced.updatePinFunc,
       removeCompareItem = _useCompareAdvanced.removeCompareItem;
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: items.map(function (item, _itemIndex) {
       var _fieldData$extra_para;
 
@@ -857,26 +859,26 @@ var CompareItems = function CompareItems(_ref) {
         var _fieldData$extra_para2;
 
         var gallery = (_fieldData$extra_para2 = fieldData.extra_params) === null || _fieldData$extra_para2 === void 0 ? void 0 : _fieldData$extra_para2.value;
-        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
           className: "tooltip-contain-gallery",
           eventActive: 'click',
-          content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SlideImages__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_SlideImages__WEBPACK_IMPORTED_MODULE_2__["default"], {
             gallery: gallery
           }),
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
             dangerouslySetInnerHTML: {
               __html: fieldData._html
             }
-          }), type == 'gallery' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-            "class": "__icon-extra-gallery",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+          }), type == 'gallery' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+            className: "__icon-extra-gallery",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
               src: _images_plus_svg__WEBPACK_IMPORTED_MODULE_5__["default"],
               alt: "#"
             })
           })]
         });
       } else {
-        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           dangerouslySetInnerHTML: {
             __html: fieldData._html
           }
@@ -888,23 +890,23 @@ var CompareItems = function CompareItems(_ref) {
         r ? removeCompareItem(index) : '';
       };
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
         className: [fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class, pin ? '__is-sticky' : ''].join(' '),
         style: {
           '--left-space': "".concat((_itemIndex + 1) * cellWidth, "px")
         },
         width: "".concat(cellWidth, "px"),
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "__entry-cell",
-          children: [fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          children: [fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "actions",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: ['ca-button', pin ? '__pinned' : ''].join(' '),
               onClick: function onClick(e) {
                 return updatePinFunc(pin ? false : true, _key);
               },
               children: pin ? 'PINNED' : 'PIN'
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "ca-button __remove",
               onClick: function onClick(e) {
                 return __removeItem(_itemIndex);
@@ -924,55 +926,66 @@ var CompareItems = function CompareItems(_ref) {
   var _useCompareAdvanced2 = (0,_context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_4__.useCompareAdvanced)(),
       cellWidth = _useCompareAdvanced2.cellWidth;
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(CompareTableContainer, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("table", {
-      className: "compare-advanced-table",
-      style: {
-        width: "".concat((compareItems.length + 1) * cellWidth, "px")
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", {
-        children: compareFields && compareFields.map(function (field) {
-          var _field$image_label, _field$image_label2;
+  var scrollContainerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
-          if (field.visible == false) return false;
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("th", {
-              className: ['__col-heading', field === null || field === void 0 ? void 0 : field.extra_class].join(' '),
-              width: "".concat(cellWidth, "px"),
-              children: [((_field$image_label = field.image_label) === null || _field$image_label === void 0 ? void 0 : _field$image_label.url) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-                className: "__image-label",
-                src: (_field$image_label2 = field.image_label) === null || _field$image_label2 === void 0 ? void 0 : _field$image_label2.url,
-                alt: "#"
-              }), field === null || field === void 0 ? void 0 : field.label, field.help_text != '' && field.enable_help_text == true && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                className: "__icon-tooltip",
-                content: field.help_text,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                  className: "__icon",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("svg", {
-                    width: "24px",
-                    height: "24px",
-                    viewBox: "0 0 24 24",
-                    xmlns: "http://www.w3.org/2000/svg",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("rect", {
-                      x: "0",
-                      fill: "none",
-                      width: "24",
-                      height: "24"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("g", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("path", {
-                        d: "M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 16h-2v-2h2v2zm0-4.14V15h-2v-2c0-.552.448-1 1-1 1.103 0 2-.897 2-2s-.897-2-2-2-2 .897-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.862-1.278 3.413-3 3.86z"
-                      })
-                    })]
+  var onScroll = function onScroll() {
+    console.log(scrollContainerRef.current.getElement().scrollLeft);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(CompareTableContainer, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_indiana_drag_scroll__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      ref: scrollContainerRef,
+      vertical: false,
+      onScroll: onScroll,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+        className: "compare-advanced-table",
+        style: {
+          width: "".concat((compareItems.length + 1) * cellWidth, "px")
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+          children: compareFields && compareFields.map(function (field) {
+            var _field$image_label, _field$image_label2;
+
+            if (field.visible == false) return false;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("th", {
+                className: ['__col-heading', field === null || field === void 0 ? void 0 : field.extra_class].join(' '),
+                width: "".concat(cellWidth, "px"),
+                children: [((_field$image_label = field.image_label) === null || _field$image_label === void 0 ? void 0 : _field$image_label.url) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                  className: "__image-label",
+                  src: (_field$image_label2 = field.image_label) === null || _field$image_label2 === void 0 ? void 0 : _field$image_label2.url,
+                  alt: "#"
+                }), field === null || field === void 0 ? void 0 : field.label, field.help_text != '' && field.enable_help_text == true && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
+                  className: "__icon-tooltip",
+                  content: field.help_text,
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                    className: "__icon",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("svg", {
+                      width: "24px",
+                      height: "24px",
+                      viewBox: "0 0 24 24",
+                      xmlns: "http://www.w3.org/2000/svg",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("rect", {
+                        x: "0",
+                        fill: "none",
+                        width: "24",
+                        height: "24"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("g", {
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("path", {
+                          d: "M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 16h-2v-2h2v2zm0-4.14V15h-2v-2c0-.552.448-1 1-1 1.103 0 2-.897 2-2s-.897-2-2-2-2 .897-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.862-1.278 3.413-3 3.86z"
+                        })
+                      })]
+                    })
                   })
-                })
+                })]
+              }), compareItems.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(CompareItems, {
+                items: lodash_orderBy__WEBPACK_IMPORTED_MODULE_3___default()(compareItems, [function (o) {
+                  return o.__config.pin;
+                }], 'desc'),
+                field: field
               })]
-            }), compareItems.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(CompareItems, {
-              items: lodash_orderBy__WEBPACK_IMPORTED_MODULE_3___default()(compareItems, [function (o) {
-                return o.__config.pin;
-              }], 'desc'),
-              field: field
-            })]
-          }, field._key);
+            }, field._key);
+          })
         })
       })
     })
@@ -37929,6 +37942,45 @@ function checkDCE() {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "./node_modules/react-dom/cjs/react-dom.development.js");
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/react-indiana-drag-scroll/dist/index.es.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-indiana-drag-scroll/dist/index.es.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */var n=function(t,e){return(n=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])})(t,e)};var o,r,i=(function(t){
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+!function(){var e={}.hasOwnProperty;function n(){for(var t=[],o=0;o<arguments.length;o++){var r=arguments[o];if(r){var i=typeof r;if("string"===i||"number"===i)t.push(r);else if(Array.isArray(r)&&r.length){var s=n.apply(null,r);s&&t.push(s)}else if("object"===i)for(var l in r)e.call(r,l)&&r[l]&&t.push(l)}}return t.join(" ")}t.exports?(n.default=n,t.exports=n):window.classNames=n}()}(r={path:o,exports:{},require:function(t,e){return function(){throw new Error("Dynamic requires are not currently supported by @rollup/plugin-commonjs")}(null==e&&r.path)}},r.exports),r.exports);function s(t,e,n){var o,r,i,s,l;function a(){var c=Date.now()-s;c<e&&c>=0?o=setTimeout(a,e-c):(o=null,n||(l=t.apply(i,r),i=r=null))}null==e&&(e=100);var c=function(){i=this,r=arguments,s=Date.now();var c=n&&!o;return o||(o=setTimeout(a,e)),c&&(l=t.apply(i,r),i=r=null),l};return c.clear=function(){o&&(clearTimeout(o),o=null)},c.flush=function(){o&&(l=t.apply(i,r),i=r=null,clearTimeout(o),o=null)},c}s.debounce=s;var l=s;!function(t,e){void 0===e&&(e={});var n=e.insertAt;if(t&&"undefined"!=typeof document){var o=document.head||document.getElementsByTagName("head")[0],r=document.createElement("style");r.type="text/css","top"===n&&o.firstChild?o.insertBefore(r,o.firstChild):o.appendChild(r),r.styleSheet?r.styleSheet.cssText=t:r.appendChild(document.createTextNode(t))}}(".indiana-scroll-container {\n  overflow: auto; }\n  .indiana-scroll-container--dragging {\n    scroll-behavior: auto !important; }\n    .indiana-scroll-container--dragging > * {\n      pointer-events: none;\n      cursor: -webkit-grab;\n      cursor: grab; }\n  .indiana-scroll-container--hide-scrollbars {\n    overflow: hidden;\n    overflow: -moz-scrollbars-none;\n    -ms-overflow-style: none;\n    scrollbar-width: none; }\n    .indiana-scroll-container--hide-scrollbars::-webkit-scrollbar {\n      display: none !important;\n      height: 0 !important;\n      width: 0 !important;\n      background: transparent !important;\n      -webkit-appearance: none !important; }\n  .indiana-scroll-container--native-scroll {\n    overflow: auto; }\n\n.indiana-dragging {\n  cursor: -webkit-grab;\n  cursor: grab; }\n");var a,c=(a="indiana-scroll-container",function(t,e){if(!t)return a;var n;"string"==typeof t?n=t:e=t;var o=a;return n&&(o+="__"+n),o+(e?Object.keys(e).reduce((function(t,n){var r=e[n];return r&&(t+=" "+("boolean"==typeof r?o+"--"+n:o+"--"+n+"_"+r)),t}),""):"")}),p=function(e){function o(n){var o=e.call(this,n)||this;return o.onEndScroll=function(){o.scrolling=!1,!o.pressed&&o.started&&o.processEnd()},o.onScroll=function(t){var e=o.container.current;e.scrollLeft===o.scrollLeft&&e.scrollTop===o.scrollTop||(o.scrolling=!0,o.processScroll(t),o.onEndScroll())},o.onTouchStart=function(t){var e=o.props.nativeMobileScroll;if(o.isDraggable(t.target))if(o.internal=!0,e&&o.scrolling)o.pressed=!0;else{var n=t.touches[0];o.processClick(t,n.clientX,n.clientY),!e&&o.props.stopPropagation&&t.stopPropagation()}},o.onTouchEnd=function(t){var e=o.props.nativeMobileScroll;o.pressed&&(!o.started||o.scrolling&&e?o.pressed=!1:o.processEnd(),o.forceUpdate())},o.onTouchMove=function(t){var e=o.props.nativeMobileScroll;if(o.pressed&&(!e||!o.isMobile)){var n=t.touches[0];n&&o.processMove(t,n.clientX,n.clientY),t.preventDefault(),o.props.stopPropagation&&t.stopPropagation()}},o.onMouseDown=function(t){o.isDraggable(t.target)&&o.isScrollable()&&(o.internal=!0,-1!==o.props.buttons.indexOf(t.button)&&(o.processClick(t,t.clientX,t.clientY),t.preventDefault(),o.props.stopPropagation&&t.stopPropagation()))},o.onMouseMove=function(t){o.pressed&&(o.processMove(t,t.clientX,t.clientY),t.preventDefault(),o.props.stopPropagation&&t.stopPropagation())},o.onMouseUp=function(t){o.pressed&&(o.started?o.processEnd():(o.internal=!1,o.pressed=!1,o.forceUpdate(),o.props.onClick&&o.props.onClick(t)),t.preventDefault(),o.props.stopPropagation&&t.stopPropagation())},o.container=react__WEBPACK_IMPORTED_MODULE_0___default().createRef(),o.onEndScroll=l(o.onEndScroll,300),o.scrolling=!1,o.started=!1,o.pressed=!1,o.internal=!1,o.getRef=o.getRef.bind(o),o}return function(t,e){function o(){this.constructor=t}n(t,e),t.prototype=null===e?Object.create(e):(o.prototype=e.prototype,new o)}(o,e),o.prototype.componentDidMount=function(){var t=this.props.nativeMobileScroll,e=this.container.current;window.addEventListener("mouseup",this.onMouseUp),window.addEventListener("mousemove",this.onMouseMove),window.addEventListener("touchmove",this.onTouchMove,{passive:!1}),window.addEventListener("touchend",this.onTouchEnd),e.addEventListener("touchstart",this.onTouchStart,{passive:!1}),e.addEventListener("mousedown",this.onMouseDown,{passive:!1}),t&&(this.isMobile=this.isMobileDevice(),this.isMobile&&this.forceUpdate())},o.prototype.componentWillUnmount=function(){window.removeEventListener("mouseup",this.onMouseUp),window.removeEventListener("mousemove",this.onMouseMove),window.removeEventListener("touchmove",this.onTouchMove),window.removeEventListener("touchend",this.onTouchEnd)},o.prototype.getElement=function(){return this.container.current},o.prototype.isMobileDevice=function(){return void 0!==window.orientation||-1!==navigator.userAgent.indexOf("IEMobile")},o.prototype.isDraggable=function(t){var e=this.props.ignoreElements;if(e){var n=t.closest(e);return null===n||n.contains(this.getElement())}return!0},o.prototype.isScrollable=function(){var t=this.container.current;return t&&(t.scrollWidth>t.clientWidth||t.scrollHeight>t.clientHeight)},o.prototype.processClick=function(t,e,n){var o=this.container.current;this.scrollLeft=o.scrollLeft,this.scrollTop=o.scrollTop,this.clientX=e,this.clientY=n,this.pressed=!0},o.prototype.processStart=function(t){void 0===t&&(t=!0);var e=this.props.onStartScroll;this.started=!0,t&&document.body.classList.add("indiana-dragging"),e&&e({external:!this.internal}),this.forceUpdate()},o.prototype.processScroll=function(t){if(this.started){var e=this.props.onScroll;e&&e({external:!this.internal})}else this.processStart(!1)},o.prototype.processMove=function(t,e,n){var o=this.props,r=o.horizontal,i=o.vertical,s=o.activationDistance,l=o.onScroll,a=this.container.current;this.started?(r&&(a.scrollLeft-=e-this.clientX),i&&(a.scrollTop-=n-this.clientY),l&&l({external:!this.internal}),this.clientX=e,this.clientY=n,this.scrollLeft=a.scrollLeft,this.scrollTop=a.scrollTop):(r&&Math.abs(e-this.clientX)>s||i&&Math.abs(n-this.clientY)>s)&&(this.clientX=e,this.clientY=n,this.processStart())},o.prototype.processEnd=function(){var t=this.props.onEndScroll;this.container.current&&t&&t({external:!this.internal}),this.pressed=!1,this.started=!1,this.scrolling=!1,this.internal=!1,document.body.classList.remove("indiana-dragging"),this.forceUpdate()},o.prototype.getRef=function(t){[this.container,this.props.innerRef].forEach((function(e){e&&("function"==typeof e?e(t):e.current=t)}))},o.prototype.render=function(){var e=this.props,n=e.children,o=e.draggingClassName,r=e.className,s=e.style,l=e.hideScrollbars,a=e.component;return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(a,{className:i(r,this.pressed&&o,c({dragging:this.pressed,"hide-scrollbars":l,"native-scroll":this.isMobile})),style:s,ref:this.getRef,onScroll:this.onScroll},n)},o.defaultProps={nativeMobileScroll:!0,hideScrollbars:!0,activationDistance:10,vertical:!0,horizontal:!0,stopPropagation:!1,style:{},component:"div",buttons:[0]},o}(react__WEBPACK_IMPORTED_MODULE_0__.PureComponent);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (p);
+//# sourceMappingURL=index.es.js.map
 
 
 /***/ }),

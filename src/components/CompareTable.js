@@ -5,6 +5,7 @@ import SlideImages from './SlideImages';
 import orderBy from 'lodash/orderBy';
 import { useCompareAdvanced } from '../context/CompareAdvancedContext';
 import iconPlus from '../../images/plus.svg';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 const CompareTableContainer = styled.div`
 display: block;
@@ -68,7 +69,7 @@ export const CompareItems = ({ items, field }) => {
             <div dangerouslySetInnerHTML={{__html: fieldData._html}}></div>
             {
               type == 'gallery' && 
-              <span class="__icon-extra-gallery">
+              <span className="__icon-extra-gallery">
                 <img src={ iconPlus } alt="#" />
               </span>
             }
@@ -104,41 +105,51 @@ export const CompareItems = ({ items, field }) => {
 
 export default ({ compareFields, compareItems }) => {
   const { cellWidth } = useCompareAdvanced();
+  const scrollContainerRef = useRef();
+
+  const onScroll = () => {
+    console.log(scrollContainerRef.current.getElement().scrollLeft)
+  }
 
   return <CompareTableContainer>
-    <table className="compare-advanced-table" style={{ width: `${ (compareItems.length + 1) * cellWidth }px` }}>
-      <tbody>
-        {
-          compareFields && 
-          compareFields.map(field => {
-            if(field.visible == false) return false;
+    <ScrollContainer 
+      ref={ scrollContainerRef }
+      vertical={ false } 
+      onScroll={ onScroll }>
+      <table className="compare-advanced-table" style={{ width: `${ (compareItems.length + 1) * cellWidth }px` }}>
+        <tbody>
+          {
+            compareFields && 
+            compareFields.map(field => {
+              if(field.visible == false) return false;
 
-            return <tr key={ field._key }>
-              <th className={ ['__col-heading', field?.extra_class].join(' ') } width={ `${ cellWidth }px` }>
-                {
-                  field.image_label?.url &&
-                  <img className="__image-label" src={ field.image_label?.url } alt="#" />
-                }
-                { field?.label }
+              return <tr key={ field._key }>
+                <th className={ ['__col-heading', field?.extra_class].join(' ') } width={ `${ cellWidth }px` }>
+                  {
+                    field.image_label?.url &&
+                    <img className="__image-label" src={ field.image_label?.url } alt="#" />
+                  }
+                  { field?.label }
 
+                  {
+                    field.help_text != '' &&
+                    field.enable_help_text == true &&
+                    <Tooltip className="__icon-tooltip" content={ field.help_text }>
+                      <span className="__icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="0" fill="none" width="24" height="24"/><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 16h-2v-2h2v2zm0-4.14V15h-2v-2c0-.552.448-1 1-1 1.103 0 2-.897 2-2s-.897-2-2-2-2 .897-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.862-1.278 3.413-3 3.86z"/></g></svg>
+                      </span>
+                    </Tooltip>
+                  }
+                </th>
                 {
-                  field.help_text != '' &&
-                  field.enable_help_text == true &&
-                  <Tooltip className="__icon-tooltip" content={ field.help_text }>
-                    <span className="__icon">
-                      <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="0" fill="none" width="24" height="24"/><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 16h-2v-2h2v2zm0-4.14V15h-2v-2c0-.552.448-1 1-1 1.103 0 2-.897 2-2s-.897-2-2-2-2 .897-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.862-1.278 3.413-3 3.86z"/></g></svg>
-                    </span>
-                  </Tooltip>
+                  (compareItems.length > 0) && 
+                  <CompareItems items={ orderBy(compareItems, [o => o.__config.pin], 'desc') } field={ field } />
                 }
-              </th>
-              {
-                (compareItems.length > 0) && 
-                <CompareItems items={ orderBy(compareItems, [o => o.__config.pin], 'desc') } field={ field } />
-              }
-            </tr>
-          })
-        }
-      </tbody>
-    </table>
+              </tr>
+            })
+          }
+        </tbody>
+      </table>
+    </ScrollContainer>
   </CompareTableContainer>
 }
