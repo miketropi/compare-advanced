@@ -10,6 +10,7 @@ if( function_exists('acf_add_options_page') ) {
     'parent_slug' => 'edit.php?post_type=compare-items',
   ]);
 }
+
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
@@ -228,7 +229,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'min' => 0,
 				'max' => 0,
 				'layout' => 'block',
-				'button_label' => '',
+				'button_label' => 'Add New Field',
 				'sub_fields' => array(
 					array(
 						'key' => 'field_62e8a74206c7d',
@@ -275,7 +276,7 @@ if( function_exists('acf_add_local_field_group') ):
 					),
 					array(
 						'key' => 'field_62e0bfdc7b19f',
-						'label' => 'Label',
+						'label' => 'Field Name',
 						'name' => 'label',
 						'type' => 'text',
 						'instructions' => '',
