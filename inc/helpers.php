@@ -142,7 +142,7 @@ function ca_rand_key($prefix = 'key_') {
   return $prefix . substr(md5(uniqid(mt_rand(), true)) , 0, 8);
 }
 
-function ca_table_compare_fields_register() {
+function ca_table_compare_fields_register($limitFields = []) {
   $compare_fields = get_field('compare_fields', 'option');
   $fields = [
     [
@@ -180,9 +180,37 @@ function ca_table_compare_fields_register() {
     }
   }
 
+  if(count($limitFields) > 0) {
+    // wp_send_json( $limitFields );
+    /**
+     * Limit compare fields
+     */
+
+    array_unshift($limitFields, 'brand_logo', 'infomation');
+
+    $new_fields = array_map(function($f) use ($fields) {
+      $_key = array_search($f, array_column($fields, 'field_map'));
+      return $fields[$_key];
+    }, $limitFields);
+
+    $fields = $new_fields;
+  }
+
   return apply_filters('ca/table-compare-fields-register', $fields);
 }
 
+function ca_acf_load_limit_compare_fields_field_choices($field) {
+  $compare_fields = get_field('compare_fields', 'option');
+  $field['choices'] = array();
+  
+  foreach($compare_fields as $_index => $f) {
+    $field['choices'][ $f['name'] ] = $f['label'];
+  }
+
+  return $field;
+}
+
+add_filter('acf/load_field/name=limit_compare_fields', 'ca_acf_load_limit_compare_fields_field_choices');
 // add_action('init', function() {
 //   var_dump(ca_build_compare_item_fields());
 // });

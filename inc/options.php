@@ -10,7 +10,6 @@ if( function_exists('acf_add_options_page') ) {
     'parent_slug' => 'edit.php?post_type=compare-items',
   ]);
 }
-
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
@@ -103,6 +102,38 @@ if( function_exists('acf_add_local_field_group') ):
 				'multiple' => 1,
 				'return_format' => 'id',
 				'ui' => 1,
+			),
+			array(
+				'key' => 'field_62f087fae2928',
+				'label' => 'Limit Compare Fields',
+				'name' => 'limit_compare_fields',
+				'type' => 'select',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'single-stroller' => 'Single Stroller',
+					'double-stroller' => 'Double Stroller',
+					'rrp-single-seat-only' => 'RRP Single  (seat only)',
+					'rrp-single-seat-bassinet' => 'RRP Single  (seat + bassinet)',
+					'rrp-double-seat-bassinet' => 'RRP Double (Seat + Bassinet)',
+					'score-out-of-5' => 'Score out of 5',
+					'inclusions' => 'Inclusions',
+					'test-field' => 'Test Field',
+				),
+				'default_value' => array(
+				),
+				'allow_null' => 1,
+				'multiple' => 1,
+				'ui' => 1,
+				'ajax' => 0,
+				'return_format' => 'value',
+				'placeholder' => '',
 			),
 			array(
 				'key' => 'field_62e9ed10bebe1',

@@ -4,7 +4,7 @@ import find from 'lodash/find';
 
 const CompareAdvancedContext = createContext();
 
-const CompareAdvancedProvider = ({ children, compareItems }) => {
+const CompareAdvancedProvider = ({ children, compareItems, limitCompareFields }) => {
   const [items, setItems] = useState([]);
   const [cellWidth, setCellWidth] = useState(200);
   const [compareFields, setCompareFields] = useState([]);
@@ -19,7 +19,7 @@ const CompareAdvancedProvider = ({ children, compareItems }) => {
 
   useEffect(() => {
     const _getCompareItems = async () => {
-      const { success, compare_items, compare_fields } = await getCompareItems(compareItems);
+      const { success, compare_items, compare_fields } = await getCompareItems(compareItems, limitCompareFields);
 
       if(true == success) {
         setItems(compare_items);

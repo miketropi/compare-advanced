@@ -1272,7 +1272,8 @@ var CompareAdvancedContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.
 
 var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
   var children = _ref.children,
-      compareItems = _ref.compareItems;
+      compareItems = _ref.compareItems,
+      limitCompareFields = _ref.limitCompareFields;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1307,7 +1308,7 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.getCompareItems)(compareItems);
+                return (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.getCompareItems)(compareItems, limitCompareFields);
 
               case 2:
                 _yield$getCompareItem = _context.sent;
@@ -1444,14 +1445,15 @@ var _request = /*#__PURE__*/function () {
  */
 
 var getCompareItems = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(ids) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(ids, limitCompareFields) {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
             return _request('ca_ajax_get_compare_items', {
-              ids: ids.split(',')
+              ids: ids.split(','),
+              fields: limitCompareFields ? limitCompareFields.split(',') : []
             });
 
           case 2:
@@ -1465,7 +1467,7 @@ var getCompareItems = /*#__PURE__*/function () {
     }, _callee2);
   }));
 
-  return function getCompareItems(_x3) {
+  return function getCompareItems(_x3, _x4) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -1559,6 +1561,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(el);
       root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_2__.CompareAdvancedProvider, {
         compareItems: el.dataset.compareItems,
+        limitCompareFields: el.dataset.limitCompareFields,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_CompareAdvanced__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       }));
     });

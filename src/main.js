@@ -16,7 +16,9 @@ import CompareAdvanced from './components/CompareAdvanced';
 
     [...elems].forEach(el => {
       const root = createRoot(el);
-      root.render(<CompareAdvancedProvider compareItems={ el.dataset.compareItems }>
+      root.render(<CompareAdvancedProvider 
+        compareItems={ el.dataset.compareItems }
+        limitCompareFields={ el.dataset.limitCompareFields } >
         <CompareAdvanced />
       </CompareAdvancedProvider>);
     })

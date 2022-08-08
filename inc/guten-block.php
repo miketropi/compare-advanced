@@ -37,9 +37,16 @@ add_action('acf/init', function() {
 
 function ca_compare_advanced_block_html() {
   $items = get_field('compare_items');
+	$limit_compare_fields = get_field('limit_compare_fields');
   $extra_class = get_field('extra_class');
-  echo do_shortcode('[compare_advanced compare_items="'. implode(',', $items) .'" extra_class="'. $extra_class .'" ]');
-}
+
+	$limit_fields =  $limit_compare_fields ? implode(',', $limit_compare_fields) : '';
+	
+  echo do_shortcode('[compare_advanced 
+		compare_items="'. implode(',', $items) .'" 
+		limit_compare_fields="'. trim($limit_fields) .'" 
+		extra_class="'. $extra_class .'" ]');
+} 
 
 function ca_image_block_html() {
 	$image = get_field('image');

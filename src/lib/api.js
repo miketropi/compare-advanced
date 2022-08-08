@@ -22,8 +22,9 @@ export const _request = async (action, args) => {
  * 
  * @param {String} ids (1,2,3) 
  */
-export const getCompareItems = async (ids) => {
+export const getCompareItems = async (ids, limitCompareFields) => {
   return await _request('ca_ajax_get_compare_items', {
-    ids: ids.split(',')
+    ids: ids.split(','),
+    fields: limitCompareFields ? limitCompareFields.split(',') : [],
   })
 }
