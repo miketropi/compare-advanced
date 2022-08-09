@@ -16,15 +16,6 @@ import CompareAdvanced from './components/CompareAdvanced';
 
     [...elems].forEach(el => {
       const root = createRoot(el);
-      const { 
-        compareItems, 
-        limitCompareFields, 
-        rowColorFirst, 
-        rowColorSecond,
-        buttonColorIde,
-        buttonColorTextIde,
-        buttonColorHover,
-        buttonColorTextHover } = el.dataset;
       
       /**
        * atts => 

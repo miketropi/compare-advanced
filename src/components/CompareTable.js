@@ -12,13 +12,6 @@ display: block;
 width: 100%;
 overflow: auto;
 margin-bottom: 3em;
-/* 
-rowColorFirst, 
-rowColorSecond,
-buttonColorIde,
-buttonColorTextIde,
-buttonColorHover,
-buttonColorTextHover */
 --row-color-first: ${ props => props.rowColorFirst };
 --row-color-second: ${ props => props.rowColorSecond };
 --button-color-ide: ${ props => props.buttonColorIde };

@@ -16,8 +16,6 @@ function ca_shortcode_compare_advanced_func($atts) {
     'extra_class' => '',
   ], $atts);
 
-  // $result = ca_get_compare_items(explode(',', $a['compare_items']));
-  // var_dump($a);
   if(empty($a)) return;
   ob_start();
   ?>
