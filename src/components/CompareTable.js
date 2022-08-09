@@ -12,6 +12,19 @@ display: block;
 width: 100%;
 overflow: auto;
 margin-bottom: 3em;
+/* 
+rowColorFirst, 
+rowColorSecond,
+buttonColorIde,
+buttonColorTextIde,
+buttonColorHover,
+buttonColorTextHover */
+--row-color-first: ${ props => props.rowColorFirst };
+--row-color-second: ${ props => props.rowColorSecond };
+--button-color-ide: ${ props => props.buttonColorIde };
+--button-color-text-ide: ${ props => props.buttonColorTextIde };
+--button-color-hover: ${ props => props.buttonColorHover };
+--button-color-text-hover: ${ props => props.buttonColorTextHover };
 
 .compare-advanced-table {
   max-width: initial;
@@ -51,7 +64,10 @@ margin-bottom: 3em;
 `
 
 export const CompareItems = ({ items, field }) => {
-  const { cellWidth, updatePinFunc, removeCompareItem } = useCompareAdvanced();
+  const { 
+    cellWidth, 
+    updatePinFunc, 
+    removeCompareItem } = useCompareAdvanced();
   return <Fragment>
     {
       items.map((item, _itemIndex) => {
@@ -104,14 +120,27 @@ export const CompareItems = ({ items, field }) => {
 }
 
 export default ({ compareFields, compareItems }) => {
-  const { cellWidth } = useCompareAdvanced();
+  const { 
+    cellWidth,
+    rowColorFirst, 
+    rowColorSecond,
+    buttonColorIde,
+    buttonColorTextIde,
+    buttonColorHover,
+    buttonColorTextHover } = useCompareAdvanced();
   const scrollContainerRef = useRef();
 
   const onScroll = () => {
-    console.log(scrollContainerRef.current.getElement().scrollLeft)
+    // console.log(scrollContainerRef.current.getElement().scrollLeft)
   }
 
-  return <CompareTableContainer>
+  return <CompareTableContainer 
+    rowColorFirst={ rowColorFirst } 
+    rowColorSecond={ rowColorSecond }
+    buttonColorIde={ buttonColorIde }
+    buttonColorTextIde={ buttonColorTextIde }
+    buttonColorHover={ buttonColorHover }
+    buttonColorTextHover={ buttonColorTextHover }>
     <ScrollContainer 
       ref={ scrollContainerRef }
       vertical={ false } 

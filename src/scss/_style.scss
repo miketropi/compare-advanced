@@ -116,15 +116,15 @@
 
           button {
             margin-bottom: 9px;
-            background: #E6E6E6;
-            color: #525252;
+            background: var(--button-color-ide);
+            color: var(--button-color-text-ide);
             border-radius: 40px;
             transition: .3s ease;
             
             &:hover,
             &.__pinned {
-              background: #C0C2AD;
-              color: white;
+              background: var(--button-color-hover);
+              color: var(--button-color-text-hover);
             }
           }
         }
@@ -149,11 +149,11 @@
     tr:nth-child(odd) {
 
       th {
-        background: #BDC6D4;
+        background: var(--row-color-second);
       }
 
       td {
-        background: #BDC6D4;
+        background: var(--row-color-second);
 
         .__entry-cell {
           background: #F5F5F5;
@@ -164,11 +164,11 @@
     tr:nth-child(even) {
 
       th {
-        background: #D0D6DF;
+        background: var(--row-color-first);
       }
 
       td {
-        background: #D0D6DF;
+        background: var(--row-color-first);
 
         .__entry-cell {
           background: white;

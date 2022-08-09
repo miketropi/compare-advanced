@@ -4,7 +4,16 @@ import find from 'lodash/find';
 
 const CompareAdvancedContext = createContext();
 
-const CompareAdvancedProvider = ({ children, compareItems, limitCompareFields }) => {
+const CompareAdvancedProvider = ({ 
+  children, 
+  compareItems, 
+  limitCompareFields, 
+  rowColorFirst, 
+  rowColorSecond,
+  buttonColorIde,
+  buttonColorTextIde,
+  buttonColorHover,
+  buttonColorTextHover }) => {
   const [items, setItems] = useState([]);
   const [cellWidth, setCellWidth] = useState(200);
   const [compareFields, setCompareFields] = useState([]);
@@ -47,6 +56,16 @@ const CompareAdvancedProvider = ({ children, compareItems, limitCompareFields })
   }
 
   const value = {
+    /**
+     * Colors
+     */
+    rowColorFirst, 
+    rowColorSecond,
+    buttonColorIde,
+    buttonColorTextIde,
+    buttonColorHover,
+    buttonColorTextHover,
+
     items,
     compareFields,
     cellWidth,

@@ -833,7 +833,19 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 9;\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 9;\n    }\n  }\n}\n"])));
+var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n/* \nrowColorFirst, \nrowColorSecond,\nbuttonColorIde,\nbuttonColorTextIde,\nbuttonColorHover,\nbuttonColorTextHover */\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 9;\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 9;\n    }\n  }\n}\n"])), function (props) {
+  return props.rowColorFirst;
+}, function (props) {
+  return props.rowColorSecond;
+}, function (props) {
+  return props.buttonColorIde;
+}, function (props) {
+  return props.buttonColorTextIde;
+}, function (props) {
+  return props.buttonColorHover;
+}, function (props) {
+  return props.buttonColorTextHover;
+});
 var CompareItems = function CompareItems(_ref) {
   var items = _ref.items,
       field = _ref.field;
@@ -924,15 +936,26 @@ var CompareItems = function CompareItems(_ref) {
       compareItems = _ref2.compareItems;
 
   var _useCompareAdvanced2 = (0,_context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_4__.useCompareAdvanced)(),
-      cellWidth = _useCompareAdvanced2.cellWidth;
+      cellWidth = _useCompareAdvanced2.cellWidth,
+      rowColorFirst = _useCompareAdvanced2.rowColorFirst,
+      rowColorSecond = _useCompareAdvanced2.rowColorSecond,
+      buttonColorIde = _useCompareAdvanced2.buttonColorIde,
+      buttonColorTextIde = _useCompareAdvanced2.buttonColorTextIde,
+      buttonColorHover = _useCompareAdvanced2.buttonColorHover,
+      buttonColorTextHover = _useCompareAdvanced2.buttonColorTextHover;
 
   var scrollContainerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
-  var onScroll = function onScroll() {
-    console.log(scrollContainerRef.current.getElement().scrollLeft);
+  var onScroll = function onScroll() {// console.log(scrollContainerRef.current.getElement().scrollLeft)
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(CompareTableContainer, {
+    rowColorFirst: rowColorFirst,
+    rowColorSecond: rowColorSecond,
+    buttonColorIde: buttonColorIde,
+    buttonColorTextIde: buttonColorTextIde,
+    buttonColorHover: buttonColorHover,
+    buttonColorTextHover: buttonColorTextHover,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_indiana_drag_scroll__WEBPACK_IMPORTED_MODULE_6__["default"], {
       ref: scrollContainerRef,
       vertical: false,
@@ -1273,7 +1296,13 @@ var CompareAdvancedContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.
 var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
   var children = _ref.children,
       compareItems = _ref.compareItems,
-      limitCompareFields = _ref.limitCompareFields;
+      limitCompareFields = _ref.limitCompareFields,
+      rowColorFirst = _ref.rowColorFirst,
+      rowColorSecond = _ref.rowColorSecond,
+      buttonColorIde = _ref.buttonColorIde,
+      buttonColorTextIde = _ref.buttonColorTextIde,
+      buttonColorHover = _ref.buttonColorHover,
+      buttonColorTextHover = _ref.buttonColorTextHover;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1360,6 +1389,15 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
   };
 
   var value = {
+    /**
+     * Colors
+     */
+    rowColorFirst: rowColorFirst,
+    rowColorSecond: rowColorSecond,
+    buttonColorIde: buttonColorIde,
+    buttonColorTextIde: buttonColorTextIde,
+    buttonColorHover: buttonColorHover,
+    buttonColorTextHover: buttonColorTextHover,
     items: items,
     compareFields: compareFields,
     cellWidth: cellWidth,
@@ -1527,6 +1565,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./context/CompareAdvancedContext */ "./src/context/CompareAdvancedContext.js");
 /* harmony import */ var _components_CompareAdvanced__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/CompareAdvanced */ "./src/components/CompareAdvanced.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1559,11 +1603,31 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     _toConsumableArray(elems).forEach(function (el) {
       var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(el);
-      root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_2__.CompareAdvancedProvider, {
-        compareItems: el.dataset.compareItems,
-        limitCompareFields: el.dataset.limitCompareFields,
+      var _el$dataset = el.dataset,
+          compareItems = _el$dataset.compareItems,
+          limitCompareFields = _el$dataset.limitCompareFields,
+          rowColorFirst = _el$dataset.rowColorFirst,
+          rowColorSecond = _el$dataset.rowColorSecond,
+          buttonColorIde = _el$dataset.buttonColorIde,
+          buttonColorTextIde = _el$dataset.buttonColorTextIde,
+          buttonColorHover = _el$dataset.buttonColorHover,
+          buttonColorTextHover = _el$dataset.buttonColorTextHover;
+      /**
+       * atts => 
+        compareItems, 
+        limitCompareFields, 
+        rowColorFirst, 
+        rowColorSecond,
+        buttonColorIde,
+        buttonColorTextIde,
+        buttonColorHover,
+        buttonColorTextHover
+       */
+
+      var atts = el.dataset;
+      root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_context_CompareAdvancedContext__WEBPACK_IMPORTED_MODULE_2__.CompareAdvancedProvider, _objectSpread(_objectSpread({}, atts), {}, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_CompareAdvanced__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-      }));
+      })));
     });
   };
 

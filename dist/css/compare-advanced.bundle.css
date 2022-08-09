@@ -91,14 +91,14 @@
 }
 .compare-advanced-table tbody td .__entry-cell .actions button {
   margin-bottom: 9px;
-  background: #E6E6E6;
-  color: #525252;
+  background: var(--button-color-ide);
+  color: var(--button-color-text-ide);
   border-radius: 40px;
   transition: 0.3s ease;
 }
 .compare-advanced-table tbody td .__entry-cell .actions button:hover, .compare-advanced-table tbody td .__entry-cell .actions button.__pinned {
-  background: #C0C2AD;
-  color: white;
+  background: var(--button-color-hover);
+  color: var(--button-color-text-hover);
 }
 .compare-advanced-table tbody th, .compare-advanced-table tbody td {
   border: none;
@@ -113,19 +113,19 @@
   position: relative;
 }
 .compare-advanced-table tbody tr:nth-child(odd) th {
-  background: #BDC6D4;
+  background: var(--row-color-second);
 }
 .compare-advanced-table tbody tr:nth-child(odd) td {
-  background: #BDC6D4;
+  background: var(--row-color-second);
 }
 .compare-advanced-table tbody tr:nth-child(odd) td .__entry-cell {
   background: #F5F5F5;
 }
 .compare-advanced-table tbody tr:nth-child(even) th {
-  background: #D0D6DF;
+  background: var(--row-color-first);
 }
 .compare-advanced-table tbody tr:nth-child(even) td {
-  background: #D0D6DF;
+  background: var(--row-color-first);
 }
 .compare-advanced-table tbody tr:nth-child(even) td .__entry-cell {
   background: white;

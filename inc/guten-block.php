@@ -38,13 +38,27 @@ add_action('acf/init', function() {
 function ca_compare_advanced_block_html() {
   $items = get_field('compare_items');
 	$limit_compare_fields = get_field('limit_compare_fields');
-  $extra_class = get_field('extra_class');
+	$extra_class = get_field('extra_class');
+
+	// Colors 
+	$row_color_1 = get_field('row_color_1');
+	$row_color_2 = get_field('row_color_2');
+	$button_color_ide = get_field('button_color_ide');
+	$button_color_text_ide = get_field('button_color_text_ide');
+	$button_color_hover = get_field('button_color_hover');
+	$button_color_text_hover = get_field('button_color_text_hover');
 
 	$limit_fields =  $limit_compare_fields ? implode(',', $limit_compare_fields) : '';
 	
   echo do_shortcode('[compare_advanced 
 		compare_items="'. implode(',', $items) .'" 
 		limit_compare_fields="'. trim($limit_fields) .'" 
+		row_color_1="'. $row_color_1 .'" 
+		row_color_2="'. $row_color_2 .'" 
+		button_color_ide="'. $button_color_ide .'" 
+		button_color_text_ide="'. $button_color_text_ide .'" 
+		button_color_hover="'. $button_color_hover .'" 
+		button_color_text_hover="'. $button_color_text_hover .'" 
 		extra_class="'. $extra_class .'" ]');
 } 
 
