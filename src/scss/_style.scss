@@ -9,6 +9,20 @@
   background: none;
   border-collapse: collapse;
 
+  @media(max-width: 425px) {
+    * {
+      font-size: 10px !important;
+    }
+
+    img {
+      max-width: 80% !important;
+    }
+
+    button {
+      padding: 6px;
+    }
+  }
+
   .tooltip-contain-gallery {
     position: relative;
     width: 100%;

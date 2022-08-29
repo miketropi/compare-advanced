@@ -1320,7 +1320,9 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
       setCompareFields = _useState6[1];
 
   var _setCellWidthHandle = function _setCellWidthHandle() {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 450) {
+      setCellWidth(window.innerWidth / 3);
+    } else if (window.innerWidth <= 768) {
       setCellWidth(150);
     } else {
       setCellWidth(200);

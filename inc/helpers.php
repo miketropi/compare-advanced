@@ -95,12 +95,12 @@ function ca_compare_item_render_html_by_type($field) {
 
 function ca_prepare_compare_table_data($ids = []) {
   $result = ca_get_compare_items($ids);
-  return array_map(function($item) {
+  return array_map(function($item, $_index) {
     $compare_item_data = [
       '__config' => [
         '_key' => $item['_key'],
         'ID' => $item['ID'],
-        'pin' => false,
+        'pin' => ($_index == 0 ? true : false), // false,
       ],
       'brand_logo' => [
         '_name' => 'brand_logo',
@@ -135,7 +135,7 @@ function ca_prepare_compare_table_data($ids = []) {
     }
 
     return $compare_item_data;
-  }, $result);
+  }, $result, array_keys($result));
 }
 
 function ca_rand_key($prefix = 'key_') {
