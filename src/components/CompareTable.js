@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect } from 'react';
+import React, { Fragment, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Tooltip from './Tooltip';
 import SlideImages from './SlideImages';
@@ -35,7 +35,15 @@ margin-bottom: 3em;
     td.__is-sticky {
       position: sticky;
       left: var(--left-space);
-      z-index: 9;
+      z-index: 99998;
+
+      &.__product-brand {
+        z-index: 999999 !important;
+      }
+
+      &.__product-info {
+        z-index: 99999;
+      }
     }
 
     td.__product-brand {
@@ -50,7 +58,7 @@ margin-bottom: 3em;
     th.__col-heading {
       position: sticky;
       left: 0;
-      z-index: 9;
+      z-index: 99999;
     }
   }
 }
@@ -121,11 +129,55 @@ export default ({ compareFields, compareItems }) => {
     buttonColorTextIde,
     buttonColorHover,
     buttonColorTextHover } = useCompareAdvanced();
+
   const scrollContainerRef = useRef();
+  const tableRef = useRef(); 
 
   const onScroll = () => {
     // console.log(scrollContainerRef.current.getElement().scrollLeft)
   }
+
+  useEffect(() => {
+    const _scrollHandle = (e) => {
+      let brandElems = tableRef.current.querySelectorAll('td.__product-brand');
+      let actionsElems = tableRef.current.querySelectorAll('.actions');
+      const { top } = tableRef.current.getBoundingClientRect();
+      const Header = document.querySelector('#main-head .navigation.sticky-bar');
+      let spaceHeader = Header ? (Header.clientHeight + Header.offsetTop) : 0;
+
+      if((top - spaceHeader) > 0) {
+        [...brandElems].forEach(el => {
+          el.style.zIndex = ``;
+          el.style.transform = `translateY(0)`;
+        });
+
+        [...actionsElems].forEach(el => {
+          el.style.zIndex = ``;
+          el.style.transform = `translateY(0)`;
+          el.classList.remove('is-top-sticky');
+        });
+        return;
+      }
+
+      [...brandElems].forEach(el => {
+        el.style.zIndex = `99995`;
+        el.style.transform = `translateY(${(top * -1) + spaceHeader}px)`;
+      });
+
+      [...actionsElems].forEach(el => {
+        el.style.zIndex = `99995`;
+        el.style.transform = `translateY(${(top * -1) + spaceHeader}px)`;
+        el.classList.add('is-top-sticky');
+      });
+      
+    }
+    
+    window.addEventListener('scroll', _scrollHandle); 
+
+    return () => {
+      window.removeEventListener('scroll', _scrollHandle);
+    }
+  }, [compareItems]);
 
   return <CompareTableContainer 
     rowColorFirst={ rowColorFirst } 
@@ -138,7 +190,10 @@ export default ({ compareFields, compareItems }) => {
       ref={ scrollContainerRef }
       vertical={ false } 
       onScroll={ onScroll }>
-      <table className="compare-advanced-table" style={{ width: `${ (compareItems.length + 1) * cellWidth }px` }}>
+      <table 
+        ref={ tableRef } 
+        className="compare-advanced-table" 
+        style={{ width: `${ (compareItems.length + 1) * cellWidth }px` }}>
         <tbody>
           {
             compareFields && 

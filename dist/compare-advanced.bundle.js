@@ -821,6 +821,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _templateObject;
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
@@ -833,7 +845,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 9;\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 9;\n    }\n  }\n}\n"])), function (props) {
+var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 99998;\n\n      &.__product-brand {\n        z-index: 999999 !important;\n      }\n\n      &.__product-info {\n        z-index: 99999;\n      }\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 99999;\n    }\n  }\n}\n"])), function (props) {
   return props.rowColorFirst;
 }, function (props) {
   return props.rowColorSecond;
@@ -945,10 +957,54 @@ var CompareItems = function CompareItems(_ref) {
       buttonColorTextHover = _useCompareAdvanced2.buttonColorTextHover;
 
   var scrollContainerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  var tableRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var onScroll = function onScroll() {// console.log(scrollContainerRef.current.getElement().scrollLeft)
   };
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var _scrollHandle = function _scrollHandle(e) {
+      var brandElems = tableRef.current.querySelectorAll('td.__product-brand');
+      var actionsElems = tableRef.current.querySelectorAll('.actions');
+
+      var _tableRef$current$get = tableRef.current.getBoundingClientRect(),
+          top = _tableRef$current$get.top;
+
+      var Header = document.querySelector('#main-head .navigation.sticky-bar');
+      var spaceHeader = Header ? Header.clientHeight + Header.offsetTop : 0;
+
+      if (top - spaceHeader > 0) {
+        _toConsumableArray(brandElems).forEach(function (el) {
+          el.style.zIndex = "";
+          el.style.transform = "translateY(0)";
+        });
+
+        _toConsumableArray(actionsElems).forEach(function (el) {
+          el.style.zIndex = "";
+          el.style.transform = "translateY(0)";
+          el.classList.remove('is-top-sticky');
+        });
+
+        return;
+      }
+
+      _toConsumableArray(brandElems).forEach(function (el) {
+        el.style.zIndex = "99995";
+        el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
+      });
+
+      _toConsumableArray(actionsElems).forEach(function (el) {
+        el.style.zIndex = "99995";
+        el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
+        el.classList.add('is-top-sticky');
+      });
+    };
+
+    window.addEventListener('scroll', _scrollHandle);
+    return function () {
+      window.removeEventListener('scroll', _scrollHandle);
+    };
+  }, [compareItems]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(CompareTableContainer, {
     rowColorFirst: rowColorFirst,
     rowColorSecond: rowColorSecond,
@@ -961,6 +1017,7 @@ var CompareItems = function CompareItems(_ref) {
       vertical: false,
       onScroll: onScroll,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+        ref: tableRef,
         className: "compare-advanced-table",
         style: {
           width: "".concat((compareItems.length + 1) * cellWidth, "px")
@@ -1125,7 +1182,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  z-index: 99;\n  left: ", ";\n  top: ", ";\n  background: white;\n  padding: 20px;\n  border-radius: 16px;\n  width: 200px;\n  box-shadow: 0 8px 10px 0 rgb(1 1 1 / 15%);\n  text-align: center;\n\n  p {\n    font-size: 13px;\n    line-height: 1.3em;\n    margin: 0;\n\n    font-family: var(--text-font);\n    color: black;\n  }\n"])), function (props) {
+var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  z-index: 99;\n  left: ", ";\n  top: ", ";\n  background: white;\n  padding: 20px;\n  border-radius: 16px;\n  width: 200px;\n  border: solid 1px #eee;\n  text-align: center;\n\n  p {\n    font-size: 13px;\n    line-height: 1.3em;\n    margin: 0;\n\n    font-family: var(--text-font);\n    color: black;\n  }\n\n  @media(max-width: 768px) {\n    padding: 10px;\n\n    p {\n      font-size: 11px;\n    }\n  }\n"])), function (props) {
   return props.left ? "".concat(props.left, "px") : "0px";
 }, function (props) {
   return props.top ? "".concat(props.top, "px") : "0px";
@@ -1203,6 +1260,11 @@ var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"]
     var _setPos = function _setPos() {
       var top = jQuery(handle.current).offset().top - 50;
       var left = jQuery(handle.current).offset().left + jQuery(handle.current).innerWidth() + 5;
+
+      if (window.innerWidth <= 768) {
+        left = window.innerWidth / 2 - 222 / 2;
+      }
+
       setPos(_objectSpread(_objectSpread({}, pos), {}, {
         top: top,
         left: left
@@ -1373,7 +1435,14 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
   }, []);
 
   var updatePinFunc = function updatePinFunc(pin, key) {
-    var _items = _toConsumableArray(items);
+    var _items = _toConsumableArray(items); // clear old pined 
+
+
+    _items.map(function (item) {
+      item.__config.pin = false;
+      return item;
+    }); // set new pin item
+
 
     var item = lodash_find__WEBPACK_IMPORTED_MODULE_2___default()(_items, function (o) {
       return o.__config._key == key;

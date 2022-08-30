@@ -98,7 +98,13 @@
 .compare-advanced-table tbody td .__entry-cell .actions {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
+  padding: 0 15%;
+  box-sizing: border-box;
+  background: white;
+}
+.compare-advanced-table tbody td .__entry-cell .actions.is-top-sticky {
+  box-shadow: 0px -11px 0 0 white, 0px 4px 8px 0px rgba(1, 1, 1, 0.05);
 }
 .compare-advanced-table tbody td .__entry-cell .actions button {
   margin-bottom: 9px;

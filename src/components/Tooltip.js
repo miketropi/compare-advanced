@@ -12,7 +12,7 @@ const TooltipContainer = styled.div`
   padding: 20px;
   border-radius: 16px;
   width: 200px;
-  box-shadow: 0 8px 10px 0 rgb(1 1 1 / 15%);
+  border: solid 1px #eee;
   text-align: center;
 
   p {
@@ -22,6 +22,14 @@ const TooltipContainer = styled.div`
 
     font-family: var(--text-font);
     color: black;
+  }
+
+  @media(max-width: 768px) {
+    padding: 10px;
+
+    p {
+      font-size: 11px;
+    }
   }
 `;
 
@@ -73,9 +81,13 @@ export default ({ content, children, eventActive, className }) => {
 
   useEffect(() => {
     const _setPos = () => {
-      const top = jQuery(handle.current).offset().top - 50;
-      const left = jQuery(handle.current).offset().left + jQuery(handle.current).innerWidth() + 5;
+      let top = jQuery(handle.current).offset().top - 50;
+      let left = jQuery(handle.current).offset().left + jQuery(handle.current).innerWidth() + 5;
       
+      if(window.innerWidth <= 768) {
+        left = ((window.innerWidth / 2) - (222 / 2));
+      }
+
       setPos({
         ...pos,
         top,

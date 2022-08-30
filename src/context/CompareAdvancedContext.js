@@ -46,6 +46,14 @@ const CompareAdvancedProvider = ({
 
   const updatePinFunc = (pin, key) => {
     let _items = [...items];  
+
+    // clear old pined 
+    _items.map(item => {
+      item.__config.pin = false;
+      return item; 
+    })
+
+    // set new pin item
     let item = find(_items, o => o.__config._key == key);
     item.__config.pin = pin;
     setItems(_items);

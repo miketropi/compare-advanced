@@ -117,7 +117,7 @@ function ca_prepare_compare_table_data($ids = []) {
           'type' => 'gallery',
           'value' => $item['product_gallery'],
         ],
-        'extra_class' => '',
+        'extra_class' => '__product-info',
       ],
     ];
 
