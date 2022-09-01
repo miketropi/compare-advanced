@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect, useState } from 'react';
+import React, { Fragment, useRef, useEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import Tooltip from './Tooltip';
 import SlideImages from './SlideImages';
@@ -75,7 +75,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
   useEffect(() => {
     let _w = tableRootElem.current.querySelector('.__col-heading ').clientWidth;
     setThWidth(_w);
-  }, [items]);
+  });
 
   return <Fragment>
     {

@@ -884,7 +884,7 @@ var CompareItems = function CompareItems(_ref) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var _w = tableRootElem.current.querySelector('.__col-heading ').clientWidth;
     setThWidth(_w);
-  }, [items]);
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: items.map(function (item, _itemIndex) {
       var _fieldData$extra_para;
