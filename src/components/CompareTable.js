@@ -64,11 +64,19 @@ margin-bottom: 3em;
 }
 `
 
-export const CompareItems = ({ items, field }) => {
+export const CompareItems = ({ tableRootElem, items, field }) => {
   const { 
     cellWidth, 
     updatePinFunc, 
     removeCompareItem } = useCompareAdvanced();
+
+  const [thWidth, setThWidth] = useState(0);
+
+  useEffect(() => {
+    let _w = tableRootElem.current.querySelector('.__col-heading ').clientWidth;
+    setThWidth(_w);
+  }, [items]);
+
   return <Fragment>
     {
       items.map((item, _itemIndex) => {
@@ -102,7 +110,8 @@ export const CompareItems = ({ items, field }) => {
 
         return <td 
           className={ [fieldData?.extra_class, pin ? '__is-sticky' : ''].join(' ') } 
-          style={{ '--left-space': `${ (_itemIndex + 1) * cellWidth }px` }}
+          // style={{ '--left-space': `${ (_itemIndex + 1) * cellWidth }px` }}
+          style={{ '--left-space': `${ (_itemIndex + 1) * thWidth }px` }}
           key={ fieldData._key } width={ `${ cellWidth }px` }>
           <div className="__entry-cell">
             {
@@ -220,7 +229,7 @@ export default ({ compareFields, compareItems }) => {
                 </th>
                 {
                   (compareItems.length > 0) && 
-                  <CompareItems items={ orderBy(compareItems, [o => o.__config.pin], 'desc') } field={ field } />
+                  <CompareItems tableRootElem={ tableRef } items={ orderBy(compareItems, [o => o.__config.pin], 'desc') } field={ field } />
                 }
               </tr>
             })
