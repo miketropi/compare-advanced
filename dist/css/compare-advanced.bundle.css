@@ -9,6 +9,9 @@
   background: none;
   border-collapse: collapse;
 }
+.compare-advanced-table tbody tr:first-child th, .compare-advanced-table tbody tr:first-child td {
+  background-color: #f8ebdf !important;
+}
 @media (max-width: 425px) {
   .compare-advanced-table * {
     font-size: 10px !important;

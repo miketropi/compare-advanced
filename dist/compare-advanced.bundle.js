@@ -1278,8 +1278,17 @@ var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, [children]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var _setPos = function _setPos() {
-      var top = jQuery(handle.current).offset().top - 50;
-      var left = jQuery(handle.current).offset().left + jQuery(handle.current).innerWidth() + 5;
+      var $wrapper = jQuery(handle.current).parent();
+      var top = 0;
+      var left = 0;
+
+      if (_eventActive == 'hover') {
+        top = jQuery(handle.current).offset().top - 50;
+        left = jQuery(handle.current).offset().left + jQuery(handle.current).innerWidth() + 5;
+      } else {
+        top = jQuery(handle.current).offset().top - 100;
+        left = $wrapper.offset().left + $wrapper.innerWidth() / 2 - 242 / 2;
+      }
 
       if (window.innerWidth <= 768) {
         left = window.innerWidth / 2 - 222 / 2;

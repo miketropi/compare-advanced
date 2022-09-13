@@ -9,6 +9,19 @@
   background: none;
   border-collapse: collapse;
 
+  tbody {
+
+    tr {
+      
+      &:first-child {
+
+        th, td {
+          background-color: #f8ebdf !important;
+        }
+      } 
+    }
+  }
+
   @media(max-width: 425px) {
     * {
       font-size: 10px !important;
