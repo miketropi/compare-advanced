@@ -68,6 +68,7 @@
 .compare-advanced-table tbody td {
   text-align: center;
   position: relative;
+  transition: all 1s ease;
 }
 .compare-advanced-table tbody td ul {
   text-align: left;
