@@ -33,8 +33,8 @@ margin-bottom: 3em;
   tr {
 
     td.__is-sticky {
-      position: sticky;
-      left: var(--left-space);
+      // position: sticky;
+      // left: var(--left-space);
       z-index: 99998;
 
       &.__product-brand {
@@ -71,10 +71,13 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
     removeCompareItem } = useCompareAdvanced();
 
   const [thWidth, setThWidth] = useState(0);
+  const [thHeight, setThHeight] = useState(0);
 
   useEffect(() => {
     let _w = tableRootElem.current.querySelector('.__col-heading ').clientWidth;
+    let _h = tableRootElem.current.querySelector('.__col-heading ').clientHeight;
     setThWidth(_w);
+    setThHeight(_h);
   });
 
   return <Fragment>
@@ -112,12 +115,15 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
           className={ [fieldData?.extra_class, pin ? '__is-sticky' : ''].join(' ') } 
           // style={{ '--left-space': `${ (_itemIndex + 1) * cellWidth }px` }}
           style={{ '--left-space': `${ (_itemIndex + 1) * thWidth }px` }}
-          key={ fieldData._key } width={ `${ cellWidth }px` }>
+          data-td-index={_itemIndex}
+          data-td-transform={(_itemIndex + 1) * 200}
+          key={ fieldData._key } width={ `${ cellWidth }px` } height={ `${ thHeight }px` }>
           <div className="__entry-cell">
             {
               fieldData._name == 'infomation' &&
               <div className="actions">
-                <button className={ ['ca-button', pin ? '__pinned' : ''].join(' ') } onClick={ e => updatePinFunc((pin ? false : true), _key) }>{ pin ? 'PINNED' : 'PIN' }</button>
+                {/* <button className={ ['ca-button', pin ? '__pinned' : ''].join(' ') } onClick={ e => updatePinFunc((pin ? false : true), _key) }>{ pin ? 'PINNED' : 'PIN' }</button> */}
+                <button className={ ['ca-button', '__pinneds'].join(' ') } >{ pin ? 'PINNED' : 'PIN' }</button>
                 <button className="ca-button __remove" onClick={ e => __removeItem(_itemIndex) }>REMOVE</button>
               </div>
             }
@@ -202,6 +208,7 @@ export default ({ compareFields, compareItems }) => {
       <table 
         ref={ tableRef } 
         className="compare-advanced-table" 
+        data-click={0}
         style={{ width: `${ (compareItems.length + 1) * cellWidth }px` }}>
         <tbody>
           {
