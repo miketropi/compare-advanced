@@ -82,18 +82,26 @@
   tbody {
 
     tr {
-
+      &:first-child{
+        background-color: #f8ebdf !important;
+      }
+      &:nth-child(odd){
+        background: var(--row-color-second);
+      }
+      &:nth-child(even){
+        background: var(--row-color-first);
+      }
       > * {
         vertical-align: middle;
       }
 
       > *:last-child {
-        padding-right: 0;
-
+        // padding-right: 0;
+        // min-width: 196px;
         .__entry-cell {
 
           &:after {
-            width: calc(100% - 4px) !important;
+            // width: calc(100% - 4px) !important;
           }
         }
       }
@@ -168,6 +176,7 @@
     th, td {
       border: none;
       padding: 0 4px;
+      min-width: 192px;
     }
 
     *.__no-background {

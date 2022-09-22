@@ -56,7 +56,10 @@ const CompareAdvancedProvider = ({
     // set new pin item
     let item = find(_items, o => o.__config._key == key);
     item.__config.pin = pin;
-    setItems(_items);
+    // setItems(_items);
+    setTimeout(function(){
+      setItems(_items);
+    }, 1000);
   }
 
   const removeCompareItem = (index) => {

@@ -853,7 +853,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      // position: sticky;\n      // left: var(--left-space);\n      z-index: 99998;\n\n      &.__product-brand {\n        z-index: 999999 !important;\n      }\n\n      &.__product-info {\n        z-index: 99999;\n      }\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 99999;\n    }\n  }\n}\n"])), function (props) {
+var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 999999;\n\n      &.__product-brand {\n        z-index: 999999 !important;\n      }\n\n      &.__product-info {\n        z-index: 99999;\n      }\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 99999;\n    }\n  }\n}\n"])), function (props) {
   return props.rowColorFirst;
 }, function (props) {
   return props.rowColorSecond;
@@ -904,6 +904,8 @@ var CompareItems = function CompareItems(_ref) {
       var type = (_fieldData$extra_para = fieldData.extra_params) === null || _fieldData$extra_para === void 0 ? void 0 : _fieldData$extra_para.type;
       var contentInner = '';
 
+      var _index = _itemIndex + 1;
+
       if (type == 'gallery') {
         var _fieldData$extra_para2;
 
@@ -939,19 +941,28 @@ var CompareItems = function CompareItems(_ref) {
         r ? removeCompareItem(index) : '';
       };
 
+      var left_space = 0;
+
+      if (_itemIndex == 5) {
+        left_space = 0;
+      } else if (_itemIndex == 6) {
+        left_space = 800;
+      } else {
+        left_space = (_itemIndex + 1) * 200;
+      }
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-        className: [fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class, pin ? '__is-sticky' : ''].join(' ') // style={{ '--left-space': `${ (_itemIndex + 1) * cellWidth }px` }}
-        ,
-        style: {
-          '--left-space': "".concat((_itemIndex + 1) * thWidth, "px")
-        },
+        className: [fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class, pin ? '__is-sticky' : ''].join(' '),
         "data-td-index": _itemIndex,
-        "data-td-transform": (_itemIndex + 1) * 200,
+        "data-td-transform": _itemIndex * 200,
+        "data-new-index": _itemIndex,
+        style: {
+          '--left-space': "".concat((_itemIndex + 1) * 200, "px")
+        },
         width: "".concat(cellWidth, "px"),
-        height: "".concat(thHeight, "px"),
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "__entry-cell",
-          children: [fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          children: [_index, fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "actions",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: ['ca-button', '__pinneds'].join(' '),
@@ -1015,20 +1026,21 @@ var CompareItems = function CompareItems(_ref) {
       }
 
       _toConsumableArray(brandElems).forEach(function (el) {
-        el.style.zIndex = "99995";
+        el.style.zIndex = "9999999";
         el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
       });
 
       _toConsumableArray(actionsElems).forEach(function (el) {
-        el.style.zIndex = "99995";
+        el.style.zIndex = "9999999";
         el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
         el.classList.add('is-top-sticky');
       });
-    };
 
-    window.addEventListener('scroll', _scrollHandle);
-    return function () {
-      window.removeEventListener('scroll', _scrollHandle);
+      console.log(123);
+    }; // window.addEventListener('scroll', _scrollHandle); 
+
+
+    return function () {// window.removeEventListener('scroll', _scrollHandle);
     };
   }, [compareItems]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(CompareTableContainer, {
@@ -1045,7 +1057,6 @@ var CompareItems = function CompareItems(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
         ref: tableRef,
         className: "compare-advanced-table",
-        "data-click": 0,
         style: {
           width: "".concat((compareItems.length + 1) * cellWidth, "px")
         },
@@ -1484,8 +1495,11 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
     var item = lodash_find__WEBPACK_IMPORTED_MODULE_2___default()(_items, function (o) {
       return o.__config._key == key;
     });
-    item.__config.pin = pin;
-    setItems(_items);
+    item.__config.pin = pin; // setItems(_items);
+
+    setTimeout(function () {
+      setItems(_items);
+    }, 1000);
   };
 
   var removeCompareItem = function removeCompareItem(index) {
@@ -1732,31 +1746,32 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   var compareAdvancedSwapColumn = function compareAdvancedSwapColumn() {
     $(document).on("click", ".__pinneds", function () {
-      var x = $(this).parents('.__product-info').offset().left - $(this).parents('tr').offset().left;
-      var x_sticky = $(this).parents('tbody').find('td.__product-info.__is-sticky').data('td-transform');
-      var x_index = $(this).parents('td.__product-info').data('td-transform');
-
+      //get index item
       var _index = $(this).parents('.__product-info').data('td-index');
 
       var _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index');
 
-      var x_index_transform = x_index - _index * 200;
-      $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', '(-' + x_index_transform + 'px)'); // $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_sticky + 'px)');
+      var _index_new = $(this).parents('.__product-info').data('new-index'); //set new index
 
-      if (_index > _index_sticky) {
-        console.log(11);
-        var xx_index = x_index - 200;
-        x_sticky = x_index - x_sticky;
-        $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_sticky + 'px)');
-        $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + xx_index + 'px)');
+
+      $(this).parents('td.__product-info').data('new-index', 1);
+      $(this).parents('td.__product-info').attr('data-new-index', 1);
+      $(this).parents('tbody').find('td.__product-info.__is-sticky').data('new-index', _index_new);
+      $(this).parents('tbody').find('td.__product-info.__is-sticky').attr('data-new-index', _index_new);
+      var x_item_swap = (_index_new - _index_sticky) * 200;
+      var x_item_sticky = _index * 200;
+
+      if (_index == _index_new) {
+        if (_index_sticky == 0) {
+          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+          $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+        } else {
+          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+          $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+        }
       } else {
-        console.log(22);
-
-        var _xx_index = x_index - 200;
-
-        x_sticky = x_sticky - x_index - 200;
-        $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(-' + x_sticky + 'px)');
-        $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + _xx_index + 'px)');
+        $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+        $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
       } //add remove class pinned
 
 
@@ -1765,15 +1780,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       $(this).parents('tbody').find('td').removeClass('__is-sticky');
       $(this).parents('tbody').find('.ca-button.__pinneds').html('PIN');
       $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
-      $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED'); //update data click
-
-      $(this).parents('.compare-advanced-table').data('click', 1);
-      $(this).parents('.compare-advanced-table').attr('data-click', 1);
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
     });
   };
 
   $(window).load(function () {
     compareAdvancedSwapColumn();
+    $(".indiana-scroll-container").scroll(function () {
+      var x_sticky = $('td.__product-info.__is-sticky').offset().left - $('.compare-advanced-table').offset().left;
+      console.log(x_sticky);
+    });
   });
 
   var ready = function ready() {

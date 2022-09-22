@@ -33,9 +33,9 @@ margin-bottom: 3em;
   tr {
 
     td.__is-sticky {
-      // position: sticky;
-      // left: var(--left-space);
-      z-index: 99998;
+      position: sticky;
+      left: var(--left-space);
+      z-index: 999999;
 
       &.__product-brand {
         z-index: 999999 !important;
@@ -87,7 +87,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
         const fieldData = item[field.field_map];
         const type = fieldData.extra_params?.type;
         let contentInner = '';
-
+        const _index = _itemIndex + 1;
         if(type == 'gallery') {
           const gallery = fieldData.extra_params?.value;
           contentInner = <Tooltip 
@@ -110,16 +110,28 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
           const r = confirm('Are you sure remove this item?')
           r ? removeCompareItem(index) : '';
         }
+        let left_space = 0;
+        if(_itemIndex == 5){
+          left_space = 0;
+        }else if(_itemIndex == 6){
+          left_space = 800;
+        }else{
+          left_space = (_itemIndex + 1) * 200;
+        }
 
         return <td 
           className={ [fieldData?.extra_class, pin ? '__is-sticky' : ''].join(' ') } 
-          // style={{ '--left-space': `${ (_itemIndex + 1) * cellWidth }px` }}
-          style={{ '--left-space': `${ (_itemIndex + 1) * thWidth }px` }}
           data-td-index={_itemIndex}
-          data-td-transform={(_itemIndex + 1) * 200}
-          key={ fieldData._key } width={ `${ cellWidth }px` } height={ `${ thHeight }px` }>
+          data-td-transform={_itemIndex * 200}
+          data-new-index={_itemIndex}
+          key={ fieldData._key } 
+          style={{ '--left-space': `${ (_itemIndex + 1) * 200}px` }}
+          width={ `${ cellWidth }px` }
+          >
           <div className="__entry-cell">
+          {_index}
             {
+              
               fieldData._name == 'infomation' &&
               <div className="actions">
                 {/* <button className={ ['ca-button', pin ? '__pinned' : ''].join(' ') } onClick={ e => updatePinFunc((pin ? false : true), _key) }>{ pin ? 'PINNED' : 'PIN' }</button> */}
@@ -175,22 +187,22 @@ export default ({ compareFields, compareItems }) => {
       }
 
       [...brandElems].forEach(el => {
-        el.style.zIndex = `99995`;
+        el.style.zIndex = `9999999`;
         el.style.transform = `translateY(${(top * -1) + spaceHeader}px)`;
       });
 
       [...actionsElems].forEach(el => {
-        el.style.zIndex = `99995`;
+        el.style.zIndex = `9999999`;
         el.style.transform = `translateY(${(top * -1) + spaceHeader}px)`;
         el.classList.add('is-top-sticky');
       });
-      
+      console.log(123)
     }
     
-    window.addEventListener('scroll', _scrollHandle); 
+    // window.addEventListener('scroll', _scrollHandle); 
 
     return () => {
-      window.removeEventListener('scroll', _scrollHandle);
+      // window.removeEventListener('scroll', _scrollHandle);
     }
   }, [compareItems]);
 
@@ -208,7 +220,6 @@ export default ({ compareFields, compareItems }) => {
       <table 
         ref={ tableRef } 
         className="compare-advanced-table" 
-        data-click={0}
         style={{ width: `${ (compareItems.length + 1) * cellWidth }px` }}>
         <tbody>
           {
