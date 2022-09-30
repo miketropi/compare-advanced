@@ -266,7 +266,7 @@ export default ({ compareFields, compareItems }) => {
                                             </span>
                                         </Tooltip>
                                     }
-                                </th>
+                                </th> 
                                 {
                                     (compareItems.length > 0) &&
                                     <CompareItems tableRootElem={tableRef} items={orderBy(compareItems, [o => o.__config.pin], 'desc')} field={field} />
