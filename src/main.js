@@ -35,33 +35,154 @@ import CompareAdvanced from './components/CompareAdvanced';
       })
    }
 
+   // const compareAdvancedSwapColumn = () => {
+   //    $(document).on("click", ".__pinneds", function () {
+
+   //       //set animation 1s
+   //       $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
+
+   //       //get index item
+   //       let _index = $(this).parents('.__product-info').data('td-index'),
+   //          _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
+   //          _index_new = $(this).parents('.__product-info').data('new-index');
+
+   //       //set new index
+   //       $(this).parents('td.__product-info').data('new-index', 1);
+   //       $(this).parents('td.__product-info').attr('data-new-index', 1);
+   //       $(this).parents('tbody').find('td.__product-info.__is-sticky').data('new-index', _index_new);
+   //       $(this).parents('tbody').find('td.__product-info.__is-sticky').attr('data-new-index', _index_new);
+
+   //       //declare translate
+   //       let translateX_Index = 0,
+   //          translateX_Sticky = 0;
+
+   //       let x_item_swap = (_index_new - _index_sticky) * 200;
+   //       let x_item_sticky = _index * 200;
+   //       if (_index > 4) {
+   //          let tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
+   //          if (tableScrollLeft > 0) {
+   //             let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
+   //             let new_x_item_sticky = 0;
+   //             if (last_item_index > _index) {
+   //                let x_scrol_left_item = (last_item_index - _index) * 200;
+   //                if (tableScrollLeft < x_scrol_left_item) {
+   //                   let x_scroll_minus = x_scrol_left_item - tableScrollLeft;
+   //                   new_x_item_sticky = last_item_index * 200 - tableScrollLeft - x_scroll_minus;
+   //                } else {
+   //                   new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
+   //                }
+   //             } else {
+   //                new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
+   //             }
+
+   //             if (_index == _index_new) {
+   //                if (_index_sticky == 0) {
+   //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
+   //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+   //                } else {
+   //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
+   //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+   //                }
+   //             } else {
+   //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
+   //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+   //             }
+   //          } else {
+   //             if (_index == _index_new) {
+   //                if (_index_sticky == 0) {
+   //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+   //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+   //                } else {
+   //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+   //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+   //                }
+   //             } else {
+   //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+   //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+   //             }
+   //          }
+   //       } else {
+   //          if (_index == _index_new) {
+   //             if (_index_sticky == 0) {
+   //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+   //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+   //             } else {
+   //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+   //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+   //             }
+   //          } else {
+   //             $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+   //             $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+   //          }
+   //       }
+
+
+   //       //add remove class pinned
+   //       $('.__pinneds').removeClass('__pinned');
+   //       $(this).addClass('__pinned');
+   //       $(this).parents('tbody').find('td').removeClass('__is-sticky');
+   //       $(this).parents('tbody').find('.ca-button.__pinneds').html('PIN');
+   //       $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
+   //       $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
+   //    });
+   // }
+
    const compareAdvancedSwapColumn = () => {
-      $(document).on("click", ".__pinneds", function () {
+      $(document).on("click", ".__pinneds:not(.__pinned)", function () {
+
+         //set animation 1s
+         $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
+         // $('tbody').find('td.__is-sticky').css('z-index', '10');
+         // $('tbody').find('td.__is-sticky').css('z-index', '10');
+
          //get index item
-         let _index = $(this).parents('.__product-info').data('td-index');
-         let _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index');
-         let _index_new = $(this).parents('.__product-info').data('new-index');
+         let _index = $(this).parents('.__product-info').data('td-index'),
+            _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
+            _index_new = $(this).parents('.__product-info').data('new-index');
 
          //set new index
          $(this).parents('td.__product-info').data('new-index', 1);
          $(this).parents('td.__product-info').attr('data-new-index', 1);
          $(this).parents('tbody').find('td.__product-info.__is-sticky').data('new-index', _index_new);
          $(this).parents('tbody').find('td.__product-info.__is-sticky').attr('data-new-index', _index_new);
+         let tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
+         //declare translate
+         let translateX_Index = 0,
+            translateX_Sticky = 0;
 
          let x_item_swap = (_index_new - _index_sticky) * 200;
          let x_item_sticky = _index * 200;
-         if (_index == _index_new) {
-            if (_index_sticky == 0) {
-               $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-               $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+         if (_index > 4 && tableScrollLeft > 0) {
+            let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
+            let x_scrol_left_item = (last_item_index - _index) * 200;
+            let new_x_item_sticky = 0;
+            let x_scroll_minus = x_scrol_left_item - tableScrollLeft;
+
+            if (last_item_index > _index && tableScrollLeft < x_scrol_left_item) {
+               new_x_item_sticky = last_item_index * 200 - tableScrollLeft - x_scroll_minus;
             } else {
-               $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-               $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+               new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
             }
+
+            if (_index == _index_new && _index_sticky == 0) {
+               translateX_Sticky = x_item_sticky;
+            } else {
+               translateX_Sticky = x_item_swap;
+            }
+            translateX_Index = -new_x_item_sticky;
+
          } else {
-            $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-            $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+            if (_index == _index_new && _index_sticky == 0) {
+               translateX_Sticky = x_item_sticky;
+            } else {
+               translateX_Sticky = x_item_swap;
+            }
+            translateX_Index = -x_item_sticky;
          }
+
+         $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(' + translateX_Index + 'px)');
+         $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + translateX_Sticky + 'px)');
+
 
          //add remove class pinned
          $('.__pinneds').removeClass('__pinned');
@@ -70,16 +191,11 @@ import CompareAdvanced from './components/CompareAdvanced';
          $(this).parents('tbody').find('.ca-button.__pinneds').html('PIN');
          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
          $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
-        
       });
    }
 
    $(window).load(function () {
       compareAdvancedSwapColumn();
-      $( ".indiana-scroll-container" ).scroll(function(){
-         let x_sticky = $('td.__product-info.__is-sticky').offset().left - $('.compare-advanced-table').offset().left;
-         console.log(x_sticky)
-      });
    });
 
    const ready = () => {

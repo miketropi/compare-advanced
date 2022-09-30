@@ -853,7 +853,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 999999;\n\n      &.__product-brand {\n        z-index: 999999 !important;\n      }\n\n      &.__product-info {\n        z-index: 99999;\n      }\n    }\n\n    td.__product-brand {\n\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 99999;\n    }\n  }\n}\n"])), function (props) {
+var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n    &:nth-child(2) {\n        td{\n            z-index: 2;\n            &.__is-sticky {\n                z-index: 4;\n            }\n        }\n    }\n    td, th{\n        z-index: 1;\n    }\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 3;\n\n      &.__product-brand {\n        z-index: 5;\n      }\n    }\n\n    td.__product-brand {\n        z-index: 3;\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 99999;\n    }\n  }\n}\n"])), function (props) {
   return props.rowColorFirst;
 }, function (props) {
   return props.rowColorSecond;
@@ -941,20 +941,10 @@ var CompareItems = function CompareItems(_ref) {
         r ? removeCompareItem(index) : '';
       };
 
-      var left_space = 0;
-
-      if (_itemIndex == 5) {
-        left_space = 0;
-      } else if (_itemIndex == 6) {
-        left_space = 800;
-      } else {
-        left_space = (_itemIndex + 1) * 200;
-      }
-
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
         className: [fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class, pin ? '__is-sticky' : ''].join(' '),
         "data-td-index": _itemIndex,
-        "data-td-transform": _itemIndex * 200,
+        "data-transform": _itemIndex * 200,
         "data-new-index": _itemIndex,
         style: {
           '--left-space': "".concat((_itemIndex + 1) * 200, "px")
@@ -962,7 +952,7 @@ var CompareItems = function CompareItems(_ref) {
         width: "".concat(cellWidth, "px"),
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "__entry-cell",
-          children: [_index, fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          children: [fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "actions",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: ['ca-button', '__pinneds'].join(' '),
@@ -996,53 +986,83 @@ var CompareItems = function CompareItems(_ref) {
   var scrollContainerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   var tableRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
-  var onScroll = function onScroll() {// console.log(scrollContainerRef.current.getElement().scrollLeft)
-  };
+  var _onScrollHorizontal = function _onScrollHorizontal() {
+    // console.log(scrollContainerRef.current.getElement().scrollLeft)
+    var scrollX = scrollContainerRef.current.getElement().scrollLeft;
+    var tdSticky = tableRef.current.querySelectorAll('td.__is-sticky');
+    var tdStickyIndex = tableRef.current.querySelector('td.__product-info.__is-sticky').dataset.tdIndex;
+    var dataTransformSticky = tableRef.current.querySelector('td.__product-brand.__is-sticky').dataset.transform;
+    var lastItemIndex = tableRef.current.querySelectorAll('td.__product-brand').length - 1;
+    var translateX_Value = 0;
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var _scrollHandle = function _scrollHandle(e) {
-      var brandElems = tableRef.current.querySelectorAll('td.__product-brand');
-      var actionsElems = tableRef.current.querySelectorAll('.actions');
+    _toConsumableArray(tdSticky).forEach(function (el) {
+      el.style.transition = "all 0s ease";
+    });
 
-      var _tableRef$current$get = tableRef.current.getBoundingClientRect(),
-          top = _tableRef$current$get.top;
+    if (tdStickyIndex > 4) {
+      var xScrollSticky = scrollX - dataTransformSticky;
 
-      var Header = document.querySelector('#main-head .navigation.sticky-bar');
-      var spaceHeader = Header ? Header.clientHeight + Header.offsetTop : 0;
+      if (xScrollSticky > -dataTransformSticky) {
+        if (tdStickyIndex < lastItemIndex) {
+          var x_num_index = (lastItemIndex - tdStickyIndex) * 200;
+          var xScrollStickys = scrollX - dataTransformSticky - x_num_index;
 
-      if (top - spaceHeader > 0) {
-        _toConsumableArray(brandElems).forEach(function (el) {
-          el.style.zIndex = "";
-          el.style.transform = "translateY(0)";
-        });
-
-        _toConsumableArray(actionsElems).forEach(function (el) {
-          el.style.zIndex = "";
-          el.style.transform = "translateY(0)";
-          el.classList.remove('is-top-sticky');
-        });
-
-        return;
+          if (xScrollStickys > -dataTransformSticky) {
+            translateX_Value = xScrollStickys;
+          } else {
+            translateX_Value = -dataTransformSticky;
+          }
+        } else {
+          translateX_Value = xScrollSticky;
+        }
+      } else {
+        translateX_Value = -dataTransformSticky;
       }
 
+      _toConsumableArray(tdSticky).forEach(function (el) {
+        el.style.transform = "translateX(".concat(translateX_Value, "px)");
+      });
+    }
+  };
+
+  var _scrollHandleVertical = function _scrollHandleVertical(e) {
+    var brandElems = tableRef.current.querySelectorAll('td.__product-brand .__entry-cell');
+    var actionsElems = tableRef.current.querySelectorAll('.actions');
+
+    var _tableRef$current$get = tableRef.current.getBoundingClientRect(),
+        top = _tableRef$current$get.top;
+
+    var Header = document.querySelector('#main-head .navigation.sticky-bar');
+    var spaceHeader = Header ? Header.clientHeight + Header.offsetTop : 0;
+
+    if (top - spaceHeader > 0) {
       _toConsumableArray(brandElems).forEach(function (el) {
-        el.style.zIndex = "9999999";
-        el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
+        el.style.zIndex = "";
+        el.style.transform = "translateY(0)";
       });
 
       _toConsumableArray(actionsElems).forEach(function (el) {
-        el.style.zIndex = "9999999";
-        el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
-        el.classList.add('is-top-sticky');
+        el.style.zIndex = "";
+        el.style.transform = "translateY(0)";
+        el.classList.remove('is-top-sticky');
       });
 
-      console.log(123);
-    }; // window.addEventListener('scroll', _scrollHandle); 
+      return;
+    }
 
+    _toConsumableArray(brandElems).forEach(function (el) {
+      // el.style.zIndex = `9999999`;
+      el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
+    });
 
-    return function () {// window.removeEventListener('scroll', _scrollHandle);
-    };
-  }, [compareItems]);
+    _toConsumableArray(actionsElems).forEach(function (el) {
+      // el.style.zIndex = `9999999`;
+      el.style.transform = "translateY(".concat(top * -1 + spaceHeader, "px)");
+      el.classList.add('is-top-sticky');
+    });
+  };
+
+  window.addEventListener('scroll', _scrollHandleVertical);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(CompareTableContainer, {
     rowColorFirst: rowColorFirst,
     rowColorSecond: rowColorSecond,
@@ -1053,7 +1073,7 @@ var CompareItems = function CompareItems(_ref) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_indiana_drag_scroll__WEBPACK_IMPORTED_MODULE_6__["default"], {
       ref: scrollContainerRef,
       vertical: false,
-      onScroll: onScroll,
+      onScroll: _onScrollHorizontal,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
         ref: tableRef,
         className: "compare-advanced-table",
@@ -1742,38 +1762,145 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_CompareAdvanced__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       })));
     });
-  };
+  }; // const compareAdvancedSwapColumn = () => {
+  //    $(document).on("click", ".__pinneds", function () {
+  //       //set animation 1s
+  //       $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
+  //       //get index item
+  //       let _index = $(this).parents('.__product-info').data('td-index'),
+  //          _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
+  //          _index_new = $(this).parents('.__product-info').data('new-index');
+  //       //set new index
+  //       $(this).parents('td.__product-info').data('new-index', 1);
+  //       $(this).parents('td.__product-info').attr('data-new-index', 1);
+  //       $(this).parents('tbody').find('td.__product-info.__is-sticky').data('new-index', _index_new);
+  //       $(this).parents('tbody').find('td.__product-info.__is-sticky').attr('data-new-index', _index_new);
+  //       //declare translate
+  //       let translateX_Index = 0,
+  //          translateX_Sticky = 0;
+  //       let x_item_swap = (_index_new - _index_sticky) * 200;
+  //       let x_item_sticky = _index * 200;
+  //       if (_index > 4) {
+  //          let tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
+  //          if (tableScrollLeft > 0) {
+  //             let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
+  //             let new_x_item_sticky = 0;
+  //             if (last_item_index > _index) {
+  //                let x_scrol_left_item = (last_item_index - _index) * 200;
+  //                if (tableScrollLeft < x_scrol_left_item) {
+  //                   let x_scroll_minus = x_scrol_left_item - tableScrollLeft;
+  //                   new_x_item_sticky = last_item_index * 200 - tableScrollLeft - x_scroll_minus;
+  //                } else {
+  //                   new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
+  //                }
+  //             } else {
+  //                new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
+  //             }
+  //             if (_index == _index_new) {
+  //                if (_index_sticky == 0) {
+  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
+  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+  //                } else {
+  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
+  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+  //                }
+  //             } else {
+  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
+  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+  //             }
+  //          } else {
+  //             if (_index == _index_new) {
+  //                if (_index_sticky == 0) {
+  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+  //                } else {
+  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+  //                }
+  //             } else {
+  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+  //             }
+  //          }
+  //       } else {
+  //          if (_index == _index_new) {
+  //             if (_index_sticky == 0) {
+  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
+  //             } else {
+  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+  //             }
+  //          } else {
+  //             $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
+  //             $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
+  //          }
+  //       }
+  //       //add remove class pinned
+  //       $('.__pinneds').removeClass('__pinned');
+  //       $(this).addClass('__pinned');
+  //       $(this).parents('tbody').find('td').removeClass('__is-sticky');
+  //       $(this).parents('tbody').find('.ca-button.__pinneds').html('PIN');
+  //       $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
+  //       $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
+  //    });
+  // }
+
 
   var compareAdvancedSwapColumn = function compareAdvancedSwapColumn() {
-    $(document).on("click", ".__pinneds", function () {
+    $(document).on("click", ".__pinneds:not(.__pinned)", function () {
+      //set animation 1s
+      $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease'); // $('tbody').find('td.__is-sticky').css('z-index', '10');
+      // $('tbody').find('td.__is-sticky').css('z-index', '10');
       //get index item
-      var _index = $(this).parents('.__product-info').data('td-index');
 
-      var _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index');
-
-      var _index_new = $(this).parents('.__product-info').data('new-index'); //set new index
+      var _index = $(this).parents('.__product-info').data('td-index'),
+          _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
+          _index_new = $(this).parents('.__product-info').data('new-index'); //set new index
 
 
       $(this).parents('td.__product-info').data('new-index', 1);
       $(this).parents('td.__product-info').attr('data-new-index', 1);
       $(this).parents('tbody').find('td.__product-info.__is-sticky').data('new-index', _index_new);
       $(this).parents('tbody').find('td.__product-info.__is-sticky').attr('data-new-index', _index_new);
+      var tableScrollLeft = $('.indiana-scroll-container').scrollLeft(); //declare translate
+
+      var translateX_Index = 0,
+          translateX_Sticky = 0;
       var x_item_swap = (_index_new - _index_sticky) * 200;
       var x_item_sticky = _index * 200;
 
-      if (_index == _index_new) {
-        if (_index_sticky == 0) {
-          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-          $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
-        } else {
-          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-          $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-        }
-      } else {
-        $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-        $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-      } //add remove class pinned
+      if (_index > 4 && tableScrollLeft > 0) {
+        var last_item_index = $('tbody tr').find('.__product-brand').length - 1;
+        var x_scrol_left_item = (last_item_index - _index) * 200;
+        var new_x_item_sticky = 0;
+        var x_scroll_minus = x_scrol_left_item - tableScrollLeft;
 
+        if (last_item_index > _index && tableScrollLeft < x_scrol_left_item) {
+          new_x_item_sticky = last_item_index * 200 - tableScrollLeft - x_scroll_minus;
+        } else {
+          new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
+        }
+
+        if (_index == _index_new && _index_sticky == 0) {
+          translateX_Sticky = x_item_sticky;
+        } else {
+          translateX_Sticky = x_item_swap;
+        }
+
+        translateX_Index = -new_x_item_sticky;
+      } else {
+        if (_index == _index_new && _index_sticky == 0) {
+          translateX_Sticky = x_item_sticky;
+        } else {
+          translateX_Sticky = x_item_swap;
+        }
+
+        translateX_Index = -x_item_sticky;
+      }
+
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(' + translateX_Index + 'px)');
+      $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + translateX_Sticky + 'px)'); //add remove class pinned
 
       $('.__pinneds').removeClass('__pinned');
       $(this).addClass('__pinned');
@@ -1786,10 +1913,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   $(window).load(function () {
     compareAdvancedSwapColumn();
-    $(".indiana-scroll-container").scroll(function () {
-      var x_sticky = $('td.__product-info.__is-sticky').offset().left - $('.compare-advanced-table').offset().left;
-      console.log(x_sticky);
-    });
   });
 
   var ready = function ready() {
