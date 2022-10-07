@@ -131,7 +131,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                             fieldData._name == 'infomation' &&
                             <div className="actions">
                                 {/* <button className={ ['ca-button', pin ? '__pinned' : ''].join(' ') } onClick={ e => updatePinFunc((pin ? false : true), _key) }>{ pin ? 'PINNED' : 'PIN' }</button> */}
-                                <button className={['ca-button', '__pinneds'].join(' ')} >{pin ? 'PINNED' : 'PIN'}</button>
+                                <button className={['ca-button', '__pinneds', _itemIndex == 0 ? '__pinned' : ''].join(' ')} >{pin ? 'PINNED' : 'PIN'}</button>
                                 <button className="ca-button __remove" onClick={e => __removeItem(_itemIndex)}>REMOVE</button>
                             </div>
                         }
@@ -169,29 +169,27 @@ export default ({ compareFields, compareItems }) => {
             el.style.transition = `all 0s ease`;
         });
 
-        if (tdStickyIndex > 4) {
-            let xScrollSticky = scrollX - dataTransformSticky;
-            if (xScrollSticky > -dataTransformSticky) {
-                if (tdStickyIndex < lastItemIndex) {
-                    let x_num_index = (lastItemIndex - tdStickyIndex) * 200;
-                    let xScrollStickys = scrollX - dataTransformSticky - x_num_index;
-                    if (xScrollStickys > -dataTransformSticky) {
-                        translateX_Value = xScrollStickys;
-                    } else {
-                        translateX_Value = -dataTransformSticky;
-                    }
+        let xScrollSticky = scrollX - dataTransformSticky;
+        if (xScrollSticky > -dataTransformSticky) {
+            if (tdStickyIndex < lastItemIndex) {
+                let x_num_index = (lastItemIndex - tdStickyIndex) * 200;
+                let xScrollStickys = scrollX - dataTransformSticky - x_num_index;
+                if (xScrollStickys > -dataTransformSticky) {
+                    translateX_Value = xScrollStickys;
                 } else {
-                    translateX_Value = xScrollSticky;
+                    translateX_Value = -dataTransformSticky;
                 }
             } else {
-                translateX_Value = -dataTransformSticky;
+                translateX_Value = xScrollSticky;
             }
-
-            [...tdSticky].forEach(el => {
-                el.style.transform = `translateX(${translateX_Value}px)`;
-            });
-
+        } else {
+            translateX_Value = -dataTransformSticky;
         }
+
+        [...tdSticky].forEach(el => {
+            el.style.transform = `translateX(${translateX_Value}px)`;
+        });
+
     }
 
     const _scrollHandleVertical = (e) => {
@@ -266,7 +264,7 @@ export default ({ compareFields, compareItems }) => {
                                             </span>
                                         </Tooltip>
                                     }
-                                </th> 
+                                </th>
                                 {
                                     (compareItems.length > 0) &&
                                     <CompareItems tableRootElem={tableRef} items={orderBy(compareItems, [o => o.__config.pin], 'desc')} field={field} />

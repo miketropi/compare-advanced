@@ -955,7 +955,7 @@ var CompareItems = function CompareItems(_ref) {
           children: [fieldData._name == 'infomation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "actions",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-              className: ['ca-button', '__pinneds'].join(' '),
+              className: ['ca-button', '__pinneds', _itemIndex == 0 ? '__pinned' : ''].join(' '),
               children: pin ? 'PINNED' : 'PIN'
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "ca-button __remove",
@@ -999,30 +999,28 @@ var CompareItems = function CompareItems(_ref) {
       el.style.transition = "all 0s ease";
     });
 
-    if (tdStickyIndex > 4) {
-      var xScrollSticky = scrollX - dataTransformSticky;
+    var xScrollSticky = scrollX - dataTransformSticky;
 
-      if (xScrollSticky > -dataTransformSticky) {
-        if (tdStickyIndex < lastItemIndex) {
-          var x_num_index = (lastItemIndex - tdStickyIndex) * 200;
-          var xScrollStickys = scrollX - dataTransformSticky - x_num_index;
+    if (xScrollSticky > -dataTransformSticky) {
+      if (tdStickyIndex < lastItemIndex) {
+        var x_num_index = (lastItemIndex - tdStickyIndex) * 200;
+        var xScrollStickys = scrollX - dataTransformSticky - x_num_index;
 
-          if (xScrollStickys > -dataTransformSticky) {
-            translateX_Value = xScrollStickys;
-          } else {
-            translateX_Value = -dataTransformSticky;
-          }
+        if (xScrollStickys > -dataTransformSticky) {
+          translateX_Value = xScrollStickys;
         } else {
-          translateX_Value = xScrollSticky;
+          translateX_Value = -dataTransformSticky;
         }
       } else {
-        translateX_Value = -dataTransformSticky;
+        translateX_Value = xScrollSticky;
       }
-
-      _toConsumableArray(tdSticky).forEach(function (el) {
-        el.style.transform = "translateX(".concat(translateX_Value, "px)");
-      });
+    } else {
+      translateX_Value = -dataTransformSticky;
     }
+
+    _toConsumableArray(tdSticky).forEach(function (el) {
+      el.style.transform = "translateX(".concat(translateX_Value, "px)");
+    });
   };
 
   var _scrollHandleVertical = function _scrollHandleVertical(e) {
@@ -1762,97 +1760,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_CompareAdvanced__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       })));
     });
-  }; // const compareAdvancedSwapColumn = () => {
-  //    $(document).on("click", ".__pinneds", function () {
-  //       //set animation 1s
-  //       $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
-  //       //get index item
-  //       let _index = $(this).parents('.__product-info').data('td-index'),
-  //          _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
-  //          _index_new = $(this).parents('.__product-info').data('new-index');
-  //       //set new index
-  //       $(this).parents('td.__product-info').data('new-index', 1);
-  //       $(this).parents('td.__product-info').attr('data-new-index', 1);
-  //       $(this).parents('tbody').find('td.__product-info.__is-sticky').data('new-index', _index_new);
-  //       $(this).parents('tbody').find('td.__product-info.__is-sticky').attr('data-new-index', _index_new);
-  //       //declare translate
-  //       let translateX_Index = 0,
-  //          translateX_Sticky = 0;
-  //       let x_item_swap = (_index_new - _index_sticky) * 200;
-  //       let x_item_sticky = _index * 200;
-  //       if (_index > 4) {
-  //          let tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
-  //          if (tableScrollLeft > 0) {
-  //             let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
-  //             let new_x_item_sticky = 0;
-  //             if (last_item_index > _index) {
-  //                let x_scrol_left_item = (last_item_index - _index) * 200;
-  //                if (tableScrollLeft < x_scrol_left_item) {
-  //                   let x_scroll_minus = x_scrol_left_item - tableScrollLeft;
-  //                   new_x_item_sticky = last_item_index * 200 - tableScrollLeft - x_scroll_minus;
-  //                } else {
-  //                   new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
-  //                }
-  //             } else {
-  //                new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
-  //             }
-  //             if (_index == _index_new) {
-  //                if (_index_sticky == 0) {
-  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
-  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
-  //                } else {
-  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
-  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-  //                }
-  //             } else {
-  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + new_x_item_sticky + 'px)');
-  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-  //             }
-  //          } else {
-  //             if (_index == _index_new) {
-  //                if (_index_sticky == 0) {
-  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
-  //                } else {
-  //                   $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-  //                   $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-  //                }
-  //             } else {
-  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-  //             }
-  //          }
-  //       } else {
-  //          if (_index == _index_new) {
-  //             if (_index_sticky == 0) {
-  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_sticky + 'px)');
-  //             } else {
-  //                $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-  //                $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-  //             }
-  //          } else {
-  //             $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(-' + x_item_sticky + 'px)');
-  //             $(this).parents('tbody').find('td.__is-sticky').css('transform', 'translateX(' + x_item_swap + 'px)');
-  //          }
-  //       }
-  //       //add remove class pinned
-  //       $('.__pinneds').removeClass('__pinned');
-  //       $(this).addClass('__pinned');
-  //       $(this).parents('tbody').find('td').removeClass('__is-sticky');
-  //       $(this).parents('tbody').find('.ca-button.__pinneds').html('PIN');
-  //       $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
-  //       $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
-  //    });
-  // }
-
+  };
 
   var compareAdvancedSwapColumn = function compareAdvancedSwapColumn() {
     $(document).on("click", ".__pinneds:not(.__pinned)", function () {
       //set animation 1s
-      $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease'); // $('tbody').find('td.__is-sticky').css('z-index', '10');
-      // $('tbody').find('td.__is-sticky').css('z-index', '10');
-      //get index item
+      $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease'); //get index item
 
       var _index = $(this).parents('.__product-info').data('td-index'),
           _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
