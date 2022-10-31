@@ -2265,7 +2265,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/wp-content/plugins/compare-advanced/dist/images/plus.svg?17d207b7999d704a455e8b43cdbf32a5");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/wp-content/plugins/compare-advanced/dist/images/plus.svg?47d992c2602d9578c8a2cfb7e9758100");
 
 /***/ }),
 

@@ -48,10 +48,11 @@ function ca_compare_advanced_block_html() {
 	$button_color_hover = get_field('button_color_hover');
 	$button_color_text_hover = get_field('button_color_text_hover');
 
+	$items = $items ? implode(',', $items) : '';
 	$limit_fields =  $limit_compare_fields ? implode(',', $limit_compare_fields) : '';
 	
   echo do_shortcode('[compare_advanced 
-		compare_items="'. implode(',', $items) .'" 
+		compare_items="'. trim($items) .'" 
 		limit_compare_fields="'. trim($limit_fields) .'" 
 		row_color_1="'. $row_color_1 .'" 
 		row_color_2="'. $row_color_2 .'" 

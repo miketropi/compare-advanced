@@ -15,8 +15,13 @@ function ca_shortcode_compare_advanced_func($atts) {
     'button_color_text_hover' => '#FFF',
     'extra_class' => '',
   ], $atts);
+  
+  if(empty($a['compare_items'])) {
+    $a['compare_items'] = implode(',', ca_get_all_items());
+  }
 
-  if(empty($a)) return;
+  if(empty($a['compare_items'])) return;
+
   ob_start();
   ?>
   <div 

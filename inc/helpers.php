@@ -3,6 +3,20 @@
  * Helpers
  */
 
+function ca_get_all_items() {
+  $all = get_posts([
+    'post_type' => 'compare-items',
+    'numberposts' => -1,
+    'post_status' => 'publish',
+  ]);
+
+  if(count($all) == 0) return [];
+
+  return array_map(function($i) {
+    return $i->ID;
+  }, $all);
+}
+
 function ca_build_compare_item_fields() {
   $compare_fields = get_field('compare_fields', 'option');
 
