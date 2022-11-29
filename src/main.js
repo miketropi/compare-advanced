@@ -36,11 +36,16 @@ import CompareAdvanced from './components/CompareAdvanced';
    }
 
    const compareAdvancedSwapColumn = () => {
+      const compareTable = $('.compare-advanced-table');
+      let data_unit = 0;
       $(document).on("click", ".__pinneds:not(.__pinned)", function () {
-
+         if ($(window).width() >= 425)
+            data_unit = compareTable.data('unit-dk');
+         else
+            data_unit = compareTable.data('unit-mb');
          //set animation 1s
          $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
-
+         
          //get index item
          let _index = $(this).parents('.__product-info').data('td-index'),
             _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
@@ -56,18 +61,18 @@ import CompareAdvanced from './components/CompareAdvanced';
          let translateX_Index = 0,
             translateX_Sticky = 0;
 
-         let x_item_swap = (_index_new - _index_sticky) * 200;
-         let x_item_sticky = _index * 200;
+         let x_item_swap = (_index_new - _index_sticky) * data_unit;
+         let x_item_sticky = _index * data_unit;
          if (_index > 4 && tableScrollLeft > 0) {
             let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
-            let x_scrol_left_item = (last_item_index - _index) * 200;
+            let x_scrol_left_item = (last_item_index - _index) * data_unit;
             let new_x_item_sticky = 0;
             let x_scroll_minus = x_scrol_left_item - tableScrollLeft;
 
             if (last_item_index > _index && tableScrollLeft < x_scrol_left_item) {
-               new_x_item_sticky = last_item_index * 200 - tableScrollLeft - x_scroll_minus;
+               new_x_item_sticky = last_item_index * data_unit - tableScrollLeft - x_scroll_minus;
             } else {
-               new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
+               new_x_item_sticky = last_item_index * data_unit - tableScrollLeft;
             }
 
             if (_index == _index_new && _index_sticky == 0) {

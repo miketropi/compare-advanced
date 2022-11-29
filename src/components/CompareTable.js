@@ -28,6 +28,9 @@ margin-bottom: 3em;
     width: 70%;
     margin: 1em auto 5px auto;
     display: block;
+    @media (max-width: 767px){
+        width: 40%;
+    }
   }
 
   tr {
@@ -46,7 +49,6 @@ margin-bottom: 3em;
       position: sticky;
       left: var(--left-space);
       z-index: 3;
-
       &.__product-brand {
         z-index: 5;
       }
@@ -70,6 +72,13 @@ margin-bottom: 3em;
 }
 `
 
+let widthCol = 200,
+    fixScrollSticky = 200;
+if (window.screen.width <= 425) {
+    widthCol = 120;
+    fixScrollSticky = 120;
+}
+
 export const CompareItems = ({ tableRootElem, items, field }) => {
     const {
         cellWidth,
@@ -86,6 +95,8 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
         setThHeight(_h);
     });
 
+
+
     return <Fragment>
         {
             items.map((item, _itemIndex) => {
@@ -100,7 +111,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                         className="tooltip-contain-gallery"
                         eventActive={'click'}
                         content={<SlideImages gallery={gallery} />}>
-                        <div dangerouslySetInnerHTML={{ __html: fieldData._html }}></div>
+                        <div className='image-featured' dangerouslySetInnerHTML={{ __html: fieldData._html }}></div>
                         {
                             type == 'gallery' &&
                             <span className="__icon-extra-gallery">
@@ -120,10 +131,10 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                 return <td
                     className={[fieldData?.extra_class, pin ? '__is-sticky' : ''].join(' ')}
                     data-td-index={_itemIndex}
-                    data-transform={_itemIndex * 200}
+                    data-transform={_itemIndex * widthCol}
                     data-new-index={_itemIndex}
                     key={fieldData._key}
-                    style={{ '--left-space': `${(_itemIndex + 1) * 200}px` }}
+                    style={{ '--left-space': `${(_itemIndex + 1) * widthCol}px` }}
                     width={`${cellWidth}px`}
                 >
                     <div className="__entry-cell">
@@ -172,7 +183,7 @@ export default ({ compareFields, compareItems }) => {
         let xScrollSticky = scrollX - dataTransformSticky;
         if (xScrollSticky > -dataTransformSticky) {
             if (tdStickyIndex < lastItemIndex) {
-                let x_num_index = (lastItemIndex - tdStickyIndex) * 200;
+                let x_num_index = (lastItemIndex - tdStickyIndex) * fixScrollSticky;
                 let xScrollStickys = scrollX - dataTransformSticky - x_num_index;
                 if (xScrollStickys > -dataTransformSticky) {
                     translateX_Value = xScrollStickys;
@@ -240,7 +251,10 @@ export default ({ compareFields, compareItems }) => {
             <table
                 ref={tableRef}
                 className="compare-advanced-table"
-                style={{ width: `${(compareItems.length + 1) * cellWidth}px` }}>
+                style={{ width: `${(compareItems.length + 1) * cellWidth}px` }}
+                data-unit-dk={fixScrollSticky}
+                data-unit-mb={fixScrollSticky}
+            >
                 <tbody>
                     {
                         compareFields &&

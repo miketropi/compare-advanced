@@ -853,7 +853,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n  }\n\n  tr {\n    &:nth-child(2) {\n        td{\n            z-index: 2;\n            &.__is-sticky {\n                z-index: 4;\n            }\n        }\n    }\n    td, th{\n        z-index: 1;\n    }\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 3;\n\n      &.__product-brand {\n        z-index: 5;\n      }\n    }\n\n    td.__product-brand {\n        z-index: 3;\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 99999;\n    }\n  }\n}\n"])), function (props) {
+var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\ndisplay: block;\nwidth: 100%;\noverflow: auto;\nmargin-bottom: 3em;\n--row-color-first: ", ";\n--row-color-second: ", ";\n--button-color-ide: ", ";\n--button-color-text-ide: ", ";\n--button-color-hover: ", ";\n--button-color-text-hover: ", ";\n\n.compare-advanced-table {\n  max-width: initial;\n  margin-bottom: 0;\n  overflow-x: initial !important;\n\n  .__image-label {\n    width: 70%;\n    margin: 1em auto 5px auto;\n    display: block;\n    @media (max-width: 767px){\n        width: 40%;\n    }\n  }\n\n  tr {\n    &:nth-child(2) {\n        td{\n            z-index: 2;\n            &.__is-sticky {\n                z-index: 4;\n            }\n        }\n    }\n    td, th{\n        z-index: 1;\n    }\n    td.__is-sticky {\n      position: sticky;\n      left: var(--left-space);\n      z-index: 3;\n      &.__product-brand {\n        z-index: 5;\n      }\n    }\n\n    td.__product-brand {\n        z-index: 3;\n      .__entry-cell {\n        min-height: auto;\n        line-height: 0;\n        padding-bottom: 0;\n      }\n    }\n\n    th.__col-heading {\n      position: sticky;\n      left: 0;\n      z-index: 99999;\n    }\n  }\n}\n"])), function (props) {
   return props.rowColorFirst;
 }, function (props) {
   return props.rowColorSecond;
@@ -866,6 +866,14 @@ var CompareTableContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["defa
 }, function (props) {
   return props.buttonColorTextHover;
 });
+var widthCol = 200,
+    fixScrollSticky = 200;
+
+if (window.screen.width <= 425) {
+  widthCol = 120;
+  fixScrollSticky = 120;
+}
+
 var CompareItems = function CompareItems(_ref) {
   var tableRootElem = _ref.tableRootElem,
       items = _ref.items,
@@ -917,6 +925,7 @@ var CompareItems = function CompareItems(_ref) {
             gallery: gallery
           }),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "image-featured",
             dangerouslySetInnerHTML: {
               __html: fieldData._html
             }
@@ -944,10 +953,10 @@ var CompareItems = function CompareItems(_ref) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
         className: [fieldData === null || fieldData === void 0 ? void 0 : fieldData.extra_class, pin ? '__is-sticky' : ''].join(' '),
         "data-td-index": _itemIndex,
-        "data-transform": _itemIndex * 200,
+        "data-transform": _itemIndex * widthCol,
         "data-new-index": _itemIndex,
         style: {
-          '--left-space': "".concat((_itemIndex + 1) * 200, "px")
+          '--left-space': "".concat((_itemIndex + 1) * widthCol, "px")
         },
         width: "".concat(cellWidth, "px"),
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -1003,7 +1012,7 @@ var CompareItems = function CompareItems(_ref) {
 
     if (xScrollSticky > -dataTransformSticky) {
       if (tdStickyIndex < lastItemIndex) {
-        var x_num_index = (lastItemIndex - tdStickyIndex) * 200;
+        var x_num_index = (lastItemIndex - tdStickyIndex) * fixScrollSticky;
         var xScrollStickys = scrollX - dataTransformSticky - x_num_index;
 
         if (xScrollStickys > -dataTransformSticky) {
@@ -1078,6 +1087,8 @@ var CompareItems = function CompareItems(_ref) {
         style: {
           width: "".concat((compareItems.length + 1) * cellWidth, "px")
         },
+        "data-unit-dk": fixScrollSticky,
+        "data-unit-mb": fixScrollSticky,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
           children: compareFields && compareFields.map(function (field) {
             var _field$image_label, _field$image_label2;
@@ -1449,9 +1460,9 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
 
   var _setCellWidthHandle = function _setCellWidthHandle() {
     if (window.innerWidth <= 450) {
-      setCellWidth(window.innerWidth / 3);
+      setCellWidth(120);
     } else if (window.innerWidth <= 768) {
-      setCellWidth(150);
+      setCellWidth(120);
     } else {
       setCellWidth(200);
     }
@@ -1763,8 +1774,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   };
 
   var compareAdvancedSwapColumn = function compareAdvancedSwapColumn() {
+    var compareTable = $('.compare-advanced-table');
+    var data_unit = 0;
     $(document).on("click", ".__pinneds:not(.__pinned)", function () {
-      //set animation 1s
+      if ($(window).width() >= 425) data_unit = compareTable.data('unit-dk');else data_unit = compareTable.data('unit-mb'); //set animation 1s
+
       $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease'); //get index item
 
       var _index = $(this).parents('.__product-info').data('td-index'),
@@ -1780,19 +1794,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var translateX_Index = 0,
           translateX_Sticky = 0;
-      var x_item_swap = (_index_new - _index_sticky) * 200;
-      var x_item_sticky = _index * 200;
+      var x_item_swap = (_index_new - _index_sticky) * data_unit;
+      var x_item_sticky = _index * data_unit;
 
       if (_index > 4 && tableScrollLeft > 0) {
         var last_item_index = $('tbody tr').find('.__product-brand').length - 1;
-        var x_scrol_left_item = (last_item_index - _index) * 200;
+        var x_scrol_left_item = (last_item_index - _index) * data_unit;
         var new_x_item_sticky = 0;
         var x_scroll_minus = x_scrol_left_item - tableScrollLeft;
 
         if (last_item_index > _index && tableScrollLeft < x_scrol_left_item) {
-          new_x_item_sticky = last_item_index * 200 - tableScrollLeft - x_scroll_minus;
+          new_x_item_sticky = last_item_index * data_unit - tableScrollLeft - x_scroll_minus;
         } else {
-          new_x_item_sticky = last_item_index * 200 - tableScrollLeft;
+          new_x_item_sticky = last_item_index * data_unit - tableScrollLeft;
         }
 
         if (_index == _index_new && _index_sticky == 0) {
