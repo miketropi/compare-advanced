@@ -1250,7 +1250,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  z-index: 99;\n  left: ", ";\n  top: ", ";\n  background: white;\n  padding: 20px;\n  border-radius: 16px;\n  width: 200px;\n  border: solid 1px #eee;\n  text-align: center;\n\n  p {\n    font-size: 13px;\n    line-height: 1.3em;\n    margin: 0;\n\n    font-family: var(--text-font);\n    color: black;\n  }\n\n  @media(max-width: 768px) {\n    padding: 10px;\n\n    p {\n      font-size: 11px;\n    }\n  }\n"])), function (props) {
+var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  z-index: 99;\n  left: ", ";\n  top: ", ";\n  background: white;\n  padding: 20px;\n  border-radius: 16px;\n  width: 200px;\n  border: solid 1px #eee;\n  text-align: center;\n   @media (max-width: 425px){\n      width: 100%;\n      max-width: 100%;\n      border-radius: 0;\n      left:unset;\n      top:unset;\n      background: white;\n      border:none;\n      padding: 0;\n      padding-bottom: 15px;\n      position: relative;\n\n   }\n   >div{\n      \n   }\n  p {\n    font-size: 13px;\n    line-height: 1.3em;\n    margin: 0;\n\n    font-family: var(--text-font);\n    color: black;\n  }\n\n  @media(max-width: 768px) {\n    padding: 10px;\n\n    p {\n      font-size: 11px;\n    }\n  }\n  @media (max-width: 425px){\n   padding: 0px 0 15px 0;\n  }\n"])), function (props) {
   return props.left ? "".concat(props.left, "px") : "0px";
 }, function (props) {
   return props.top ? "".concat(props.top, "px") : "0px";
@@ -1300,17 +1300,26 @@ var TooltipContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"]
     toolTipRef = (0,_lib_useOuterClick__WEBPACK_IMPORTED_MODULE_2__["default"])(function (ev) {
       if (!handle.current.contains(ev.target)) {
         setShow(false);
+
+        if (window.innerWidth <= 450) {
+          document.body.classList.remove('tooltip-active');
+        }
       }
     });
     eventActiveHandle = {
       onClick: function onClick(e) {
         setShow(!show);
+
+        if (window.innerWidth <= 450) {
+          document.body.classList.add('tooltip-active');
+        }
       }
     };
   }
 
   var renderContainer = function renderContainer() {
     var containerElem = document.createElement('DIV');
+    containerElem.innerHTML = '<span class="tooltip-close">X</span>';
     containerElem.className = 'ca-tooltip-component';
     return containerElem;
   };
