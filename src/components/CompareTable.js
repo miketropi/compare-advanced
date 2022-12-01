@@ -124,8 +124,9 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                 }
 
                 const __removeItem = (index) => {
-                    const r = confirm('Are you sure remove this item?')
-                    r ? removeCompareItem(index) : '';
+                    // const r = confirm('Are you sure remove this item?')
+                    // r ? removeCompareItem(index) : '';
+                    removeCompareItem(index)
                 }
 
                 return <td
@@ -247,6 +248,7 @@ export default ({ compareFields, compareItems }) => {
         <ScrollContainer
             ref={scrollContainerRef}
             vertical={false}
+            horizontal={true}
             onScroll={_onScrollHorizontal}>
             <table
                 ref={tableRef}

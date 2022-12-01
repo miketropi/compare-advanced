@@ -77,7 +77,6 @@ export default ({ content, children, eventActive, className }) => {
          }
       });
 
-
       eventActiveHandle = {
          onClick: e => {
             setShow(!show)

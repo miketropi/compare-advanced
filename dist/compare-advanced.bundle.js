@@ -946,8 +946,9 @@ var CompareItems = function CompareItems(_ref) {
       }
 
       var __removeItem = function __removeItem(index) {
-        var r = confirm('Are you sure remove this item?');
-        r ? removeCompareItem(index) : '';
+        // const r = confirm('Are you sure remove this item?')
+        // r ? removeCompareItem(index) : '';
+        removeCompareItem(index);
       };
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -1080,6 +1081,7 @@ var CompareItems = function CompareItems(_ref) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_indiana_drag_scroll__WEBPACK_IMPORTED_MODULE_6__["default"], {
       ref: scrollContainerRef,
       vertical: false,
+      horizontal: true,
       onScroll: _onScrollHorizontal,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
         ref: tableRef,
@@ -1848,7 +1850,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   };
 
   $(window).load(function () {
-    compareAdvancedSwapColumn();
+    compareAdvancedSwapColumn(); // compareAdvancedSwapColumn_new();
   });
 
   var ready = function ready() {

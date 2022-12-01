@@ -45,7 +45,7 @@ import CompareAdvanced from './components/CompareAdvanced';
             data_unit = compareTable.data('unit-mb');
          //set animation 1s
          $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
-         
+
          //get index item
          let _index = $(this).parents('.__product-info').data('td-index'),
             _index_sticky = $(this).parents('tbody').find('td.__is-sticky').data('td-index'),
@@ -107,6 +107,7 @@ import CompareAdvanced from './components/CompareAdvanced';
 
    $(window).load(function () {
       compareAdvancedSwapColumn();
+      // compareAdvancedSwapColumn_new();
    });
 
    const ready = () => {
