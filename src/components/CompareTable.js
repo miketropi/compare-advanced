@@ -247,9 +247,9 @@ export default ({ compareFields, compareItems }) => {
         buttonColorTextHover={buttonColorTextHover}>
         <ScrollContainer
             ref={scrollContainerRef}
-            vertical={false}
-            horizontal={true}
-            onScroll={_onScrollHorizontal}>
+            // vertical={false}
+            // horizontal={true}
+            onScroll={_onScrollHorizontal}> 
             <table
                 ref={tableRef}
                 className="compare-advanced-table"

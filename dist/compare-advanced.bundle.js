@@ -1079,9 +1079,9 @@ var CompareItems = function CompareItems(_ref) {
     buttonColorHover: buttonColorHover,
     buttonColorTextHover: buttonColorTextHover,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_indiana_drag_scroll__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      ref: scrollContainerRef,
-      vertical: false,
-      horizontal: true,
+      ref: scrollContainerRef // vertical={false}
+      // horizontal={true}
+      ,
       onScroll: _onScrollHorizontal,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
         ref: tableRef,
