@@ -6,6 +6,8 @@ import orderBy from 'lodash/orderBy';
 import { useCompareAdvanced } from '../context/CompareAdvancedContext';
 import iconPlus from '../../images/plus.svg';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import 'react-indiana-drag-scroll/dist/style.css'
+
 
 const CompareTableContainer = styled.div`
 display: block;
@@ -104,7 +106,6 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                 const fieldData = item[field.field_map];
                 const type = fieldData.extra_params?.type;
                 let contentInner = '';
-                const _index = _itemIndex + 1;
                 if (type == 'gallery') {
                     const gallery = fieldData.extra_params?.value;
                     contentInner = <Tooltip
@@ -169,7 +170,7 @@ export default ({ compareFields, compareItems }) => {
     const tableRef = useRef();
 
     const _onScrollHorizontal = () => {
-        // console.log(scrollContainerRef.current.getElement().scrollLeft)
+        console.log(scrollContainerRef.current.getElement().scrollLeft)
         let scrollX = scrollContainerRef.current.getElement().scrollLeft;
         let tdSticky = tableRef.current.querySelectorAll('td.__is-sticky');
         let tdStickyIndex = tableRef.current.querySelector('td.__product-info.__is-sticky').dataset.tdIndex;
@@ -247,9 +248,9 @@ export default ({ compareFields, compareItems }) => {
         buttonColorTextHover={buttonColorTextHover}>
         <ScrollContainer
             ref={scrollContainerRef}
-            vertical={false}
-            horizontal={true}
-            onScroll={_onScrollHorizontal}>
+            vertical="false"
+            horizontal="true"
+            className="scroll-container">
             <table
                 ref={tableRef}
                 className="compare-advanced-table"
