@@ -65,11 +65,11 @@ import CompareAdvanced from './components/CompareAdvanced';
          let x_item_sticky = _index * data_unit;
          if (_index > 4 && tableScrollLeft > 0) {
             let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
-            let x_scrol_left_item = (last_item_index - _index) * data_unit;
+            let x_scroll_left_item = (last_item_index - _index) * data_unit;
             let new_x_item_sticky = 0;
-            let x_scroll_minus = x_scrol_left_item - tableScrollLeft;
+            let x_scroll_minus = x_scroll_left_item - tableScrollLeft;
 
-            if (last_item_index > _index && tableScrollLeft < x_scrol_left_item) {
+            if (last_item_index > _index && tableScrollLeft < x_scroll_left_item) {
                new_x_item_sticky = last_item_index * data_unit - tableScrollLeft - x_scroll_minus;
             } else {
                new_x_item_sticky = last_item_index * data_unit - tableScrollLeft;
@@ -105,14 +105,81 @@ import CompareAdvanced from './components/CompareAdvanced';
       });
    }
 
+
+   const compareAdvancedPinMultipleColumn = () => {
+      const compareTable = $('.compare-advanced-table');
+      let dataUnit = compareTable.data('unit-dk');
+      $(document).on("click", ".__pinneds:not(.__pinned)", function () {
+         let tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
+         let _index = $(this).parents('.__product-info').data('td-index'),
+            _index_new = $(this).parents('.__product-info').data('new-index');
+
+         //count column pinned
+         let countPinned = $(this).parents('tr').find('td').find('.__pinned').length;
+         
+         //set animation 1s
+         $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
+
+         //add class pinned
+         $(this).addClass('__pinned');
+         //set pin column
+         $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
+         $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
+
+         if (countPinned == _index) return;
+
+         //set new index         
+         $(this).parents('tr').find('td.__product-info').data('new-index', countPinned);
+         $(this).parents('tr').find('td.__product-info').attr('data-new-index', countPinned);
+
+
+         let columnNotSticky = $(this).parents('tr').find('td.__product-info:not(.__is-sticky)');
+
+         let arrayNewIdx = [];
+         columnNotSticky.each(function (i, obj) {
+            arrayNewIdx.push($(this).data('new-index'));
+         });
+
+         let minNewIdx = Math.min.apply(Math, arrayNewIdx);
+        
+         let minIdx = $(this).parents('tr').find('td[data-new-index="' + minNewIdx + '"]').data('td-index');
+         console.log(arrayNewIdx, minNewIdx, minIdx)
+         $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').data('new-index', _index_new);
+         $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').attr('data-new-index', _index_new);
+
+         if (_index_new == countPinned) return;
+
+         //move column to pin position
+         let distanceIndexOrg = dataUnit * _index;
+         let distanceCountPinned = dataUnit * countPinned;
+         let distance = 0;
+
+         if (_index_new > _index) {
+            distance = distanceCountPinned - (_index * dataUnit);
+         } else {
+            if (distanceIndexOrg > distanceCountPinned) {
+               distance = distanceCountPinned - distanceIndexOrg;
+            } else {
+               distance = distanceIndexOrg - distanceCountPinned;
+            }
+         }
+
+         
+         let distanceSortColumn = (_index_new - minIdx) * dataUnit;
+
+         // console.log(distance)
+         $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').css('transform', 'translateX(' + distanceSortColumn + 'px)');
+         $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(' + distance + 'px)');
+      });
+   }
+
    $(window).load(function () {
-      compareAdvancedSwapColumn();
-      // compareAdvancedSwapColumn_new();
+      // compareAdvancedSwapColumn();
+      compareAdvancedPinMultipleColumn();
    });
 
    const ready = () => {
       compareAdvanced();
-
    }
 
    $(ready);

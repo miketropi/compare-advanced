@@ -1810,11 +1810,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       if (_index > 4 && tableScrollLeft > 0) {
         var last_item_index = $('tbody tr').find('.__product-brand').length - 1;
-        var x_scrol_left_item = (last_item_index - _index) * data_unit;
+        var x_scroll_left_item = (last_item_index - _index) * data_unit;
         var new_x_item_sticky = 0;
-        var x_scroll_minus = x_scrol_left_item - tableScrollLeft;
+        var x_scroll_minus = x_scroll_left_item - tableScrollLeft;
 
-        if (last_item_index > _index && tableScrollLeft < x_scrol_left_item) {
+        if (last_item_index > _index && tableScrollLeft < x_scroll_left_item) {
           new_x_item_sticky = last_item_index * data_unit - tableScrollLeft - x_scroll_minus;
         } else {
           new_x_item_sticky = last_item_index * data_unit - tableScrollLeft;
@@ -1849,8 +1849,64 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     });
   };
 
+  var compareAdvancedPinMultipleColumn = function compareAdvancedPinMultipleColumn() {
+    var compareTable = $('.compare-advanced-table');
+    var dataUnit = compareTable.data('unit-dk');
+    $(document).on("click", ".__pinneds:not(.__pinned)", function () {
+      var tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
+
+      var _index = $(this).parents('.__product-info').data('td-index'),
+          _index_new = $(this).parents('.__product-info').data('new-index'); //count column pinned
+
+
+      var countPinned = $(this).parents('tr').find('td').find('.__pinned').length; //set animation 1s
+
+      $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease'); //add class pinned
+
+      $(this).addClass('__pinned'); //set pin column
+
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
+      if (countPinned == _index) return; //set new index         
+
+      $(this).parents('tr').find('td.__product-info').data('new-index', countPinned);
+      $(this).parents('tr').find('td.__product-info').attr('data-new-index', countPinned);
+      var columnNotSticky = $(this).parents('tr').find('td.__product-info:not(.__is-sticky)');
+      var arrayNewIdx = [];
+      columnNotSticky.each(function (i, obj) {
+        arrayNewIdx.push($(this).data('new-index'));
+      });
+      var minNewIdx = Math.min.apply(Math, arrayNewIdx);
+      var minIdx = $(this).parents('tr').find('td[data-new-index="' + minNewIdx + '"]').data('td-index');
+      console.log(arrayNewIdx, minNewIdx, minIdx);
+      $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').data('new-index', _index_new);
+      $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').attr('data-new-index', _index_new);
+      if (_index_new == countPinned) return; //move column to pin position
+
+      var distanceIndexOrg = dataUnit * _index;
+      var distanceCountPinned = dataUnit * countPinned;
+      var distance = 0;
+
+      if (_index_new > _index) {
+        distance = distanceCountPinned - _index * dataUnit;
+      } else {
+        if (distanceIndexOrg > distanceCountPinned) {
+          distance = distanceCountPinned - distanceIndexOrg;
+        } else {
+          distance = distanceIndexOrg - distanceCountPinned;
+        }
+      }
+
+      var distanceSortColumn = (_index_new - minIdx) * dataUnit; // console.log(distance)
+
+      $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').css('transform', 'translateX(' + distanceSortColumn + 'px)');
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(' + distance + 'px)');
+    });
+  };
+
   $(window).load(function () {
-    compareAdvancedSwapColumn(); // compareAdvancedSwapColumn_new();
+    // compareAdvancedSwapColumn();
+    compareAdvancedPinMultipleColumn();
   });
 
   var ready = function ready() {
@@ -2390,7 +2446,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/wp-content/plugins/compare-advanced/dist/images/plus.svg?47d992c2602d9578c8a2cfb7e9758100");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/wp-content/plugins/compare-advanced/dist/images/plus.svg?17d207b7999d704a455e8b43cdbf32a5");
 
 /***/ }),
 
