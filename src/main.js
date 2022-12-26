@@ -108,42 +108,42 @@ import CompareAdvanced from './components/CompareAdvanced';
 
    const compareAdvancedPinMultipleColumn = () => {
       const compareTable = $('.compare-advanced-table');
-      let dataUnit = compareTable.data('unit-dk');
+      let dataUnit = compareTable.data('unit');
       $(document).on("click", ".__pinneds:not(.__pinned)", function () {
          let tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
          let _index = $(this).parents('.__product-info').data('td-index'),
             _index_new = $(this).parents('.__product-info').data('new-index');
 
-         //count column pinned
-         let countPinned = $(this).parents('tr').find('td').find('.__pinned').length;
-         
+         let columnNotSticky = $(this).parents('tr').find('td:not(.__is-sticky)');
          //set animation 1s
          $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
-
-         //add class pinned
-         $(this).addClass('__pinned');
-         //set pin column
-         $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
-         $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
-
-         if (countPinned == _index) return;
-
-         //set new index         
-         $(this).parents('tr').find('td.__product-info').data('new-index', countPinned);
-         $(this).parents('tr').find('td.__product-info').attr('data-new-index', countPinned);
-
-
-         let columnNotSticky = $(this).parents('tr').find('td.__product-info:not(.__is-sticky)');
 
          let arrayNewIdx = [];
          columnNotSticky.each(function (i, obj) {
             arrayNewIdx.push($(this).data('new-index'));
          });
-
          let minNewIdx = Math.min.apply(Math, arrayNewIdx);
-        
          let minIdx = $(this).parents('tr').find('td[data-new-index="' + minNewIdx + '"]').data('td-index');
-         console.log(arrayNewIdx, minNewIdx, minIdx)
+
+         //count column pinned
+         let countPinned = $(this).parents('tr').find('td').find('.__pinned').length;
+
+         //add class pinned
+         $(this).addClass('__pinned');
+
+         //remove sticky last
+         $(this).parents('tbody').find('td').removeClass('__is-sticky-last');
+
+         //set pin column
+         $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
+         $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky-last');
+         $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
+
+         if (countPinned == _index) return;
+
+         //set new index         
+         $(this).parents('td.__product-info').data('new-index', countPinned);
+         $(this).parents('td.__product-info').attr('data-new-index', countPinned);
          $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').data('new-index', _index_new);
          $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').attr('data-new-index', _index_new);
 
@@ -164,19 +164,85 @@ import CompareAdvanced from './components/CompareAdvanced';
             }
          }
 
-         
          let distanceSortColumn = (_index_new - minIdx) * dataUnit;
+         if (_index > 4 && tableScrollLeft > 0) {
+            const stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
+            let idxNewStickyLast = stickyLast.data('new-index');
+            let unitPinned = (idxNewStickyLast - 1) * dataUnit;
 
+            let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
+            let x_scroll_left_item = (last_item_index - _index) * dataUnit;
+            let x_scroll_minus = x_scroll_left_item - tableScrollLeft;
+            if (last_item_index > _index && tableScrollLeft < x_scroll_left_item) {
+               distance = (last_item_index * dataUnit - tableScrollLeft - x_scroll_minus - dataUnit - unitPinned) * -1;
+            } else {
+               distance = (last_item_index * dataUnit - tableScrollLeft - dataUnit - unitPinned) * -1;
+            }
+         }
          // console.log(distance)
          $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').css('transform', 'translateX(' + distanceSortColumn + 'px)');
          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(' + distance + 'px)');
       });
    }
 
+   const compareAdvancedTableScrollHorizontal = () => {
+      const tableContainer = $('.indiana-scroll-container');
+      const compareTable = $('.compare-advanced-table');
+      let dataUnit = compareTable.data('unit');
+
+      tableContainer.scroll(function () {
+         let tableScrollLeft = tableContainer.scrollLeft();
+         const stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
+         let idxNewStickyLast = stickyLast.data('new-index');
+         let unitPinned = (idxNewStickyLast - 1) * dataUnit;
+         //set animation 1s
+         $('tbody').find('td.__is-sticky').css('transition', 'all 0s ease');
+
+         const stickyColumn = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
+
+         stickyColumn.each(function (i, obj) {
+            let indexCol = $(this).data('td-index');
+            let transformCol = $(this).data('transform');
+            let dataMinusTransform = (indexCol - 1) * dataUnit;
+            let distance = 0;
+
+            if (indexCol > 4) {
+               let lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
+               let xScrollSticky = tableScrollLeft - transformCol;
+               
+               if (xScrollSticky > -transformCol) {
+                  if (indexCol < lastItemIndex) {
+                     let x_num_index = (lastItemIndex - indexCol) * dataUnit;
+                     let xScrollStickys = tableScrollLeft - dataMinusTransform - x_num_index;
+                     if (xScrollStickys > -dataMinusTransform) {
+                        distance = xScrollStickys + unitPinned;
+                     } else {
+                        distance = unitPinned - dataMinusTransform;
+                     }
+                  } else {
+                     distance = tableScrollLeft - (transformCol - dataUnit) + unitPinned;
+                  }
+               } else {
+                  distance = unitPinned - dataMinusTransform;
+               }
+
+               // if(stickyColumn.length > 2){
+               //    distance = distance - ((lastItemIndex - indexCol) * dataUnit)
+               //    console.log(distance)
+               // }
+               
+               $('[data-td-index="' + indexCol + '"]').css('transform', 'translateX(' + distance + 'px)');
+            }
+         });
+      });
+   }
+
    $(window).load(function () {
       // compareAdvancedSwapColumn();
       compareAdvancedPinMultipleColumn();
+      compareAdvancedTableScrollHorizontal();
    });
+
 
    const ready = () => {
       compareAdvanced();

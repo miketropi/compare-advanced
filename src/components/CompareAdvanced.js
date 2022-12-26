@@ -10,8 +10,6 @@ export default () => {
 
   return <div className="compare-advanced-element">
     <CompareAdvancedContainer>
-      {/* { JSON.stringify(items) } */}
-      {/* { JSON.stringify(compareFields) } */}
       <CompareTable compareFields={ compareFields } compareItems={ items } />
     </CompareAdvancedContainer>
   </div>

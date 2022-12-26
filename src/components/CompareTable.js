@@ -97,7 +97,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
         setThHeight(_h);
     });
 
-
+    
 
     return <Fragment>
         {
@@ -108,6 +108,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                 let contentInner = '';
                 if (type == 'gallery') {
                     const gallery = fieldData.extra_params?.value;
+                    console.log(fieldData)
                     contentInner = <Tooltip
                         className="tooltip-contain-gallery"
                         eventActive={'click'}
@@ -142,8 +143,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                     <div className="__entry-cell">
                         {
                             fieldData._name == 'infomation' &&
-                            <div className="actions">
-                                {/* <button className={ ['ca-button', pin ? '__pinned' : ''].join(' ') } onClick={ e => updatePinFunc((pin ? false : true), _key) }>{ pin ? 'PINNED' : 'PIN' }</button> */}
+                            <div className="actions">                                
                                 <button className={['ca-button', '__pinneds', _itemIndex == 0 ? '__pinned' : ''].join(' ')} >{pin ? 'PINNED' : 'PIN'}</button>
                                 <button className="ca-button __remove" onClick={e => __removeItem(_itemIndex)}>REMOVE</button>
                             </div>
@@ -170,7 +170,7 @@ export default ({ compareFields, compareItems }) => {
     const tableRef = useRef();
 
     const _onScrollHorizontal = () => {
-        console.log(scrollContainerRef.current.getElement().scrollLeft)
+        console.log(scrollContainerRef)
         let scrollX = scrollContainerRef.current.getElement().scrollLeft;
         let tdSticky = tableRef.current.querySelectorAll('td.__is-sticky');
         let tdStickyIndex = tableRef.current.querySelector('td.__product-info.__is-sticky').dataset.tdIndex;
@@ -255,8 +255,7 @@ export default ({ compareFields, compareItems }) => {
                 ref={tableRef}
                 className="compare-advanced-table"
                 style={{ width: `${(compareItems.length + 1) * cellWidth}px` }}
-                data-unit-dk={fixScrollSticky}
-                data-unit-mb={fixScrollSticky}
+                data-unit={fixScrollSticky}
             >
                 <tbody>
                     {

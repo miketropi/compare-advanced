@@ -918,6 +918,7 @@ var CompareItems = function CompareItems(_ref) {
         var _fieldData$extra_para2;
 
         var gallery = (_fieldData$extra_para2 = fieldData.extra_params) === null || _fieldData$extra_para2 === void 0 ? void 0 : _fieldData$extra_para2.value;
+        console.log(fieldData);
         contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
           className: "tooltip-contain-gallery",
           eventActive: 'click',
@@ -997,7 +998,7 @@ var CompareItems = function CompareItems(_ref) {
   var tableRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var _onScrollHorizontal = function _onScrollHorizontal() {
-    console.log(scrollContainerRef.current.getElement().scrollLeft);
+    console.log(scrollContainerRef);
     var scrollX = scrollContainerRef.current.getElement().scrollLeft;
     var tdSticky = tableRef.current.querySelectorAll('td.__is-sticky');
     var tdStickyIndex = tableRef.current.querySelector('td.__product-info.__is-sticky').dataset.tdIndex;
@@ -1089,8 +1090,7 @@ var CompareItems = function CompareItems(_ref) {
         style: {
           width: "".concat((compareItems.length + 1) * cellWidth, "px")
         },
-        "data-unit-dk": fixScrollSticky,
-        "data-unit-mb": fixScrollSticky,
+        "data-unit": fixScrollSticky,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tbody", {
           children: compareFields && compareFields.map(function (field) {
             var _field$image_label, _field$image_label2;
@@ -1851,34 +1851,36 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   var compareAdvancedPinMultipleColumn = function compareAdvancedPinMultipleColumn() {
     var compareTable = $('.compare-advanced-table');
-    var dataUnit = compareTable.data('unit-dk');
+    var dataUnit = compareTable.data('unit');
     $(document).on("click", ".__pinneds:not(.__pinned)", function () {
       var tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
 
       var _index = $(this).parents('.__product-info').data('td-index'),
-          _index_new = $(this).parents('.__product-info').data('new-index'); //count column pinned
+          _index_new = $(this).parents('.__product-info').data('new-index');
 
+      var columnNotSticky = $(this).parents('tr').find('td:not(.__is-sticky)'); //set animation 1s
 
-      var countPinned = $(this).parents('tr').find('td').find('.__pinned').length; //set animation 1s
-
-      $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease'); //add class pinned
-
-      $(this).addClass('__pinned'); //set pin column
-
-      $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
-      $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
-      if (countPinned == _index) return; //set new index         
-
-      $(this).parents('tr').find('td.__product-info').data('new-index', countPinned);
-      $(this).parents('tr').find('td.__product-info').attr('data-new-index', countPinned);
-      var columnNotSticky = $(this).parents('tr').find('td.__product-info:not(.__is-sticky)');
+      $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
       var arrayNewIdx = [];
       columnNotSticky.each(function (i, obj) {
         arrayNewIdx.push($(this).data('new-index'));
       });
       var minNewIdx = Math.min.apply(Math, arrayNewIdx);
-      var minIdx = $(this).parents('tr').find('td[data-new-index="' + minNewIdx + '"]').data('td-index');
-      console.log(arrayNewIdx, minNewIdx, minIdx);
+      var minIdx = $(this).parents('tr').find('td[data-new-index="' + minNewIdx + '"]').data('td-index'); //count column pinned
+
+      var countPinned = $(this).parents('tr').find('td').find('.__pinned').length; //add class pinned
+
+      $(this).addClass('__pinned'); //remove sticky last
+
+      $(this).parents('tbody').find('td').removeClass('__is-sticky-last'); //set pin column
+
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky-last');
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
+      if (countPinned == _index) return; //set new index         
+
+      $(this).parents('td.__product-info').data('new-index', countPinned);
+      $(this).parents('td.__product-info').attr('data-new-index', countPinned);
       $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').data('new-index', _index_new);
       $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').attr('data-new-index', _index_new);
       if (_index_new == countPinned) return; //move column to pin position
@@ -1897,16 +1899,82 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       }
 
-      var distanceSortColumn = (_index_new - minIdx) * dataUnit; // console.log(distance)
+      var distanceSortColumn = (_index_new - minIdx) * dataUnit;
+
+      if (_index > 4 && tableScrollLeft > 0) {
+        var stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
+        var idxNewStickyLast = stickyLast.data('new-index');
+        var unitPinned = (idxNewStickyLast - 1) * dataUnit;
+        var last_item_index = $('tbody tr').find('.__product-brand').length - 1;
+        var x_scroll_left_item = (last_item_index - _index) * dataUnit;
+        var x_scroll_minus = x_scroll_left_item - tableScrollLeft;
+
+        if (last_item_index > _index && tableScrollLeft < x_scroll_left_item) {
+          distance = (last_item_index * dataUnit - tableScrollLeft - x_scroll_minus - dataUnit - unitPinned) * -1;
+        } else {
+          distance = (last_item_index * dataUnit - tableScrollLeft - dataUnit - unitPinned) * -1;
+        }
+      } // console.log(distance)
+
 
       $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').css('transform', 'translateX(' + distanceSortColumn + 'px)');
       $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(' + distance + 'px)');
     });
   };
 
+  var compareAdvancedTableScrollHorizontal = function compareAdvancedTableScrollHorizontal() {
+    var tableContainer = $('.indiana-scroll-container');
+    var compareTable = $('.compare-advanced-table');
+    var dataUnit = compareTable.data('unit');
+    tableContainer.scroll(function () {
+      var tableScrollLeft = tableContainer.scrollLeft();
+      var stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
+      var idxNewStickyLast = stickyLast.data('new-index');
+      var unitPinned = (idxNewStickyLast - 1) * dataUnit; //set animation 1s
+
+      $('tbody').find('td.__is-sticky').css('transition', 'all 0s ease');
+      var stickyColumn = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
+      stickyColumn.each(function (i, obj) {
+        var indexCol = $(this).data('td-index');
+        var transformCol = $(this).data('transform');
+        var dataMinusTransform = (indexCol - 1) * dataUnit;
+        var distance = 0;
+
+        if (indexCol > 4) {
+          var lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
+          var xScrollSticky = tableScrollLeft - transformCol;
+
+          if (xScrollSticky > -transformCol) {
+            if (indexCol < lastItemIndex) {
+              var x_num_index = (lastItemIndex - indexCol) * dataUnit;
+              var xScrollStickys = tableScrollLeft - dataMinusTransform - x_num_index;
+
+              if (xScrollStickys > -dataMinusTransform) {
+                distance = xScrollStickys + unitPinned;
+              } else {
+                distance = unitPinned - dataMinusTransform;
+              }
+            } else {
+              distance = tableScrollLeft - (transformCol - dataUnit) + unitPinned;
+            }
+          } else {
+            distance = unitPinned - dataMinusTransform;
+          } // if(stickyColumn.length > 2){
+          //    distance = distance - ((lastItemIndex - indexCol) * dataUnit)
+          //    console.log(distance)
+          // }
+
+
+          $('[data-td-index="' + indexCol + '"]').css('transform', 'translateX(' + distance + 'px)');
+        }
+      });
+    });
+  };
+
   $(window).load(function () {
     // compareAdvancedSwapColumn();
     compareAdvancedPinMultipleColumn();
+    compareAdvancedTableScrollHorizontal();
   });
 
   var ready = function ready() {
