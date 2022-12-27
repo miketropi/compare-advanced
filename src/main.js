@@ -193,44 +193,57 @@ import CompareAdvanced from './components/CompareAdvanced';
       tableContainer.scroll(function () {
          let tableScrollLeft = tableContainer.scrollLeft();
          const stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
+         let idxStickyLast = stickyLast.data('td-index');
          let idxNewStickyLast = stickyLast.data('new-index');
          let unitPinned = (idxNewStickyLast - 1) * dataUnit;
          //set animation 1s
          $('tbody').find('td.__is-sticky').css('transition', 'all 0s ease');
 
          const stickyColumn = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
-
+         let lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
          stickyColumn.each(function (i, obj) {
             let indexCol = $(this).data('td-index');
+            let indexNewCol = $(this).data('new-index');
             let transformCol = $(this).data('transform');
             let dataMinusTransform = (indexCol - 1) * dataUnit;
             let distance = 0;
 
             if (indexCol > 4) {
-               let lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
+
                let xScrollSticky = tableScrollLeft - transformCol;
-               
+               let x_num_index = (lastItemIndex - indexCol) * dataUnit;
+               let xScrollStickys = tableScrollLeft - dataMinusTransform - x_num_index;
                if (xScrollSticky > -transformCol) {
                   if (indexCol < lastItemIndex) {
-                     let x_num_index = (lastItemIndex - indexCol) * dataUnit;
-                     let xScrollStickys = tableScrollLeft - dataMinusTransform - x_num_index;
-                     if (xScrollStickys > -dataMinusTransform) {
-                        distance = xScrollStickys + unitPinned;
+                     if (idxStickyLast != indexCol) {
+                        if (xScrollStickys > -dataMinusTransform) {
+                           distance = tableScrollLeft - (lastItemIndex - indexNewCol) * dataUnit;
+                        } else {
+                           distance = (lastItemIndex - indexNewCol - 1) * dataUnit * -1;
+                        }
                      } else {
-                        distance = unitPinned - dataMinusTransform;
+                        if (xScrollStickys > -dataMinusTransform) {
+                           distance = xScrollStickys + unitPinned;
+                        } else {
+                           distance = unitPinned - dataMinusTransform;
+                        }
                      }
+
                   } else {
-                     distance = tableScrollLeft - (transformCol - dataUnit) + unitPinned;
+                     if (idxStickyLast != indexCol) {
+                        distance = tableScrollLeft - (lastItemIndex - indexNewCol) * dataUnit;
+                     } else {
+                        distance = tableScrollLeft - (transformCol - dataUnit) + unitPinned;
+                     }
                   }
                } else {
-                  distance = unitPinned - dataMinusTransform;
+                  if (indexCol < lastItemIndex) {
+                     distance = (lastItemIndex - indexNewCol - 1) * dataUnit * -1;
+                  }else{
+                     distance = (lastItemIndex - indexNewCol) * dataUnit * -1;
+                  }
                }
 
-               // if(stickyColumn.length > 2){
-               //    distance = distance - ((lastItemIndex - indexCol) * dataUnit)
-               //    console.log(distance)
-               // }
-               
                $('[data-td-index="' + indexCol + '"]').css('transform', 'translateX(' + distance + 'px)');
             }
          });

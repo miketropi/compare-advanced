@@ -918,7 +918,6 @@ var CompareItems = function CompareItems(_ref) {
         var _fieldData$extra_para2;
 
         var gallery = (_fieldData$extra_para2 = fieldData.extra_params) === null || _fieldData$extra_para2 === void 0 ? void 0 : _fieldData$extra_para2.value;
-        console.log(fieldData);
         contentInner = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_Tooltip__WEBPACK_IMPORTED_MODULE_1__["default"], {
           className: "tooltip-contain-gallery",
           eventActive: 'click',
@@ -998,7 +997,6 @@ var CompareItems = function CompareItems(_ref) {
   var tableRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var _onScrollHorizontal = function _onScrollHorizontal() {
-    console.log(scrollContainerRef);
     var scrollX = scrollContainerRef.current.getElement().scrollLeft;
     var tdSticky = tableRef.current.querySelectorAll('td.__is-sticky');
     var tdStickyIndex = tableRef.current.querySelector('td.__product-info.__is-sticky').dataset.tdIndex;
@@ -1929,41 +1927,54 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     tableContainer.scroll(function () {
       var tableScrollLeft = tableContainer.scrollLeft();
       var stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
+      var idxStickyLast = stickyLast.data('td-index');
       var idxNewStickyLast = stickyLast.data('new-index');
       var unitPinned = (idxNewStickyLast - 1) * dataUnit; //set animation 1s
 
       $('tbody').find('td.__is-sticky').css('transition', 'all 0s ease');
       var stickyColumn = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
+      var lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
       stickyColumn.each(function (i, obj) {
         var indexCol = $(this).data('td-index');
+        var indexNewCol = $(this).data('new-index');
         var transformCol = $(this).data('transform');
         var dataMinusTransform = (indexCol - 1) * dataUnit;
         var distance = 0;
 
         if (indexCol > 4) {
-          var lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
           var xScrollSticky = tableScrollLeft - transformCol;
+          var x_num_index = (lastItemIndex - indexCol) * dataUnit;
+          var xScrollStickys = tableScrollLeft - dataMinusTransform - x_num_index;
 
           if (xScrollSticky > -transformCol) {
             if (indexCol < lastItemIndex) {
-              var x_num_index = (lastItemIndex - indexCol) * dataUnit;
-              var xScrollStickys = tableScrollLeft - dataMinusTransform - x_num_index;
-
-              if (xScrollStickys > -dataMinusTransform) {
-                distance = xScrollStickys + unitPinned;
+              if (idxStickyLast != indexCol) {
+                if (xScrollStickys > -dataMinusTransform) {
+                  distance = tableScrollLeft - (lastItemIndex - indexNewCol) * dataUnit;
+                } else {
+                  distance = (lastItemIndex - indexNewCol - 1) * dataUnit * -1;
+                }
               } else {
-                distance = unitPinned - dataMinusTransform;
+                if (xScrollStickys > -dataMinusTransform) {
+                  distance = xScrollStickys + unitPinned;
+                } else {
+                  distance = unitPinned - dataMinusTransform;
+                }
               }
             } else {
-              distance = tableScrollLeft - (transformCol - dataUnit) + unitPinned;
+              if (idxStickyLast != indexCol) {
+                distance = tableScrollLeft - (lastItemIndex - indexNewCol) * dataUnit;
+              } else {
+                distance = tableScrollLeft - (transformCol - dataUnit) + unitPinned;
+              }
             }
           } else {
-            distance = unitPinned - dataMinusTransform;
-          } // if(stickyColumn.length > 2){
-          //    distance = distance - ((lastItemIndex - indexCol) * dataUnit)
-          //    console.log(distance)
-          // }
-
+            if (indexCol < lastItemIndex) {
+              distance = (lastItemIndex - indexNewCol - 1) * dataUnit * -1;
+            } else {
+              distance = (lastItemIndex - indexNewCol) * dataUnit * -1;
+            }
+          }
 
           $('[data-td-index="' + indexCol + '"]').css('transform', 'translateX(' + distance + 'px)');
         }

@@ -108,7 +108,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                 let contentInner = '';
                 if (type == 'gallery') {
                     const gallery = fieldData.extra_params?.value;
-                    console.log(fieldData)
+
                     contentInner = <Tooltip
                         className="tooltip-contain-gallery"
                         eventActive={'click'}
@@ -170,7 +170,6 @@ export default ({ compareFields, compareItems }) => {
     const tableRef = useRef();
 
     const _onScrollHorizontal = () => {
-        console.log(scrollContainerRef)
         let scrollX = scrollContainerRef.current.getElement().scrollLeft;
         let tdSticky = tableRef.current.querySelectorAll('td.__is-sticky');
         let tdStickyIndex = tableRef.current.querySelector('td.__product-info.__is-sticky').dataset.tdIndex;
