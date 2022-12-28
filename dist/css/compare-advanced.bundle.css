@@ -82,6 +82,9 @@
   position: relative;
   transition: all 1s ease;
 }
+.compare-advanced-table tbody td.__is-sticky .__entry-cell .actions button.__remove {
+  visibility: visible;
+}
 .compare-advanced-table tbody td ul {
   text-align: left;
 }
@@ -137,6 +140,9 @@
   color: var(--button-color-text-ide);
   border-radius: 40px;
   transition: 0.3s ease;
+}
+.compare-advanced-table tbody td .__entry-cell .actions button.__remove {
+  visibility: hidden;
 }
 .compare-advanced-table tbody td .__entry-cell .actions button:hover, .compare-advanced-table tbody td .__entry-cell .actions button.__pinned {
   background: var(--button-color-hover);

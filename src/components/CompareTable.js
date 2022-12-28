@@ -145,7 +145,7 @@ export const CompareItems = ({ tableRootElem, items, field }) => {
                             fieldData._name == 'infomation' &&
                             <div className="actions">                                
                                 <button className={['ca-button', '__pinneds', _itemIndex == 0 ? '__pinned' : ''].join(' ')} >{pin ? 'PINNED' : 'PIN'}</button>
-                                <button className="ca-button __remove">REMOVE</button>
+                                <button className={['ca-button', '__remove'].join(' ')}>REMOVE</button>
                             </div>
                         }
                         {contentInner}

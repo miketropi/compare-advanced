@@ -125,7 +125,17 @@
       text-align: center;
       position: relative;
       transition: all 1s ease;
-
+      &.__is-sticky{
+        .__entry-cell {
+          .actions {
+            button {
+              &.__remove{
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
       ul {
         text-align: left;
 
@@ -186,7 +196,9 @@
             color: var(--button-color-text-ide);
             border-radius: 40px;
             transition: .3s ease;
-
+            &.__remove{
+              visibility: hidden;
+            }
             &:hover,
             &.__pinned {
               background: var(--button-color-hover);

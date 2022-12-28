@@ -968,7 +968,7 @@ var CompareItems = function CompareItems(_ref) {
               className: ['ca-button', '__pinneds', _itemIndex == 0 ? '__pinned' : ''].join(' '),
               children: pin ? 'PINNED' : 'PIN'
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
-              className: "ca-button __remove",
+              className: ['ca-button', '__remove'].join(' '),
               children: "REMOVE"
             })]
           }), contentInner]
@@ -1985,8 +1985,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var indexItem = $(this).parents('td').data('td-index');
       var indexNewItem = $(this).parents('td').data('new-index');
       var lengthItem = $('tbody tr').find('.__product-brand').length - 1;
-      var compareAdvancedColumn = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td');
-      var compareAdvancedColumnSticky = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky'); //count column pinned
+      var compareAdvancedColumn = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td'); //count column pinned
 
       var countPinnedBefore = $(this).parents('tr').find('td').find('.__pinned').length;
       $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').removeClass('__is-sticky');
@@ -1997,8 +1996,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       if (countPinnedBefore == 1) return;
       $(this).parents('tbody').find('td').removeClass('__is-sticky-last');
       var idxLastSticky = countPinnedAfter - 1;
-      compareAdvancedColumnSticky.each(function (i, obj) {});
-      console.log(idxLastSticky);
       $(this).parents('tbody').find('td[data-new-index="' + idxLastSticky + '"]').addClass('__is-sticky-last');
       var distanceItemRemove = (lengthItem - indexItem) * dataUnit;
       $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').css('transform', 'translateX(' + distanceItemRemove + 'px)');

@@ -259,7 +259,7 @@ import CompareAdvanced from './components/CompareAdvanced';
          let indexNewItem = $(this).parents('td').data('new-index');
          let lengthItem = $('tbody tr').find('.__product-brand').length - 1;
          let compareAdvancedColumn = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td');
-         let compareAdvancedColumnSticky = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
+         
          //count column pinned
          let countPinnedBefore = $(this).parents('tr').find('td').find('.__pinned').length;
 
@@ -273,10 +273,7 @@ import CompareAdvanced from './components/CompareAdvanced';
 
          $(this).parents('tbody').find('td').removeClass('__is-sticky-last');
          let idxLastSticky = countPinnedAfter - 1;
-         compareAdvancedColumnSticky.each(function (i, obj) {
 
-         })
-         console.log(idxLastSticky)
          $(this).parents('tbody').find('td[data-new-index="' + idxLastSticky + '"]').addClass('__is-sticky-last');
 
          let distanceItemRemove = (lengthItem - indexItem) * dataUnit;
