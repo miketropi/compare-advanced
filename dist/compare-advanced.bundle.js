@@ -969,9 +969,6 @@ var CompareItems = function CompareItems(_ref) {
               children: pin ? 'PINNED' : 'PIN'
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
               className: "ca-button __remove",
-              onClick: function onClick(e) {
-                return __removeItem(_itemIndex);
-              },
               children: "REMOVE"
             })]
           }), contentInner]
@@ -1874,8 +1871,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
       $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky-last');
-      $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
-      if (countPinned == _index) return; //set new index         
+      $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED'); //set new index         
 
       $(this).parents('td.__product-info').data('new-index', countPinned);
       $(this).parents('td.__product-info').attr('data-new-index', countPinned);
@@ -1897,7 +1893,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       }
 
-      var distanceSortColumn = (_index_new - minIdx) * dataUnit;
+      var distanceSortColumn = (_index_new - minIdx) * dataUnit; //check column hidden width table
 
       if (_index > 4 && tableScrollLeft > 0) {
         var stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
@@ -1982,10 +1978,54 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     });
   };
 
+  var compareAdvancedRemoveItem = function compareAdvancedRemoveItem() {
+    var compareAdvancedTable = $('.compare-advanced-table');
+    var dataUnit = compareAdvancedTable.data('unit');
+    $(document).on("click", ".__is-sticky .__remove", function () {
+      var indexItem = $(this).parents('td').data('td-index');
+      var indexNewItem = $(this).parents('td').data('new-index');
+      var lengthItem = $('tbody tr').find('.__product-brand').length - 1;
+      var compareAdvancedColumn = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td');
+      var compareAdvancedColumnSticky = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky'); //count column pinned
+
+      var countPinnedBefore = $(this).parents('tr').find('td').find('.__pinned').length;
+      $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').removeClass('__is-sticky');
+      $(this).parents('.actions').find('.ca-button').removeClass('__pinned');
+      $(this).parents('td').find('.ca-button.__pinneds').html('PIN'); //count column pinned
+
+      var countPinnedAfter = $(this).parents('tr').find('td').find('.__pinned').length;
+      if (countPinnedBefore == 1) return;
+      $(this).parents('tbody').find('td').removeClass('__is-sticky-last');
+      var idxLastSticky = countPinnedAfter - 1;
+      compareAdvancedColumnSticky.each(function (i, obj) {});
+      console.log(idxLastSticky);
+      $(this).parents('tbody').find('td[data-new-index="' + idxLastSticky + '"]').addClass('__is-sticky-last');
+      var distanceItemRemove = (lengthItem - indexItem) * dataUnit;
+      $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').css('transform', 'translateX(' + distanceItemRemove + 'px)');
+      compareAdvancedColumn.each(function (i, obj) {
+        var indexCol = $(this).data('td-index');
+        var indexNewCol = $(this).data('new-index');
+        var distanceNotSticky = 0;
+
+        if (indexNewCol > indexNewItem) {
+          var idxNew = indexNewCol - 1;
+          var destination = idxNew - indexCol;
+          distanceNotSticky = destination * dataUnit;
+          $(this).parents('tbody').find('td[data-td-index="' + indexCol + '"]').data('new-index', idxNew);
+          $(this).parents('tbody').find('td[data-td-index="' + indexCol + '"]').attr('data-new-index', idxNew);
+          $(this).parents('tbody').find('td[data-td-index="' + indexCol + '"]').css('transform', 'translateX(' + distanceNotSticky + 'px)');
+        }
+      });
+      $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').data('new-index', lengthItem);
+      $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').attr('data-new-index', lengthItem);
+    });
+  };
+
   $(window).load(function () {
     // compareAdvancedSwapColumn();
     compareAdvancedPinMultipleColumn();
     compareAdvancedTableScrollHorizontal();
+    compareAdvancedRemoveItem();
   });
 
   var ready = function ready() {

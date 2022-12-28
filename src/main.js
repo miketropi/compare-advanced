@@ -138,9 +138,7 @@ import CompareAdvanced from './components/CompareAdvanced';
          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky');
          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').addClass('__is-sticky-last');
          $(this).parents('tbody').find('td[data-td-index="' + _index + '"] .ca-button.__pinneds').html('PINNED');
-
-         if (countPinned == _index) return;
-
+ 
          //set new index         
          $(this).parents('td.__product-info').data('new-index', countPinned);
          $(this).parents('td.__product-info').attr('data-new-index', countPinned);
@@ -165,6 +163,7 @@ import CompareAdvanced from './components/CompareAdvanced';
          }
 
          let distanceSortColumn = (_index_new - minIdx) * dataUnit;
+         //check column hidden width table
          if (_index > 4 && tableScrollLeft > 0) {
             const stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
             let idxNewStickyLast = stickyLast.data('new-index');
@@ -239,7 +238,7 @@ import CompareAdvanced from './components/CompareAdvanced';
                } else {
                   if (indexCol < lastItemIndex) {
                      distance = (lastItemIndex - indexNewCol - 1) * dataUnit * -1;
-                  }else{
+                  } else {
                      distance = (lastItemIndex - indexNewCol) * dataUnit * -1;
                   }
                }
@@ -250,10 +249,65 @@ import CompareAdvanced from './components/CompareAdvanced';
       });
    }
 
+   const compareAdvancedRemoveItem = () => {
+
+      const compareAdvancedTable = $('.compare-advanced-table');
+      let dataUnit = compareAdvancedTable.data('unit');
+      $(document).on("click", ".__is-sticky .__remove", function () {
+
+         let indexItem = $(this).parents('td').data('td-index');
+         let indexNewItem = $(this).parents('td').data('new-index');
+         let lengthItem = $('tbody tr').find('.__product-brand').length - 1;
+         let compareAdvancedColumn = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td');
+         let compareAdvancedColumnSticky = compareAdvancedTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
+         //count column pinned
+         let countPinnedBefore = $(this).parents('tr').find('td').find('.__pinned').length;
+
+         $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').removeClass('__is-sticky');
+         $(this).parents('.actions').find('.ca-button').removeClass('__pinned');
+         $(this).parents('td').find('.ca-button.__pinneds').html('PIN');
+
+         //count column pinned
+         let countPinnedAfter = $(this).parents('tr').find('td').find('.__pinned').length;
+         if (countPinnedBefore == 1) return;
+
+         $(this).parents('tbody').find('td').removeClass('__is-sticky-last');
+         let idxLastSticky = countPinnedAfter - 1;
+         compareAdvancedColumnSticky.each(function (i, obj) {
+
+         })
+         console.log(idxLastSticky)
+         $(this).parents('tbody').find('td[data-new-index="' + idxLastSticky + '"]').addClass('__is-sticky-last');
+
+         let distanceItemRemove = (lengthItem - indexItem) * dataUnit;
+         $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').css('transform', 'translateX(' + distanceItemRemove + 'px)');
+
+         compareAdvancedColumn.each(function (i, obj) {
+            let indexCol = $(this).data('td-index');
+            let indexNewCol = $(this).data('new-index');
+            let distanceNotSticky = 0;
+
+            if (indexNewCol > indexNewItem) {
+               let idxNew = indexNewCol - 1;
+               let destination = idxNew - indexCol;
+               distanceNotSticky = destination * dataUnit;
+               $(this).parents('tbody').find('td[data-td-index="' + indexCol + '"]').data('new-index', idxNew);
+               $(this).parents('tbody').find('td[data-td-index="' + indexCol + '"]').attr('data-new-index', idxNew);
+               $(this).parents('tbody').find('td[data-td-index="' + indexCol + '"]').css('transform', 'translateX(' + distanceNotSticky + 'px)');
+            }
+         })
+
+         $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').data('new-index', lengthItem);
+         $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').attr('data-new-index', lengthItem);
+
+      })
+   }
+
    $(window).load(function () {
       // compareAdvancedSwapColumn();
       compareAdvancedPinMultipleColumn();
       compareAdvancedTableScrollHorizontal();
+      compareAdvancedRemoveItem();
    });
 
 
