@@ -168,17 +168,18 @@ import CompareAdvanced from './components/CompareAdvanced';
             const stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
             let idxNewStickyLast = stickyLast.data('new-index');
             let unitPinned = (idxNewStickyLast - 1) * dataUnit;
-
             let last_item_index = $('tbody tr').find('.__product-brand').length - 1;
             let x_scroll_left_item = (last_item_index - _index) * dataUnit;
             let x_scroll_minus = x_scroll_left_item - tableScrollLeft;
+
+            //check index item < last item
             if (last_item_index > _index && tableScrollLeft < x_scroll_left_item) {
                distance = (last_item_index * dataUnit - tableScrollLeft - x_scroll_minus - dataUnit - unitPinned) * -1;
             } else {
                distance = (last_item_index * dataUnit - tableScrollLeft - dataUnit - unitPinned) * -1;
             }
          }
-         // console.log(distance)
+         // Move item
          $(this).parents('tbody').find('td[data-td-index="' + minIdx + '"]').css('transform', 'translateX(' + distanceSortColumn + 'px)');
          $(this).parents('tbody').find('td[data-td-index="' + _index + '"]').css('transform', 'translateX(' + distance + 'px)');
       });
@@ -200,6 +201,7 @@ import CompareAdvanced from './components/CompareAdvanced';
 
          const stickyColumn = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
          let lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
+
          stickyColumn.each(function (i, obj) {
             let indexCol = $(this).data('td-index');
             let indexNewCol = $(this).data('new-index');
@@ -207,12 +209,14 @@ import CompareAdvanced from './components/CompareAdvanced';
             let dataMinusTransform = (indexCol - 1) * dataUnit;
             let distance = 0;
 
+            //check item with index > 4 (item hidden table)
             if (indexCol > 4) {
-
                let xScrollSticky = tableScrollLeft - transformCol;
                let x_num_index = (lastItemIndex - indexCol) * dataUnit;
                let xScrollStickys = tableScrollLeft - dataMinusTransform - x_num_index;
+
                if (xScrollSticky > -transformCol) {
+                  //check item not last item
                   if (indexCol < lastItemIndex) {
                      if (idxStickyLast != indexCol) {
                         if (xScrollStickys > -dataMinusTransform) {
@@ -229,6 +233,7 @@ import CompareAdvanced from './components/CompareAdvanced';
                      }
 
                   } else {
+                     //check last sticky != item
                      if (idxStickyLast != indexCol) {
                         distance = tableScrollLeft - (lastItemIndex - indexNewCol) * dataUnit;
                      } else {
@@ -236,6 +241,7 @@ import CompareAdvanced from './components/CompareAdvanced';
                      }
                   }
                } else {
+
                   if (indexCol < lastItemIndex) {
                      distance = (lastItemIndex - indexNewCol - 1) * dataUnit * -1;
                   } else {
@@ -243,6 +249,7 @@ import CompareAdvanced from './components/CompareAdvanced';
                   }
                }
 
+               //hold item when scroll table
                $('[data-td-index="' + indexCol + '"]').css('transform', 'translateX(' + distance + 'px)');
             }
          });
@@ -263,27 +270,33 @@ import CompareAdvanced from './components/CompareAdvanced';
          //count column pinned
          let countPinnedBefore = $(this).parents('tr').find('td').find('.__pinned').length;
 
+         //reset item Pinned
          $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').removeClass('__is-sticky');
          $(this).parents('.actions').find('.ca-button').removeClass('__pinned');
          $(this).parents('td').find('.ca-button.__pinneds').html('PIN');
 
          //count column pinned
          let countPinnedAfter = $(this).parents('tr').find('td').find('.__pinned').length;
+
+         //check number items pinned
          if (countPinnedBefore == 1) return;
 
-         $(this).parents('tbody').find('td').removeClass('__is-sticky-last');
+         //remove and add `sticky last` to last item sticky
          let idxLastSticky = countPinnedAfter - 1;
-
+         $(this).parents('tbody').find('td').removeClass('__is-sticky-last');
          $(this).parents('tbody').find('td[data-new-index="' + idxLastSticky + '"]').addClass('__is-sticky-last');
 
+         //move item remove to last list
          let distanceItemRemove = (lengthItem - indexItem) * dataUnit;
          $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').css('transform', 'translateX(' + distanceItemRemove + 'px)');
 
+         //move all items after item removed to before
          compareAdvancedColumn.each(function (i, obj) {
             let indexCol = $(this).data('td-index');
             let indexNewCol = $(this).data('new-index');
             let distanceNotSticky = 0;
 
+            // loop check all items > item clicked
             if (indexNewCol > indexNewItem) {
                let idxNew = indexNewCol - 1;
                let destination = idxNew - indexCol;
@@ -294,6 +307,7 @@ import CompareAdvanced from './components/CompareAdvanced';
             }
          })
 
+         //set new index for item remove (move to last list)
          $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').data('new-index', lengthItem);
          $(this).parents('tbody').find('td[data-td-index="' + indexItem + '"]').attr('data-new-index', lengthItem);
 
