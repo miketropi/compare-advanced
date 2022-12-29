@@ -12,6 +12,15 @@
   tbody {
 
     tr {
+      &:nth-last-child(2) {
+        td {
+          .__entry-cell {
+            @media(max-width: 425px) {
+              min-height: 35px;
+            }
+          }
+        }
+      }
 
       &:first-child {
 
@@ -44,8 +53,9 @@
     .image-featured {
       >img {
         max-height: 129px;
+
         @media (max-width: 767px) {
-          max-height: 76px;
+          max-height: 50px;
         }
       }
     }
@@ -86,6 +96,10 @@
       max-width: 90%;
       margin: 0 auto;
       display: inline-block;
+
+      @media(max-width: 425px) {
+        width: 75px;
+      }
     }
   }
 
@@ -125,17 +139,19 @@
       text-align: center;
       position: relative;
       transition: all 1s ease;
-      &.__is-sticky{
+
+      &.__is-sticky {
         .__entry-cell {
           .actions {
             button {
-              &.__remove{
+              &.__remove {
                 visibility: visible;
               }
             }
           }
         }
       }
+
       ul {
         text-align: left;
 
@@ -196,9 +212,11 @@
             color: var(--button-color-text-ide);
             border-radius: 40px;
             transition: .3s ease;
-            &.__remove{
-              visibility: hidden;
+
+            &.__remove {
+              // visibility: hidden;
             }
+
             &:hover,
             &.__pinned {
               background: var(--button-color-hover);
@@ -216,15 +234,15 @@
       min-width: 192px;
 
       @media(max-width: 425px) {
-        min-width: 116px;
+        min-width: 93px;
         padding: 0 2px;
       }
     }
 
     th {
       @media (max-width: 425px) {
-        min-width: 116px !important;
-        width: 116px;
+        min-width: 93px !important;
+        width: 93px;
       }
     }
 
@@ -393,8 +411,8 @@
   }
 }
 
-body.tooltip-active{
-  .ca-tooltip-component{
+body.tooltip-active {
+  .ca-tooltip-component {
     background-color: rgba(0, 0, 0, .05);
     position: absolute;
     top: 0;
@@ -404,14 +422,15 @@ body.tooltip-active{
     display: flex;
     align-items: center;
     justify-content: center;
-    .tooltip-close{
+
+    .tooltip-close {
       display: flex;
     }
 
   }
 }
 
-.tooltip-close{
+.tooltip-close {
   display: inline-block;
   height: 30px;
   width: 30px;

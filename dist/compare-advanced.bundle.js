@@ -872,8 +872,8 @@ var widthCol = 200,
     fixScrollSticky = 200;
 
 if (window.screen.width <= 425) {
-  widthCol = 120;
-  fixScrollSticky = 120;
+  widthCol = 97;
+  fixScrollSticky = 97;
 }
 
 var CompareItems = function CompareItems(_ref) {
@@ -1466,9 +1466,9 @@ var CompareAdvancedProvider = function CompareAdvancedProvider(_ref) {
 
   var _setCellWidthHandle = function _setCellWidthHandle() {
     if (window.innerWidth <= 450) {
-      setCellWidth(120);
+      setCellWidth(97);
     } else if (window.innerWidth <= 768) {
-      setCellWidth(120);
+      setCellWidth(97);
     } else {
       setCellWidth(200);
     }
@@ -1847,6 +1847,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   var compareAdvancedPinMultipleColumn = function compareAdvancedPinMultipleColumn() {
     var compareTable = $('.compare-advanced-table');
     var dataUnit = compareTable.data('unit');
+
+    if ($(window).width() <= 425) {
+      dataUnit = 97;
+    }
+
     $(document).on("click", ".__pinneds:not(.__pinned)", function () {
       var tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
 
@@ -1856,6 +1861,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var columnNotSticky = $(this).parents('tr').find('td:not(.__is-sticky)'); //set animation 1s
 
       $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
+      console.log(dataUnit);
       var arrayNewIdx = [];
       columnNotSticky.each(function (i, obj) {
         arrayNewIdx.push($(this).data('new-index'));
@@ -1920,6 +1926,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var tableContainer = $('.indiana-scroll-container');
     var compareTable = $('.compare-advanced-table');
     var dataUnit = compareTable.data('unit');
+
+    if ($(window).width() <= 425) {
+      dataUnit = 97;
+    }
+
     tableContainer.scroll(function () {
       var tableScrollLeft = tableContainer.scrollLeft();
       var stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
@@ -1928,6 +1939,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var unitPinned = (idxNewStickyLast - 1) * dataUnit; //set animation 1s
 
       $('tbody').find('td.__is-sticky').css('transition', 'all 0s ease');
+      console.log(dataUnit);
       var stickyColumn = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
       var lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
       stickyColumn.each(function (i, obj) {
@@ -1984,6 +1996,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   var compareAdvancedRemoveItem = function compareAdvancedRemoveItem() {
     var compareAdvancedTable = $('.compare-advanced-table');
     var dataUnit = compareAdvancedTable.data('unit');
+
+    if ($(window).width() <= 425) {
+      dataUnit = 97;
+    }
+
     $(document).on("click", ".__is-sticky .__remove", function () {
       var indexItem = $(this).parents('td').data('td-index');
       var indexNewItem = $(this).parents('td').data('new-index');

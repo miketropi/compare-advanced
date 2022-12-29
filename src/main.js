@@ -109,6 +109,9 @@ import CompareAdvanced from './components/CompareAdvanced';
    const compareAdvancedPinMultipleColumn = () => {
       const compareTable = $('.compare-advanced-table');
       let dataUnit = compareTable.data('unit');
+      if ($(window).width() <= 425){
+         dataUnit = 97
+      }
       $(document).on("click", ".__pinneds:not(.__pinned)", function () {
          let tableScrollLeft = $('.indiana-scroll-container').scrollLeft();
          let _index = $(this).parents('.__product-info').data('td-index'),
@@ -117,7 +120,7 @@ import CompareAdvanced from './components/CompareAdvanced';
          let columnNotSticky = $(this).parents('tr').find('td:not(.__is-sticky)');
          //set animation 1s
          $('tbody').find('td.__is-sticky').css('transition', 'all 1s ease');
-
+         console.log(dataUnit)
          let arrayNewIdx = [];
          columnNotSticky.each(function (i, obj) {
             arrayNewIdx.push($(this).data('new-index'));
@@ -189,7 +192,9 @@ import CompareAdvanced from './components/CompareAdvanced';
       const tableContainer = $('.indiana-scroll-container');
       const compareTable = $('.compare-advanced-table');
       let dataUnit = compareTable.data('unit');
-
+      if ($(window).width() <= 425){
+         dataUnit = 97
+      }
       tableContainer.scroll(function () {
          let tableScrollLeft = tableContainer.scrollLeft();
          const stickyLast = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky-last');
@@ -198,7 +203,7 @@ import CompareAdvanced from './components/CompareAdvanced';
          let unitPinned = (idxNewStickyLast - 1) * dataUnit;
          //set animation 1s
          $('tbody').find('td.__is-sticky').css('transition', 'all 0s ease');
-
+         console.log(dataUnit)
          const stickyColumn = compareTable.find('tbody').find('tr:nth-child(2)').find('td.__is-sticky');
          let lastItemIndex = $('tbody tr').find('.__product-brand').length - 1;
 
@@ -260,6 +265,9 @@ import CompareAdvanced from './components/CompareAdvanced';
 
       const compareAdvancedTable = $('.compare-advanced-table');
       let dataUnit = compareAdvancedTable.data('unit');
+      if ($(window).width() <= 425){
+         dataUnit = 97
+      }
       $(document).on("click", ".__is-sticky .__remove", function () {
 
          let indexItem = $(this).parents('td').data('td-index');

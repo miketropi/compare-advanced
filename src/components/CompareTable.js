@@ -77,8 +77,8 @@ margin-bottom: 3em;
 let widthCol = 200,
     fixScrollSticky = 200;
 if (window.screen.width <= 425) {
-    widthCol = 120;
-    fixScrollSticky = 120;
+    widthCol = 97;
+    fixScrollSticky = 97;
 }
 
 export const CompareItems = ({ tableRootElem, items, field }) => {

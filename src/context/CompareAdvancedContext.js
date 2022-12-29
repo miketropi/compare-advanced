@@ -20,9 +20,9 @@ const CompareAdvancedProvider = ({
 
   const _setCellWidthHandle = () => {
     if(window.innerWidth <= 450) {
-      setCellWidth(120)
+      setCellWidth(97)
     } else if(window.innerWidth <= 768) {
-      setCellWidth(120)
+      setCellWidth(97)
     } else {
       setCellWidth(200) 
     }
